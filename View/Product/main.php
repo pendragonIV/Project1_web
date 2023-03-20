@@ -93,12 +93,12 @@
                                     </thead>
                                     <tbody>
 
-                                      <?php 
+                                    <?php 
                                       
-                                      $index = 0;
-                                      foreach($record as $item){
+                                        $index = 0;
+                                        foreach($record as $item){
 
-                                      ?>
+                                    ?>
                                             <tr>
                                             <th scope="row" class = "col-1"> <?php echo $index; ?>  </th>
                                             <td class="col-3"> <?php echo $item['product_name']; ?>  </td>
@@ -119,10 +119,12 @@
                                                
                                             </td>
                                           </tr>
-                                          <?php
-                                             }
+                                    <?php
+
+                                        $index++;
+                                        }
                                       
-                                          ?>
+                                    ?>
 
                                       
                                     </tbody>

@@ -62,11 +62,7 @@
                         <div class="row">
                                 <form role="form" method="POST" action ="?controller=product&action=update" enctype="multipart/form-data">
                                     <?php 
-                                        echo "<pre>";
-                                        echo print_r($record);
-                                        echo "</pre>";
-                                        foreach($record as $item){
-                                        list($product,$images) = $item;
+                                        foreach($product as $item){
                                     ?>
                                     <div class="row">
                                         <div class="col-8">
@@ -131,7 +127,7 @@
                                                 <input class="form-control" type="file" id="product_img" name="product_img[]" onchange = "loadFile(event)" multiple>
                                                 <div id = "images_preview">
                                                     <?php
-                                                    foreach($images as $img){
+                                                        foreach($images as $img){
                                                      ?>
                                                     <img class="col-12 my-3" id = "img_preview" src = "public/upload/<?php echo $img['image_link'] ?>">
                                                         
@@ -168,10 +164,10 @@
             let output = document.getElementById('images_preview');
             output.innerHTML = '';
             console.log([...event.target.files]);
+            //spread to load all files
             [...event.target.files].forEach(
                 (file) => (output.innerHTML += img( URL.createObjectURL(file)))
             );
-            // output.src = URL.createObjectURL(event.target.files[0]);
             console.log(output.src);
             output.onload = function() {
             URL.revokeObjectURL(output.src) // free memory

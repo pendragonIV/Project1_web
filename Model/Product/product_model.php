@@ -64,8 +64,10 @@ function store(){
 
 
 function getProduct(){
-    require_once "Config/open_connect.php";
+
     if(isset($_GET['product_id'])){
+        require_once "Config/open_connect.php";
+
         $product_id = $_GET['product_id'];
         $getProductSql = "SELECT * FROM product WHERE product_id = $product_id";
         $product = mysqli_query($connect,$getProductSql);
@@ -73,10 +75,11 @@ function getProduct(){
         $getImgsSql = "SELECT * FROM product_image WHERE product_id = $product_id";
         $images = mysqli_query($connect,$getImgsSql);
         
-        return [$product,$images];
+        require_once "Config/close_connect.php";
+        return array($product,$images);
     }
-    require_once "Config/close_connect.php";
 }
+
 
 
 function update(){
@@ -96,18 +99,34 @@ function update(){
             $product_featured = 0;
         }
 
-        if($_FILES['product_img']['name'] != ""){
-            $product_image=$_FILES['product_img']['name'];
-            $product_tmp_img=$_FILES['product_img']['tmp_name'];
-            move_uploaded_file($product_tmp_img,"public/upload/".$product_image);
-        }
-        else{
-            $getPrd =  mysqli_query($connect,"SELECT * FROM product WHERE product_id = $product_id");
-            foreach($getPrd as $item){
-                $product_image = $item['img'];
+
+        if(!empty($_FILES['product_img']['name'][0])){
+            $total_image = count($_FILES['product_img']['name']);
+
+            $del_img_sql = "DELETE FROM product_image WHERE product_id = $product_id";
+            mysqli_query($connect,$del_img_sql);
+            for($i=0; $i< $total_image; $i++){
+                $file_tmp = $_FILES['product_img']['tmp_name'][$i];
+                $product_image = $_FILES['product_img']['name'][$i];
+        
+                if($file_tmp != ""){
+                    $add_img_sql = "INSERT INTO product_image(image_link,product_id) VALUES ('$product_image', $product_id)";
+                    mysqli_query($connect,$add_img_sql);
+                    move_uploaded_file($file_tmp,"public/upload/".$product_image);
+                }
             }
-            
+                
         }
+    
+
+        
+        // else{
+        //     $getPrd =  mysqli_query($connect,"SELECT * FROM product WHERE product_id = $product_id");
+        //     foreach($getPrd as $item){
+        //         $product_image = $item['img'];
+        //     }
+            
+        // }
 
         $edit_product_sql = "UPDATE product
                              SET 
@@ -115,18 +134,16 @@ function update(){
                              product_price = $product_price,
                              product_featured = $product_featured,
                              product_description = '$product_description',
-                             product_promotion = $product_promotion,
-                             img = '$product_image'
+                             product_promotion = $product_promotion
                              WHERE product_id = $product_id";
 
         mysqli_query($connect,$edit_product_sql);
-        move_uploaded_file($file_tmp,"public/upload/".$product_image);
     }
     
 
     require_once "Config/close_connect.php";
 
-    return $record;
+    return;
 }
 
 
@@ -159,7 +176,7 @@ switch($action){
         break;
     }
     case 'edit': {
-        $record = getProduct();
+        list($product,$images) = getProduct();
         break;
     }
     case 'update': {
