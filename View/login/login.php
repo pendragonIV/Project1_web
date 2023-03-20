@@ -1,25 +1,3 @@
-<?php
-require_once("Config/open_connect.php");
-if(isset($_POST['submit_btn'])){
-    $user_name = $_POST['user_name'];
-    $password = $_POST['password'];
-    $check_sql = "SELECT * FROM user WHERE user_name = '".$user_name."' AND user_passw = '".$password."' ";
-    $check_numb = mysqli_query($connect,$check_sql);
-    $count = mysqli_num_rows($check_numb);
-    if($count == 0){
-        $error = "Incorrect User name or Password";
-    }
-    else{
-        session_start();
-        $_SESSION['user_name'] =$user_name;
-        $_SESSION['password'] = $password;
-        header("location: ?controller=user");
-    }
-}
-
-require_once("Config/close_connect.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
