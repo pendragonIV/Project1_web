@@ -11,12 +11,21 @@ switch ($action){
     }
     case 'check_login':{
         require_once("Model/login/login_model.php");
-        if(isset($check_login)){
+        if($check_login == 1){
             header("location: index.php");
         }
         else{
             require_once("View/login/login.php");
         }
+        break;
+    }
+    case 'create':{
+        require_once("View/login/register.php");
+        break;
+    }
+    case 'store':{
+        require_once("Model/login/login_model.php");
+        header("location: ?controller=login&action=login");
         break;
     }
     case 'logout':{

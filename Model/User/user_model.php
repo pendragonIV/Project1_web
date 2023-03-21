@@ -4,11 +4,29 @@ function index() {
     require_once "Config/open_connect.php";
     
     $sql = "SELECT * FROM user";
-    $record  = mysqli_query($connect,$sql);
+    $getUser  = mysqli_query($connect,$sql);
+
+    $totalUser = mysqli_num_rows($getUser);
+    // echo $total_user;
+
+    $userPerPage = 5;
+
+    $totalPage = ceil($totalUser/$userPerPage);
+
+    $currentPage = 1;
+
+    if(isset($_GET['page'])){
+        $currentPage = $_GET['page'];
+    }
+
+    $userStart = ($currentPage - 1) * $userPerPage;
+    
+    $getPageUser = "SELECT * FROM user ORDER BY user_id DESC LIMIT $userStart,$userPerPage";
+    $record = mysqli_query($connect,$getPageUser);
 
     require_once "Config/close_connect.php";
 
-    return $record;
+    return array($record,$totalPage,$currentPage);
 }
 
 function store(){
@@ -84,7 +102,7 @@ function getUser(){
 
 switch($action) {
     case '':{
-        $record = index();
+        list($record,$totalPage,$currentPage) = index();
         break;
     }
     case 'store':{

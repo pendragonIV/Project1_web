@@ -3,10 +3,30 @@
 function index(){
     require_once "Config/open_connect.php";
 
-    $products = mysqli_query($connect, "SELECT * FROM product JOIN (SELECT * FROM product_image GROUP BY product_id) AS image ON product.product_id = image.product_id");
+    $totalProduct = mysqli_num_rows(mysqli_query($connect,"SELECT * FROM product"));
+
+    $productPerPage = 3;
+
+    $totalPage = ceil($totalProduct/$productPerPage);
+
+    $currentPage = 1;
+
+    if(isset($_GET['page'])){
+        $currentPage = $_GET['page'];
+    }
+
+    $productStart = ($currentPage - 1) * $productPerPage;
+
+    $products = mysqli_query($connect, "SELECT * FROM product 
+                                        JOIN (SELECT * FROM product_image GROUP BY product_id) AS image 
+                                        ON product.product_id = image.product_id
+                                        ORDER BY product.product_id DESC 
+                                        LIMIT $productStart,$productPerPage");
+
 
     require_once "Config/close_connect.php";
-    return $products;
+
+    return array($products,$totalPage,$currentPage);
 }
 
 
@@ -168,7 +188,7 @@ switch($action){
 
 
     case '':{
-        $record = index();
+        list($record,$totalPage,$currentPage) = index();
         break;
     }
     case 'store':{
