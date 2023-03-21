@@ -26,7 +26,11 @@ switch($action){
         header('location: ?controller='.$controller.'');
         break;
     }
-    
+    case 'destroy':{
+        require_once "Model/User/user_model.php";
+        header('location: ?controller='.$controller.'');
+        break;
+    }
 }
 
 ?>

@@ -101,7 +101,7 @@
                                             <a href="?controller=<?php echo $controller ?>&action=edit&user_id=<?php echo $item['user_id'] ?> " type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
-                                            <a href="edit_user.php" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=<?php echo $controller ?>&action=destroy&user_id=<?php echo $item['user_id'] ?> " type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                            

@@ -117,6 +117,10 @@ switch($action) {
         $record = update();
         break;
     }
+    case 'destroy': {
+        $record = destroy();
+        break;
+    }
     
 }
 ?>
