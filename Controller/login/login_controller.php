@@ -12,7 +12,7 @@ switch ($action){
     case 'check_login':{
         require_once("Model/login/login_model.php");
         if($check_login == 1){
-            header("location: index.php");
+            header("location: index.php?controller=admin");
         }
         else{
             require_once("View/login/login.php");
@@ -30,7 +30,7 @@ switch ($action){
     }
     case 'logout':{
         session_destroy();
-        header("location: index.php");
+        header("location: index.php?controller=admin");
         break;
     }
 }

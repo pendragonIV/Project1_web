@@ -1,0 +1,14 @@
+.back__cart__btn:hover i{
+    transform: translateX(-.5em);
+    transition: all .5s;
+}
+.create__order__btn:hover{
+    background-color: #000;
+    color: #fff;
+    transition: all .5s;
+}
+.check__radio:checked{
+    outline: none;
+    border: none;
+    background: #000;
+}

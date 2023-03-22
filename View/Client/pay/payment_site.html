@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="payment_site.css">
+</head>
+<body>
+    
+    <div class="container-fluid">
+
+        <form action="POST">
+
+          <div class="row">
+            <div class="col-7 pt-5">
+
+                <!-- Link to customer home page -->
+
+                <div class="col-8 bg-dark mx-5 mb-4">
+                  <a class= "col d-block" href="">
+                    <img class="col-7 mx-auto d-block" src="../product_img/imglogo.png" alt="">
+                  </a>
+                </div>
+
+                <!-- Form for customer -->
+
+                <div class="col-8 mx-5 border-bottom pb-5">
+                    <p class="fs-5 text-secondary">Thông tin giao hàng</p>
+
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="input__name" placeholder="Họ và tên" name="customer_name">
+                    </div>
+
+                    <div class="row">
+
+                      <div class="mb-3 col-8">
+                        <input type="email" class="form-control" id="input__email" placeholder="Email" name="customer_email">
+                      </div>
+  
+                      <div class="mb-3 col-4">
+                        <input type="text" class="form-control" id="input__phone" placeholder="Số điện thoại" name="customer_phone">
+                      </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="input__address" placeholder="Địa chỉ" name="customer_address">
+                    </div>
+
+                    <div class="mb-3">
+                      <textarea class="form-control" id="customer_more" placeholder="Ghi chú" rows="3"></textarea>
+                    </div>
+
+                    <p class="fs-5 text-muted">Phương thức thanh toán</p>
+                    <div class="mb-3 form-check border rounded py-3">
+                      <input type="radio" class="form-check-input mx-1 check__radio" id="exampleCheck1">
+                      <label class="form-check-label ms-2" for="exampleCheck1">Thanh toán tại nhà - Cash On Delivery (COD)</label>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="col-5 border-start pt-5">
+
+                <!-- products -->
+                <div class="product-container col-9 mx-auto border-bottom py-3">
+                  <div class=" d-flex">
+                    <img class= "col-2 px-2" src="../product_img/_MG_6317.jpg" alt="">
+                    <p class="col-7 px-2 m-0">Áo Blazer - Harris - Cropped Fit - Ghi - S</p>
+                    <p class="col-3 text-end px-2">1,199,000 ₫</p>
+                  </div>
+                </div>
+
+                <!-- order -->
+                <div class="col-9 mx-auto border-bottom pb-3 pt-5">
+
+                    <div class="d-flex justify-content-between px-2 py-2 text-muted">
+                      <span>Tạm tính</span>
+                      <span>1,380,000 ₫</span>
+                    </div>
+                    <div class="d-flex justify-content-between px-2 py-2 text-muted">
+                      <span>Chiết khấu</span>
+                      <span>-181,000 ₫</span>
+                    </div>
+                    <div class="d-flex justify-content-between px-2 py-2 text-muted">
+                      <span>Phí vận chuyển</span>
+                      <span>Shop sẽ liên hệ sau</span>
+                    </div>
+                </div>
+
+                <div class="col-9 mx-auto border-bottom py-3">
+                  
+                  <div class="d-flex justify-content-between px-2 py-2 text-muted fs-5">
+                    <span>Tổng tiền</span>
+                    <span>1,199,000 ₫</span>
+                  </div>
+                </div>
+                
+                <div class="col-9 mx-auto border border-2 border-dark my-4 p-4">
+                    <span>
+                      Chúng tôi sẽ XÁC NHẬN đơn hàng bằng EMAIL hoặc ĐIỆN THOẠI. Bạn vui lòng kiểm tra EMAIL hoặc NGHE MÁY ngay khi đặt hàng thành công và CHỜ NHẬN HÀNG nha.
+                    </span>
+                </div>
+
+                <!-- nav area -->
+                <div class="col-9 mx-auto">
+                  
+                  <div class="d-flex">
+                    <div class="col-6 position-relative">
+                      <a href = "" class=" position-absolute top-50 start-0 translate-middle-y text-decoration-none text-dark back__cart__btn">
+                        <i class="fa-solid fa-chevron-left fs-6 position-relative"></i>
+                        <span class="mx-2">Giỏ hàng</span>
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <button type="submit" class="p-3 col-12 create__order__btn">Hoàn tất đơn hàng</button>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          
+          </div>
+
+        </form>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+</body>
+</html>
