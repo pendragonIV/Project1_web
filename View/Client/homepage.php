@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
 
-    <link rel="stylesheet" href="public/CSS/home_custom.css">
+    <link rel="stylesheet" href="public/CSS/custom_home.css" <?php echo time(); ?>>
 </head>
 <body>
     
@@ -47,12 +47,16 @@
                                             <li>
                                                 <p class = "dropdown__link--custom fw-bold">ĐẶC BIỆT</p>
                                             </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Hàng Mới</p>
-                                            </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Bán Chạy</p>
-                                            </li>
+                                            <?php 
+                                            
+                                            foreach($categories as $cate){
+                                                echo '<li>
+                                                        <p class = "dropdown__link--custom">'.$cate['category_name'].'</p>
+                                                        </li>';
+                                            }
+                                            
+                                            ?>
+                                            
                                         </ul>
                                         <ul class="col-3 text-white list-unstyled">
                                             <li>
@@ -83,7 +87,7 @@
                                             </li>
                                         </ul>
                                         <ul class="col-3 text-white list-unstyled">
-                                            <img class = "col-12" src="../product_img/20230303_ItbXhV8iqmuLYa3c.png" />
+                                            <img class = "col-12" src="public/images/20230303_ItbXhV8iqmuLYa3c.png" />
                                             <li class=" my-3">
                                                 <p class = "dropdown__link--custom fw-bold">MUA NGAY</p>
                                             </li>
@@ -102,7 +106,7 @@
     
                     <div class="col-2">
                         <a class= "col" href="">
-                            <img class = "col-12" src="../product_img/imglogo.png" alt="Imglogo" />
+                            <img class = "col-12" src="public/images/imglogo.png" alt="Imglogo" />
                         </a>
                     </div>
                         
@@ -135,13 +139,13 @@
             <div id="carouselExampleIndicators" class="carousel slide p-0" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="../product_img/20230302_2TDLg3fR14OpOg8U.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="../product_img/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public/images/20230302_2TDLg3fR14OpOg8U.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                   <div class="carousel-item">
-                    <img src="../product_img/20230302_iDwfjcWv2w8MFbw9.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="../product_img/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public/images/20230302_iDwfjcWv2w8MFbw9.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                   <div class="carousel-item">
-                    <img src="../product_img/20230302_M9hCqnTL55m20wtE.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="../product_img/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public/images/20230302_M9hCqnTL55m20wtE.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -160,11 +164,11 @@
 
          <div class="row my-4">
             <a href="" class="col-6 p-0 position-relative category--main">
-                <img class="col-12" src="../product_img/20230228_f9ll0hoepFPaC7Kp.jpeg" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
+                <img class="col-12" src="public/images/20230228_f9ll0hoepFPaC7Kp.jpeg" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
                 <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">QUẦN JEANS</div>
             </a>
             <a href ="" class="col-6 p-0 position-relative category--main">
-                <img class="col-12" src="../product_img/20230228_VygJVdKGouMd3z5O.jpeg" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
+                <img class="col-12" src="public/images/20230228_VygJVdKGouMd3z5O.jpeg" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
                 <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">SƠ MI</div>
             </a>
         </div>
@@ -178,71 +182,38 @@
 
         <div class="row mx-3 mb-5">
             <div class="owl-carousel owl-newest-prd position-relative">
-                <a href ="" class="item__block">
-                   <img src="../product_img/_MG_7845.jpg" alt=""> 
-                   <div class = "item__block__swatch">
-                        <ul class = "swatch__type">
-                            <li>
-                                <img class = "swatch--img" src = "../product_img/_MG_7845.jpg" />
-                            </li>
-                            <li>
-                                <img class = "swatch--img" src = "../product_img/_MG_7845.jpg" />
-                            </li>
-                        </ul>
-                    </div>
-                </a>
-                <a href ="" class="item__block">
-                    <img src="../product_img/_MG_6317.jpg" alt=""> 
-                    <div class = "item__block__swatch">
-                         <ul class = "swatch__type">
-                             <li>
-                                 <img class = "swatch--img" src = "../product_img/_MG_6317.jpg" />
-                             </li>
-                             <li>
-                                 <img class = "swatch--img" src = "../product_img/_MG_6317.jpg" />
-                             </li>
-                         </ul>
-                     </div>
-                 </a>
-                 <a href ="" class="item__block">
-                    <img src="../product_img/_MG_7836__3_.jpg" alt=""> 
-                    <div class = "item__block__swatch">
-                         <ul class = "swatch__type">
-                             <li>
-                                 <img class = "swatch--img" src = "../product_img/_MG_7836__3_.jpg" />
-                             </li>
-                             <li>
-                                 <img class = "swatch--img" src = "../product_img/_MG_7836__3_.jpg" />
-                             </li>
-                         </ul>
-                     </div>
-                 </a>
-                 <a href ="" class="item__block">
-                    <img src="../product_img/_MG_7853__1_.jpg" alt=""> 
-                    <div class = "item__block__swatch">
-                         <ul class = "swatch__type">
-                             <li>
-                                 <img class = "swatch--img" src = "../product_img/_MG_7853__1_.jpg" />
-                             </li>
-                             <li>
-                                 <img class = "swatch--img" src = "../product_img/_MG_7853__1_.jpg" />
-                             </li>
-                         </ul>
-                     </div>
-                 </a>
-                 <a href ="" class="item__block">
-                    <img src="../product_img/HW16012216902.jpg" alt=""> 
-                    <div class = "item__block__swatch">
-                         <ul class = "swatch__type">
-                             <li>
-                                 <img class = "swatch--img" src = "../product_img/HW16012216902.jpg" />
-                             </li>
-                             <li>
-                                 <img class = "swatch--img" src = "../product_img/HW16012216902.jpg" />
-                             </li>
-                         </ul>
-                     </div>
-                 </a>
+                <?php
+                foreach($productNewest as $prdNew){
+
+                    echo '<a href ="" class="item__block">
+                        <img src="public/upload/'.$prdNew['image_link'].'" alt=""> 
+                        <div class = "item__block__swatch">
+                         <ul class = "swatch__type">';
+
+                ?>
+                <?php
+                    $count = 0;
+                    foreach($productImages as $img){
+                        if ($prdNew['product_id'] == $img['product_id']){
+                            echo '<li>
+                                <img class = "swatching--img" src = "public/upload/'.$img['image_link'].'" />
+                            </li>';
+                            $count++;
+                        }
+                        if($count == 3){
+                            break;
+                        }
+
+                    }
+                ?>
+                <?php
+                    echo '</ul>
+                        </div>
+                        </a>';
+
+                }
+                ?>
+                
             </div>
         </div>
 
@@ -257,22 +228,22 @@
         <div class="row mb-5">
             <div class="owl-carousel owl-store position-relative px-0">
                 <a href=""  class="col-6 p-0 position-relative stores__list">
-                    <img src="../product_img/100dongtac.jpg" alt="" style="object-fit: cover; object-position: 0% 0%;">
+                    <img src="public/images/100dongtac.jpg" alt="" style="object-fit: cover; object-position: 0% 0%;">
                     <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">100 ĐÔNG CÁC - HÀ NỘI</div>
                 </a> 
 
                 <a href=""  class="col-6 p-0 position-relative stores__list">
-                    <img src="../product_img/loduc.jpg" alt="" style="object-fit: cover; object-position: 0% 0%;">
+                    <img src="public/images/loduc.jpg" alt="" style="object-fit: cover; object-position: 0% 0%;">
                     <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">109 LÒ ĐUC - HÀ NỘI</div>
                 </a> 
 
                 <a href=""  class="col-6 p-0 position-relative stores__list">
-                    <img src="../product_img/levansy.jpg" alt="" style="object-fit: cover; object-position: 0% 0%;">
+                    <img src="public/images/levansy.jpg" alt="" style="object-fit: cover; object-position: 0% 0%;">
                     <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">367 LÊ VĂN SỸ - HCM</div>
                 </a> 
 
                 <a href=""  class="col-6 p-0 position-relative stores__list">
-                    <img src="../product_img/lethirieng.jpg" alt="" style="object-fit: cover; object-position: 0% 0%;">
+                    <img src="public/images/lethirieng.jpg" alt="" style="object-fit: cover; object-position: 0% 0%;">
                     <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">66 LÊ THỊ RIÊNG - HCM</div>
                 </a> 
             </div>
@@ -285,14 +256,14 @@
             <!-- img -->
             <div class="footer__img col-12">
                 <a class = "col d-block" href="">
-                    <img src="../product_img/imglogo.png" class = "col-2 d-block mx-auto mb-5" alt="">
+                    <img src="public/images/imglogo.png" class = "col-2 d-block mx-auto mb-5" alt="">
                 </a>
             </div>
 
             <!-- certificate -->
             <div class="col-3">
                 <a href="http://online.gov.vn/Home/WebDetails/101915">
-                    <img class="col-8" src="../product_img/dathongbaobocongthuong.png" alt="">
+                    <img class="col-8" src="public/images/dathongbaobocongthuong.png" alt="">
                 </a>
             </div>
 

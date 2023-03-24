@@ -175,8 +175,8 @@
     width : 100%;
     background-color: white;
     position: absolute;
-    bottom  :0;
     transform:translate(0,100%);
+    bottom: 0;
     transition: .7s;
 }
 .swatch__type{
@@ -189,15 +189,14 @@
 .swatch__type li{
     margin: 0 .2em;
 }
-.swatch--img{
-    height:4em;
+.swatching--img{
+    height: 5em;
     margin : .2em 0;
     object-fit: cover;
 }
-.swatch--img:hover{
+.swatching--img:hover{
     border:1px solid red;
 }
-
 .fs-small{
     font-size: .8em;
 }
