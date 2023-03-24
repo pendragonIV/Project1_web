@@ -8,6 +8,17 @@ $action = $_GET['action'] ?? '';
 
 //dieu huong trong admin
 $redirect = $_GET['redirect'] ?? '';
-require_once "Model/Client/index_model.php";
 
-require_once "View/Client/homepage.php";
+if($redirect == ''){
+    require_once "Model/Client/index_model.php";
+    require_once "View/Client/index.php";
+}else{
+    switch($redirect){
+        case 'detail': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            require_once "View/Client/itemDetailed.php";
+            break;
+        }
+    }
+}
