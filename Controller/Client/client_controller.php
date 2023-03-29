@@ -15,9 +15,8 @@ if($redirect == ''){
 }else{
     switch($redirect){
         case 'detail': {
-            require_once "Model/Client/index_model.php";
+            require_once "Model/Client/product/product_model.php";
             require_once "View/Client/index.php";
-            require_once "View/Client/itemDetailed.php";
             break;
         }
     }

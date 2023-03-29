@@ -1,6 +1,6 @@
 <?php
 
-$rediect = $_GET['rediect'] ?? '';
+$redirect = $_GET['redirect'] ?? '';
 
 function index(){
     require_once "Config/open_connect.php";
@@ -22,7 +22,7 @@ function index(){
     return array($categories,$productNewest,$productFeatured,$productImages);
 }
 
-switch ($rediect){
+switch ($redirect){
     case '': {
         list($categories,$productNewest,$productFeatured,$productImages) = index();
         break;

@@ -352,7 +352,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    <script src = "public/JS/gallery.js"></script>
+    <script src="public/JS/gallery.js"></script>
     <script src="public/JS/sticky_nav.js"></script>
     <script src="public/JS/to_top.js"></script>
     <script src="public/JS/slide_cart.js"></script>
