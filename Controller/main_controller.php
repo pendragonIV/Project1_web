@@ -7,7 +7,7 @@ $controller = $_GET['controller'] ?? ''; // ?? '' (khi k get duoc controller thi
 $action = $_GET['action'] ?? '';
 
 //Goi chuc nang
-if(!isset($_GET['controller'])){
+if(!isset($_GET['controller']) || $_GET['controller'] == ''){
     require_once "Controller/Client/client_controller.php";
 }
 switch($controller){

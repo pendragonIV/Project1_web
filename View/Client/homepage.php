@@ -4,13 +4,13 @@
             <div id="carouselExampleIndicators" class="carousel slide p-0" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="public/images/20230302_2TDLg3fR14OpOg8U.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public/images/20230302_2TDLg3fR14OpOg8U.png" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                   <div class="carousel-item">
-                    <img src="public/images/20230302_iDwfjcWv2w8MFbw9.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public/images/20230302_iDwfjcWv2w8MFbw9.png" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                   <div class="carousel-item">
-                    <img src="public/images/20230302_M9hCqnTL55m20wtE.png" class="d-block w-100" style= "object-fit: cover; height: 40em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public/images/20230302_M9hCqnTL55m20wtE.png" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -50,7 +50,7 @@
                 <?php
                 foreach($productNewest as $prdNew){
 
-                    echo '<a href ="" class="item__block">
+                    echo '<a href ="?redirect=detail&id='.$prdNew['product_id'].'" class="item__block">
                         <img src="public/upload/'.$prdNew['image_link'].'" alt=""> 
                         <div class = "item__block__swatch">
                          <ul class = "swatch__type">';

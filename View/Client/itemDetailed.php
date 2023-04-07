@@ -166,7 +166,7 @@
                 <?php
                 foreach($productNewest as $prdNew){
 
-                    echo '<a href ="" class="item__block">
+                    echo '<a href ="?redirect=detail&id='.$prdNew['product_id'].'" class="item__block">
                         <img src="public/upload/'.$prdNew['image_link'].'" alt=""> 
                         <div class = "item__block__swatch">
                          <ul class = "swatch__type">';

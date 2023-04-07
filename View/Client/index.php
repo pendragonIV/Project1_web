@@ -107,7 +107,7 @@
                     </div>
     
                     <div class="col-2">
-                        <a class= "col" href="">
+                        <a class= "col" href="?controller=">
                             <img class = "col-12" src="public/images/imglogo.png" alt="Imglogo" />
                         </a>
                     </div>
