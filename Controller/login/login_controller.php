@@ -5,14 +5,18 @@ if(isset($_GET['action'])){
 }
 
 switch ($action){
-    case 'login':{
+    case 'login':
+    case'': {
         require_once("View/login/login.php");
         break;
     }
     case 'check_login':{
         require_once("Model/login/login_model.php");
-        if($check_login == 1){
+        if($check_login == 1 && $_SESSION['permission'] == 0){
             header("location: index.php?controller=admin");
+        }
+        elseif($check_login == 1 && $_SESSION['permission'] == 1){
+            header("location: index.php");
         }
         else{
             require_once("View/login/login.php");

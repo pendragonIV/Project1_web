@@ -19,5 +19,9 @@ if($redirect == ''){
             require_once "View/Client/index.php";
             break;
         }
+        case 'cart': {
+            require_once "Controller/Client/cart/cart_controller.php";
+            break;
+        }
     }
 }

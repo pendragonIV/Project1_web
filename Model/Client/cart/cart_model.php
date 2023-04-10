@@ -1,17 +1,7 @@
 <?php
-$redirect = $_GET['redirect'];
+
 function index(){
     require_once "Config/open_connect.php";
-    $productId  = $_GET['id'];
-
-    $getCategorySql = "SELECT * FROM category ORDER BY category_id ASC";
-    $categories = mysqli_query($connect,$getCategorySql);
-    $getProductSql = "SELECT * FROM product 
-                        JOIN (SELECT * FROM product_image GROUP BY product_id) AS image 
-                        ON product.product_id = image.product_id 
-                        ORDER BY product.product_id DESC 
-                        LIMIT 10";
-    $product = mysqli_query($connect,$getProductSql);
 
     if(isset($_SESSION['cart'][$productId])){
         $_SESSION['cart'][$productId]++;
@@ -20,16 +10,58 @@ function index(){
         $_SESSION['cart'][$productId] = 1;
     }
 
-
-
     require_once "Config/close_connect.php";    
 
     return array($categories,$product,$_SESSION['cart'][$productId]);
 }
 
-switch ($redirect){
-    case 'detail': {
-        list($categories,$product,$cart_prd) = index();
+function addToCart(){
+    require_once "Config/open_connect.php";
+
+    if(isset($_POST['submit_btn'])){
+
+        if(!isset($_SESSION['cart'])) $_SESSION['cart']=[];
+
+        $image = $_POST['product_img'];
+        $size = $_POST['product_size'];
+        $name =$_POST['product_name'];
+        $price = $_POST['product_price'];
+        $quantity = $_POST['product_quantity'] ?? 1;
+
+         // Kiểm tra sản phẩm có trang giỏ hàng không để chống hiển thị lặp lại sản phẩm
+          // kiểm tra sản phẩm có trùng hay không
+        $check = 0;
+        for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+            if($_SESSION['cart'][$i]['product_name'] == $name && $_SESSION['cart'][$i]['product_size'] == $size){
+                $check = 1;
+                $_SESSION['cart'][$i]['product_quantity'] += $quantity;
+                break;
+            }
+        }
+
+        if($check == 0){
+            $product = [
+                "product_image" => $image,
+                "product_name" => $name,
+                "product_price" => $price,
+                "product_size" => $size,
+                "product_quantity" => $quantity
+            ];
+            $_SESSION['cart'][] = $product;
+        }
+        
+        for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+            
+        }
+
+    }
+
+    require_once "Config/close_connect.php";  
+}
+
+switch ($action){
+    case 'add': {
+        $result = addToCart();
         break;
     }
 }

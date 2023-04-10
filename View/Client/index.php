@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css" />
-    <link rel="stylesheet" href="public/CSS/itemDetailed.css">
+    <link rel="stylesheet" href="public/CSS/itemDetailed_custom.css">
 
     <link rel="stylesheet" href="public/CSS/custom_home.css" <?php echo time(); ?>>
 </head>
@@ -259,25 +259,27 @@
                     </div>
                     
                     <!-- products -->
-
+                    <?php
+                    for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+                    ?>
                     <div class="py-3 border-bottom border-2 border-dark">
                         <div class="d-flex mt-3">
-                            <img class="col-2" src="../product_img/_MG_6317.jpg" alt="">
+                            <img class="col-2" src="public/upload/<?php echo $_SESSION['cart'][$i]['product_image']; ?>" alt="">
                             <div class="col-9 px-3">
-                                <div>ÁO BLAZER - HARRIS - CROPPED FIT - GHI</div>
+                                <div><?php echo $_SESSION['cart'][$i]['product_name']; ?> - <?php echo $_SESSION['cart'][$i]['product_size']; ?></div>
                                 <div class="mt-2 d-flex">
                                     <div class = "d-inline-block col-4 d-flex me-2">
-                                        <input class = "col-4 border bg-white rounded-start" onclick="var result = document.getElementById('ammount'); var qty = result.value; if( !isNaN(qty) && qty > 1 ) result.value--;return false;" type='button' value='-' />
-                                        <input id = "ammount" class ="col-4 border text-center" value = "1">
-                                        <input class = "col-4 border bg-white rounded-end" onclick="var result = document.getElementById('ammount'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+' />
+                                        <input class = "col-4 border bg-white rounded-start" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty) && qty > 1 ) result.value--;return false;" type='button' value='-' />
+                                        <input id = "ammount_<?php echo $i; ?>" class ="col-4 border text-center" value = "<?php echo (int)$_SESSION['cart'][$i]['product_quantity']; ?>">
+                                        <input class = "col-4 border bg-white rounded-end" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+' />
                                     </div>
 
                                     <div class="col-4">
-                                        <del> 1,380,000 ₫ </del>
+                                        <del><?php echo number_format((int)$_SESSION['cart'][$i]['product_price'],0,'','.'); ?>₫ </del>
                                     </div>
 
                                     <div class="col-4">
-                                        <span class="text-danger">1,199,000 ₫</span>
+                                        <span class="text-danger"><?php echo number_format(($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']),0,'','.'); ?>₫</span>
                                     </div>
                                 </div>
                             </div>
@@ -286,32 +288,10 @@
                                 <i class="fa-solid fa-xmark position-absolute top-50"></i>
                             </div>
                         </div>
+                    <?php
+                    }
+                    ?>
 
-                        <div class="d-flex mt-3">
-                            <img class="col-2" src="../product_img/_MG_6317.jpg" alt="">
-                            <div class="col-9 px-3">
-                                <div>ÁO BLAZER - HARRIS - CROPPED FIT - GHI</div>
-                                <div class="mt-2 d-flex">
-                                    <div class = "d-inline-block col-4 d-flex me-2">
-                                        <input class = "col-4 border bg-white rounded-start" onclick="var result = document.getElementById('ammount_prd2'); var qty = result.value; if( !isNaN(qty) && qty > 1 ) result.value--;return false;" type='button' value='-' />
-                                        <input id = "ammount_prd2" class ="col-4 border text-center" value = "1">
-                                        <input class = "col-4 border bg-white rounded-end" onclick="var result = document.getElementById('ammount_prd2'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+' />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <del> 1,380,000 ₫ </del>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <span class="text-danger">1,199,000 ₫</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-1 position-relative">
-                                <i class="fa-solid fa-xmark position-absolute top-50"></i>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="d-flex justify-content-between py-2 text-muted">

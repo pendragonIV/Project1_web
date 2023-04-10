@@ -35,29 +35,60 @@
 
             <div class="col-4 px-5">
                 <!-- Product In4 block -->
-               <div>
+                <form role="form" method="post" action ="?controller=<?php echo $controller; ?>&redirect=cart&action=add" enctype="multipart/form-data">
+                    <?php 
+                        
+                        foreach ($productIn4 as $in4){
+
+                    ?>
                     <div class="border-bottom">
-                        <h5 class="fw-bold mb-3">
-                            ÁO IN - JUST KISS ME - REGULAR FIT - ĐEN
-                        </h5>
-                        <p class="fw-bold">
-                            380,000₫
-                        </p>
+                        <div class="mb-3 d-none">
+                            <input type="text" class="form-control" id="product_id" name="product_id" value="<?php echo $in4['product_id'] ?>" required>
+                        </div>
+                        <div class="mb-3 d-none">
+                            <input type="text" class="form-control" id="product_img" name="product_img" value="<?php echo $in4['image_link'] ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control border-0 p-0 fw-bold mb-3 fs-4" id="product_name" name="product_name" value="<?php echo $in4['product_name'] ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6" id="product_price" name="product_price" value="<?php echo $in4['product_price'] ?>" required>
+                        </div>
                     </div>
 
+                    <?php
+                        }
+                    ?>
+
                     <div class="border-bottom">
-                        <div class="d-flex my-3">
-                            <input type="button" class="col-1 me-2 text-white select__size" value="S"></input>
-                            <input type="button" class="col-1 me-2 text-white select__size" value="M"></input>
-                            <input type="button" class="col-1 me-2 text-white select__size" value="L"></input>
-                            <input type="button" class="col-1 me-2 text-white select__size" value="XL"></input>
+                    <div class="d-flex my-3">
+                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark">
+                                <input type="radio" class="col-12 h-100 radio_custom" value="S" name = "product_size" required></input>
+                                <span class="text-white position-absolute start-0 ps-1 ">S</span>
+                            </label>
+
+                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark">
+                                <input type="radio" class="col-12 h-100 radio_custom" value="M" name = "product_size"></input>
+                                <span class="text-white position-absolute start-0 ps-1 ">M</span>     
+                            </label>
+
+                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark">
+                                <input type="radio" class="col-12 h-100 radio_custom" value="L" name = "product_size"></input>
+                                <span class="text-white position-absolute start-0 ps-1 ">L</span>
+                            </label>
+
+                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark">
+                                <input type="radio" class="col-12 h-100 radio_custom" value="XL" name = "product_size"></input>
+                                <span class="text-white position-absolute start-0 ps-1 ">XL</span>
+                            </label>
+
                         </div>
                     
                         <p onclick="" class="text-decoration-underline fw-bold d-inline-block">HƯỚNG DẪN CHỌN KÍCH CỠ</p>
                     </div>
 
                     <div>
-                        <button class="col-12 p-2 fw-bold addToCart_btn my-3">CHỌN MUA</button>
+                        <input type="submit" class="col-12 p-2 fw-bold addToCart_btn my-3" value= "CHỌN MUA" name="submit_btn"></input>
                     </div>
 
                     <div id="accordion">
@@ -76,11 +107,7 @@
                             <div class="">
                                 <p class="my-2">MÔ TẢ:</p>
 
-                                - Chất liệu 100% Cotton USA mang ưu điểm về độ bền và thấm hút mồ hôi tốt.</br>
-                                - Công nghệ in lụa sắc nét.</br>
-                                - Hình in được thiết kế riêng bởi Artist.</br>
-                                - Lưu ý: Giặt máy ở chế độ nhẹ để sản phẩm được bền lâu.</br>
-                                - Sản xuất tại Việt Nam</br>
+                                <?php echo $in4['product_description'] ?>
                                 
                                 <p class="my-2">SỐ ĐO:</p>
                                 
@@ -125,7 +152,7 @@
 
                     </div>
                       
-               </div>
+                </form>
 
                <!-- Social media link  -->
                <div class="d-flex justify-content-between my-3 text-muted">

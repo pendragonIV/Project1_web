@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThinkPro-Product Management</title>
+    <title>ThinkPro-Category Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link rel="stylesheet" href="/admin/admin_resource/css/custom.css">
 </head>
 <body>
     
@@ -25,27 +24,26 @@
                         <i class="fa-solid fa-user my-auto mx-3"></i>
                         <p class="my-auto">Admin</p>
                     </div>
-                    <button class="dropdown-toggle bg-transparent border-0" style="outline:none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle bg-transparent border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
                       <li><a class="dropdown-item" href="#">Profile</a></li>
                       <li><a class="dropdown-item d-block" href="?controller=login&action=logout">Logout</a></li>
                     </ul>
-                </div>
+                  </div>
             </div>
         </nav>
         </div>
         <div class="row">
-            <div class="col-10 mx-auto"  style="margin-top:5em;">
+            <div class="col-10  mx-auto"  style="margin-top:5em;">
                 <div class="row">
                     <div class="col-3 shadow p-3 bg-body rounded mb-3 min-vh-100">
                         <div class="btn-group-vertical col-12 " role="group" aria-label="Basic example">
                             <a href="?controller=<?php echo $controller; ?>" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Dashboard</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=user" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Member management</a>
-                            <a href="?controller=<?php echo $controller; ?>&redirect=category" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Category management</a>
-                            <a href="?controller=<?php echo $controller; ?>&redirect=product" class="btn border-0 rounded text-start bg-primary text-light" tabindex="-1" role="button" aria-disabled="true">Product management</a>
+                            <a href="" class="btn border-0 rounded text-start bg-primary text-light" tabindex="-1" role="button" aria-disabled="true">Category management</a>
+                            <a href="?controller=<?php echo $controller; ?>&redirect=product" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Product management</a>
                             <a href="admin_order.php" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Order management</a>
-                        
                         </div>
                     </div>
                     <div class="col-9">
@@ -53,7 +51,7 @@
                         <!-- Title -->
                          <div class="row">
                             <div class="col">
-                                <h2 class="text-muted">Product management site</h2>
+                                <h2 class="text-muted">Category management site</h2>
                             </div>
                          </div>
 
@@ -73,7 +71,7 @@
                             <div class="col-12">
                                 <a href="index.php?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=create" type="button" class="btn btn-outline-success my-4" tabindex="-1" role="button" aria-disabled="true">
                                     <i class="fa-solid fa-plus"></i>
-                                    New product
+                                    New category
                                 </a>
                             </div>
                          </div>
@@ -84,56 +82,32 @@
                                 <table class="table my-3">
                                     <thead>
                                       <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Product name</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Product image</th>
+                                        <th scope="col">ID</th>
                                         <th scope="col">Category</th>
                                         <th scope="col">Action</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-
-                                    <?php 
-                                      
-                                        $index = 0;
-                                        foreach($record as $item){
-
-                                    ?>
-                                            <tr>
-                                            <th scope="row" class = "col-1"> <?php echo $index; ?>  </th>
-                                            <td class="col-3"> <?php echo $item['product_name']; ?>  </td>
-                                            <td class="col-3"> <?php echo $item['product_price']; ?> vnd</td>
-                                            <td class="col-2">
-                                                <img class="col-12" src="public/upload/<?php echo $item['image_link']; ?>">
-                                            </td>
-                                            <td class="col-1">
-                                                a
-                                            </td>
-                                            <td class="col-2">
-                                                <a href="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=edit&product_id=<?php echo $item['product_id']; ?>" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>
-                                                <a href="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=destroy&product_id=<?php echo $item['product_id']; ?>" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </a>
-                                               
-                                            </td>
-                                          </tr>
-                                    <?php
-
-                                        $index++;
-                                        }
-                                      
-                                    ?>
-
-                                      
+                                      <tr>
+                                        <th scope="row"><?php echo $row['category_id'] ?> </th>
+                                        <td> <?php echo $row['category_name'] ?> </td>
+                                        <td>
+                                            <a href="edit_category.php?category_id= <?php echo $row['category_id'] ?>" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <a href="#" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                           
+                                        </td>
+                                      </tr>
                                     </tbody>
                                   </table>
 
-                                
-                                  <nav aria-label="Page navigation">
+                                                                  
+                                <nav aria-label="Page navigation">
                                     <ul class="pagination">
+
                                         <?php
                                             if($currentPage > 1){
                                                 echo '<li class="page-item">
@@ -162,19 +136,9 @@
 
                                     </ul>
                                 </nav>
-
+                                
                             </div>
 
-                         </div>
-                         
-                         <div class="row">
-                            <div class="col">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        
-                                    </ul>
-                                </nav>
-                            </div>
                          </div>
 
                     </div>

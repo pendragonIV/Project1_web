@@ -70,3 +70,21 @@ border:1px solid red;
     color: #fff;
     transition: .4s;
 }
+
+.radio_custom {
+    -webkit-appearance: none; /*to disable the default appearance of radio button*/
+    -moz-appearance: none;
+}
+  
+.radio_custom:focus { /*no need, if you don't disable default appearance*/
+    outline: none; /*to remove the square border on focus*/
+}
+  
+.radio_custom:checked { /*no need, if you don't disable default appearance*/
+    background-color: #949494;
+}
+
+
+
+  
+  

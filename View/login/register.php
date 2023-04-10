@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <div class="container-fluid" style = "min-height: 46.3em; background-color:#000;">
+    <div class="container-fluid" style = "min-height: 51em; background-color:#000;">
         <div class="row" style = "padding-top:10em;">
             <div class="col-6 mx-auto">
                     <h2 class = "text-white">Đăng ký</h2>
