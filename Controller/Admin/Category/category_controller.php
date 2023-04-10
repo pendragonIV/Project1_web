@@ -18,17 +18,17 @@ switch($action){
         break;
     }
     case 'edit':{
-        require_once "Model/Admin/User/user_model.php";
-        require_once "View/Admin/User/edit.php";
+        require_once "Model/Admin/Category/category_model.php";
+        require_once "View/Admin/Category/edit.php";
         break;
     }
     case 'update':{
-        require_once "Model/Admin/User/user_model.php";
+        require_once "Model/Admin/Category/category_model.php";
         header('location: ?controller='.$controller.'&redirect='.$redirect.'');
         break;
     }
     case 'destroy':{
-        require_once "Model/Admin/User/user_model.php";
+        require_once "Model/Admin/Category/category_model.php";
         header('location: ?controller='.$controller.'&redirect='.$redirect.'');
         break;
     }

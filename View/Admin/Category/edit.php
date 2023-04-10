@@ -59,36 +59,54 @@
                          <!-- Main -->
                         <div class="row">
                             <div class="col-10">
-                                <form role="form" method="post" action="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=store">
+                                <?php
+                            
+                                foreach($record as $in4){
+
+                                ?>
+
+                                <form role="form" method="post" action="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=update">
+                                    <div class="mb-3 d-none">
+                                        <input type="text" class="form-control" id="category_id" name="category_id" value = "<?php echo $in4['category_id']; ?>" required>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="category_name" class="form-label">Category name</label>
-                                        <input type="text" class="form-control" id="category_name" name="category_name" required>
+                                        <input type="text" class="form-control" id="category_name" name="category_name" value = "<?php echo $in4['category_name']; ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="floatingTextarea">Description</label>
-                                        <textarea class="form-control" id="category_description" name="category_description"></textarea>
+                                        <textarea class="form-control" id="category_description" name="category_description"> <?php echo $in4['category_description']; ?> </textarea>
                                     </div>
                                     <div>
                                         <div>
                                             <label >New</label>
-                                            <input type = "radio" name = "parent_category" value = "-1" required>
+                                            <input type = "radio" name = "parent_category" value = "-1" checked required>
                                         </div>
                                         <?php
-                                            foreach($record as $item){
+                                            foreach($getParent as $item){
+                                                if($item['category_name'] != $in4['category_name']){
                                         ?>
 
                                         <div>
                                             <label ><?php echo $item['category_name'] ?></label>
-                                            <input type = "radio" name = "parent_category" value = "<?php echo $item['category_id'] ?>">
+                                            <input type = "radio" name = "parent_category" value = "<?php echo $item['category_id'] ?>" <?php if($in4['parent_id'] == $item['category_id']) { echo "checked";} ?>>
                                         </div>
                                         
                                         <?php
+
+                                                }
                                             }
                                         ?>
                                     </div>
                                     
-                                    <input type="submit" class="btn btn-success my-3 col-2" value="Add" name="submit_btn"></input>
-                                  </form>
+                                    <input type="submit" class="btn btn-success my-3 col-2" value="Edit" name="submit_btn"></input>
+
+                                </form>
+
+                                <?php
+                                }
+                                ?>
+
                             </div>
                         </div>
 

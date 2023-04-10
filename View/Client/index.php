@@ -49,45 +49,42 @@
                                             <li>
                                                 <p class = "dropdown__link--custom fw-bold">ĐẶC BIỆT</p>
                                             </li>
-                                            <?php 
+                                            <li>
+                                                <p class = "dropdown__link--custom">Hàng Mới</p>
+                                            </li>
+                                            <li>
+                                                <p class = "dropdown__link--custom">Bán Chạy</p>
+                                            </li>
                                             
-                                            foreach($categories as $cate){
-                                                echo '<li>
-                                                        <p class = "dropdown__link--custom">'.$cate['category_name'].'</p>
-                                                        </li>';
-                                            }
-                                            
+                                        </ul>
+
+                                        <?php
+                                        
+                                        foreach ($cateParents as $cate){
+                                            if($cate['parent_id'] == 0){
+                                        ?>
+                                        <ul class="col-3 text-white list-unstyled">
+                                            <li>
+                                                <p class = "dropdown__link--custom fw-bold"> <?php echo mb_strtoupper($cate['category_name']) ?> </p>
+                                            </li>
+                                            <?php
+                                            foreach ($cateChilds as $cateChild){
+                                                if($cateChild['parent_id'] == $cate['category_id']){
                                             ?>
-                                            
+                                            <li>
+                                                <p class = "dropdown__link--custom"> <?php echo ucwords($cateChild['category_name']) ?> </p>
+                                            </li>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
                                         </ul>
-                                        <ul class="col-3 text-white list-unstyled">
-                                            <li>
-                                                <p class = "dropdown__link--custom fw-bold">TRANG PHỤC</p>
-                                            </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Mới Nhất</p>
-                                            </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Mới Nhất</p>
-                                            </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Mới Nhất</p>
-                                            </li>
-                                        </ul>
-                                        <ul class="col-3 text-white list-unstyled">
-                                            <li>
-                                                <p class = "dropdown__link--custom fw-bold">GIÀY & PHỤ KIỆN</p>
-                                            </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Mới Nhất</p>
-                                            </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Mới Nhất</p>
-                                            </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Mới Nhất</p>
-                                            </li>
-                                        </ul>
+
+                                        <?php
+                                            } 
+                                        }
+                                        ?>
+
                                         <ul class="col-3 text-white list-unstyled">
                                             <img class = "col-12" src="public/images/20230303_ItbXhV8iqmuLYa3c.png" />
                                             <li class=" my-3">

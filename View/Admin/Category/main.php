@@ -82,25 +82,36 @@
                                 <table class="table my-3">
                                     <thead>
                                       <tr>
-                                        <th scope="col">ID</th>
+                                        <th scope="col">No</th>
                                         <th scope="col">Category</th>
                                         <th scope="col">Action</th>
                                       </tr>
                                     </thead>
                                     <tbody>
+
+                                    <?php
+                                        $no = 0;
+                                        foreach ($record as $item){
+                                    ?>
                                       <tr>
-                                        <th scope="row"><?php echo $row['category_id'] ?> </th>
-                                        <td> <?php echo $row['category_name'] ?> </td>
+                                        <th scope="row"><?php echo $no ?> </th>
+                                        <td> <?php echo $item['category_name'] ?> </td>
                                         <td>
-                                            <a href="edit_category.php?category_id= <?php echo $row['category_id'] ?>" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=edit&category_id=<?php echo $item['category_id']; ?>" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
-                                            <a href="#" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=destroy&category_id=<?php echo $item['category_id']; ?>" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                            
                                         </td>
                                       </tr>
+
+                                    <?php
+                                        $no++;
+                                        }
+                                    ?>
+
                                     </tbody>
                                   </table>
 

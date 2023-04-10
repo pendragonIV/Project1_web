@@ -45,15 +45,17 @@ function createCate(){
 function store(){
     require_once "Config/open_connect.php";
     
-    $user_name = $_POST['user_name'];
-    $user_email = $_POST['user_email'];
-    $user_passw = $_POST['user_pssw'];
-    $user_repassw = $_POST['user_re_pssw'];
-    if($user_passw == $user_repassw){
-
-    $insert_user_sql = "INSERT INTO user(user_name,user_email,user_passw) Values('$user_name', '$user_email', '$user_passw')";
-    $record = mysqli_query($connect,$insert_user_sql);
-    
+    if(isset($_POST['submit_btn'])){
+        $category_name = $_POST['category_name'];
+        $category_description = $_POST['category_description'];
+        $parent_category = $_POST['parent_category'];
+        if($parent_category == -1){
+            $insert_cate_sql = "INSERT INTO category(category_name,category_description,parent_id) Values('$category_name', '$category_description', 0)";
+        }
+        else{
+            $insert_cate_sql = "INSERT INTO category(category_name,category_description,parent_id) Values('$category_name', '$category_description', $parent_category)";
+        }
+        $record = mysqli_query($connect,$insert_cate_sql);
     }
     require_once "Config/close_connect.php";
 
@@ -62,9 +64,9 @@ function store(){
 
 function destroy(){
     require_once "Config/open_connect.php";
-    if(isset($_GET['user_id'])){
-        $user_id = $_GET['user_id'];
-        $del_sql = "DELETE FROM user WHERE user_id = $user_id";
+    if(isset($_GET['category_id'])){
+        $cateId = $_GET['category_id'];
+        $del_sql = "DELETE FROM category WHERE category_id = $cateId";
         mysqli_query($connect,$del_sql);
     }
     require_once "Config/close_connect.php";
@@ -75,25 +77,31 @@ function destroy(){
 function update(){
     require_once "Config/open_connect.php";
     
-    if(isset($_GET['user_id'])){
-        $user_id = $_GET['user_id'];
-        $user_name = $_POST['user_name'];
-        $user_email = $_POST['user_email'];
-        $user_passw = $_POST['user_pssw'];
-        $user_repassw = $_POST['user_re_pssw'];
-
-        if($user_passw == $user_repassw){
-
-        $edit_user_sql = "  UPDATE user
-                            SET 
-                            user_name = '$user_name',
-                            user_email ='$user_email',
-                            user_passw = '$user_passw'
-                            WHERE user_id = $user_id";
-
-        $record = mysqli_query($connect,$edit_user_sql);
-
+    if(isset($_POST['category_id'])){
+        $categoryId = $_POST['category_id'];
+        $category_name = $_POST['category_name'];
+        $category_description = $_POST['category_description'];
+        $parent_category = $_POST['parent_category'];
+        if($parent_category == -1){
+            
+            $edit_cate_sql = "  UPDATE category
+                                SET 
+                                category_name = '$category_name',
+                                category_description ='$category_description',
+                                parent_id = 0
+                                WHERE category_id = $categoryId";
         }
+        else{
+            $edit_cate_sql = "  UPDATE category
+                                SET 
+                                category_name = '$category_name',
+                                category_description ='$category_description',
+                                parent_id = $parent_category
+                                WHERE category_id = $categoryId";
+        }
+
+        $record = mysqli_query($connect,$edit_cate_sql);
+
     }
    
     require_once "Config/close_connect.php";
@@ -101,16 +109,19 @@ function update(){
     return $record;
 }
 
-function getUser(){
+function getCate(){
     require_once "Config/open_connect.php";
     
-    $userId = $_GET['user_id'];
-    $sql = "SELECT * FROM user WHERE user_id = $userId";
+    $cateId = $_GET['category_id'];
+    $sql = "SELECT * FROM category WHERE category_id = $cateId";
     $record  = mysqli_query($connect,$sql);
+
+    $sqlParent = "SELECT * FROM category WHERE parent_id = 0";
+    $getParent = mysqli_query($connect,$sqlParent);
     
     require_once "Config/close_connect.php";
 
-    return $record;
+    return array($record,$getParent);
 }
 
 switch($action) {
@@ -127,7 +138,7 @@ switch($action) {
         break;
     }
     case 'edit': {
-        $record = getUser();
+        list($record,$getParent) = getCate();
         break;
     }
     case 'update' :{
