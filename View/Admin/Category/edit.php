@@ -52,7 +52,7 @@
                         <!-- Title -->
                          <div class="row">
                             <div class="col">
-                                <h2 class="text-muted mb-4">Add category</h2>
+                                <h2 class="text-muted mb-4">Edit category</h2>
                             </div>
                          </div>
 

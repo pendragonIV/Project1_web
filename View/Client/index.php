@@ -112,7 +112,9 @@
                     <div class="col-5">
                         <ul class="d-flex flex-row-reverse list-unstyled m-0">
                             <li class="py-3 col-1 text-end">
-                                <i class="fa-solid fa-user text-white fs-5 py-1"></i>
+                                <a href="?controller=login">
+                                    <i class="fa-solid fa-user text-white fs-5 py-1"></i>
+                                </a>
                             </li>
                             <li class="py-3 col-1 text-end">
                                 <i onclick="slideIn()" class="fa-solid fa-cart-shopping text-white fs-5 py-1"></i>
@@ -257,7 +259,8 @@
                     
                     <!-- products -->
                     <?php
-                    for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+                    if(isset(($_SESSION['cart']))){
+                        for($i=0; $i < sizeof($_SESSION['cart']); $i++){
                     ?>
                     <div class="py-3 border-bottom border-2 border-dark">
                         <div class="d-flex mt-3">
@@ -285,11 +288,15 @@
                                 <i class="fa-solid fa-xmark position-absolute top-50"></i>
                             </div>
                         </div>
-                    <?php
-                    }
-                    ?>
-
                     </div>
+                    <?php
+                        }
+                    }
+                    else{
+                        echo  '<div class="fs-6 py-5 text-center"> Giỏ hàng trống </div>';
+                    }
+                    
+                    ?>
 
                     <div class="d-flex justify-content-between py-2 text-muted">
                         <span>Tổng tiền</span>

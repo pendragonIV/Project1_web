@@ -37,6 +37,7 @@ function store(){
     $product_price = $_POST['product_price'];
     $product_promotion = $_POST['product_promotion'];
     $product_description = $_POST['product_description'];
+    $product_category = $_POST['product_category'];
     
     if(isset($_POST['featured_product'])){
         $product_featured = 1;
@@ -44,8 +45,8 @@ function store(){
         $product_featured = 0;
     }
 
-    $insert_product_sql = "INSERT INTO product (product_name,product_price,product_featured,product_description,product_promotion)
-    VALUES('$product_name',$product_price,$product_featured,'$product_description',$product_promotion)";
+    $insert_product_sql = "INSERT INTO product (product_name,product_price,product_featured,product_description,product_promotion,category_id)
+    VALUES('$product_name',$product_price,$product_featured,'$product_description',$product_promotion,$product_category)";
     mysqli_query($connect,$insert_product_sql);
 
     $search_prd_sql = "SELECT * FROM product 
@@ -53,7 +54,8 @@ function store(){
                        AND product_price = $product_price 
                        AND product_description = '$product_description' 
                        AND product_promotion = '$product_promotion'
-                       AND product_featured = $product_featured";
+                       AND product_featured = $product_featured
+                       AND category_id = $product_category";
     $search_prd = mysqli_query($connect,$search_prd_sql);
     $product_id = -1;
     foreach($search_prd as $item){
@@ -76,6 +78,16 @@ function store(){
                 move_uploaded_file($file_tmp,"public/upload/".$product_image);
             }
         }
+
+        
+        foreach(mysqli_query($connect,"SELECT * FROM product_size") as $size){
+            if(isset($_POST['product_quantity_'.$size['size_name']])){
+                $quantity = $_POST['product_quantity_'.$size['size_name']];
+                $sizeId = $size['size_id'];
+                $add_detail_sql = "INSERT INTO product_detail(product_id,size_id,quantity) VALUES ($product_id,$sizeId,$quantity)";
+                mysqli_query($connect,$add_detail_sql);
+            }
+        }
     }
 
     require_once "Config/close_connect.php";
@@ -94,9 +106,15 @@ function getProduct(){
 
         $getImgsSql = "SELECT * FROM product_image WHERE product_id = $product_id";
         $images = mysqli_query($connect,$getImgsSql);
+
+        $cates = mysqli_query($connect,"SELECT * FROM category WHERE parent_id != 0"); 
+
+        $sizes = mysqli_query($connect,"SELECT * FROM product_size");
+
+        $quantity = mysqli_query($connect,"SELECT * FROM product_detail WHERE product_id = $product_id");
         
         require_once "Config/close_connect.php";
-        return array($product,$images);
+        return array($product,$images,$cates,$sizes,$quantity);
     }
 }
 
@@ -111,6 +129,7 @@ function update(){
         $product_price = $_POST['product_price'];
         $product_promotion = $_POST['product_promotion'];
         $product_description = $_POST['product_description'];
+        $product_category = $_POST['product_category'];
 
 
         if(isset($_POST['featured_product'])){
@@ -137,16 +156,7 @@ function update(){
             }
                 
         }
-    
 
-        
-        // else{
-        //     $getPrd =  mysqli_query($connect,"SELECT * FROM product WHERE product_id = $product_id");
-        //     foreach($getPrd as $item){
-        //         $product_image = $item['img'];
-        //     }
-            
-        // }
 
         $edit_product_sql = "UPDATE product
                              SET 
@@ -154,10 +164,28 @@ function update(){
                              product_price = $product_price,
                              product_featured = $product_featured,
                              product_description = '$product_description',
-                             product_promotion = $product_promotion
+                             product_promotion = $product_promotion,
+                             category_id = $product_category
                              WHERE product_id = $product_id";
 
         mysqli_query($connect,$edit_product_sql);
+
+        //update quantity
+
+        foreach(mysqli_query($connect,"SELECT * FROM product_size") as $size){
+
+            if(isset($_POST['product_quantity_'.$size['size_name']])){
+                $quantity = $_POST['product_quantity_'.$size['size_name']];
+                $sizeId = $size['size_id'];
+                $add_detail_sql = "UPDATE product_detail
+                                    SET
+                                    quantity = $quantity
+                                    WHERE product_id = $product_id
+                                    AND size_id = $sizeId";
+                mysqli_query($connect,$add_detail_sql);
+            }
+
+        }
     }
     
 
@@ -172,8 +200,13 @@ function destroy(){
 
     if(isset($_GET['product_id'])){
         $product_id = $_GET['product_id'];
+        //del product
         $del_product_sql = "DELETE FROM product WHERE product_id = $product_id";
         mysqli_query($connect,$del_product_sql);
+        //del imgs
+        mysqli_query($connect,"DELETE FROM product_image WHERE product_id = $product_id");
+        //del detail
+        mysqli_query($connect,"DELETE FROM product_detail WHERE product_id = $product_id");
     }
     else {
         return;
@@ -183,6 +216,17 @@ function destroy(){
     require_once "Config/close_connect.php";
 }
 
+function getCreate(){
+    require_once "Config/open_connect.php";
+
+    $cates = mysqli_query($connect,"SELECT * FROM category WHERE parent_id != 0"); 
+
+    $sizes = mysqli_query($connect,"SELECT * FROM product_size");
+
+    require_once "Config/close_connect.php";
+
+    return array($cates,$sizes);
+}
 
 switch($action){
 
@@ -191,12 +235,16 @@ switch($action){
         list($record,$totalPage,$currentPage) = index();
         break;
     }
+    case 'create': { 
+        list($cates,$sizes) = getCreate();
+        break;
+    }
     case 'store':{
         store();
         break;
     }
     case 'edit': {
-        list($product,$images) = getProduct();
+        list($product,$images,$cates,$sizes,$quantity) = getProduct();
         break;
     }
     case 'update': {

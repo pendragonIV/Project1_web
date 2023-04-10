@@ -70,12 +70,12 @@
                                     
                                             <div class="mb-3">
                                                 <label for="product_price" class="form-label">Price</label>
-                                                <input type="text" class="form-control" id="product_price" name="product_price"  required>
+                                                <input type="number" class="form-control" id="product_price" name="product_price"  required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="product_promotion" class="form-label">Promotion</label>
-                                                <input type="text" class="form-control" id="product_promotion" name="product_promotion"  required>
+                                                <input type="number" class="form-control" id="product_promotion" name="product_promotion"  required>
                                             </div>
 
                                             <div class="mb-3">
@@ -83,17 +83,13 @@
                                                 <select id="category_select" class="form-select" name="product_category">
                                                         <!-- Get all category -->
                                                     <?php
-                                                    //    $select_all_category = "SELECT * FROM category";
-                                                    //         $query_all_category = mysqli_query($connect,$select_all_category);
-                                                    //         if(mysqli_num_rows($query_all_category) > 0){
-                                                    //             while($row = mysqli_fetch_assoc($query_all_category)){
+                                                        foreach ($cates as $item){
                                                     ?>
 
-                                                        <option value= "<?php echo $row['category_id'] ?>"> <?php echo $row['category_name'] ?> </option>
+                                                        <option value= "<?php echo $item['category_id'] ?>"> <?php echo $item['category_name'] ?> </option>
 
                                                     <?php
-                                                        //     }
-                                                        // }
+                                                        }
                                                     ?>
 
                                                 </select>
@@ -102,6 +98,23 @@
                                             <div class="mb-3 form-check">
                                                 <input type="checkbox" class="form-check-input" id="featured_product" name="featured_product" value="1">
                                                 <label class="form-check-label" for="featured_product">Featured product</label>
+                                            </div>
+
+                                            <label class="form-label">Quantity</label>
+                                            <div class="mb-3 d-flex justify-content-between">
+                                        
+                                            <?php
+                                            foreach ($sizes as $size) {
+                                            ?>
+                                                <div class="col-2">
+                                                    <label for="product_quantity_<?php echo $size['size_name']; ?>"><?php echo $size['size_name']; ?></label>
+                                                    <input type="number" class="form-control" id="product_quantity_<?php echo $size['size_name']; ?>" name="product_quantity_<?php echo $size['size_name']; ?>">
+                                                </div>
+                                            
+                                            <?php
+                                            }
+                                            ?>
+
                                             </div>
 
                                             <div class="mb-3">
@@ -139,7 +152,7 @@
         CKEDITOR.replace(product_description);
     </script>
     <script>
-            const img = (src) => '<img class="col-12 my-3" src = "'+src+'">';
+            const img = (src) => '<img class="col-6 my-3" src = "'+src+'">';
             function loadFile(event) {
             let output = document.getElementById('images_preview');
             output.innerHTML = '';

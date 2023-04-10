@@ -92,32 +92,45 @@
                                                 <select id="category_select" class="form-select" name="product_category">
                                                         <!-- Get all category -->
                                                     <?php
-                                                    //    $select_all_category = "SELECT * FROM category";
-                                                    //         $query_all_category = mysqli_query($connect,$select_all_category);
-                                                    //         if(mysqli_num_rows($query_all_category) > 0){
-                                                    //             while($row = mysqli_fetch_assoc($query_all_category)){
+                                                        foreach ($cates as $cate){
                                                     ?>
 
-                                                        <option value= "<?php echo $row['category_id'] ?>"> <?php echo $row['category_name'] ?> </option>
+                                                        <option value= "<?php echo $cate['category_id'] ?>" <?php if($cate['category_id'] == $item['category_id']){echo "selected";} ?>> <?php echo $cate['category_name'] ?> </option>
 
                                                     <?php
-                                                        //     }
-                                                        // }
+                                                        }
                                                     ?>
 
                                                 </select>
                                             </div>
 
-
                                             <div class="mb-3 form-check">
-                                                <input type="checkbox" class="form-check-input" id="featured_product" name="featured_product" value="1" <?php if($item['product_featured']==1){echo "checked";} ?>>
+                                                <input type="checkbox" class="form-check-input" id="featured_product" name="featured_product" <?php if($item['product_featured'] == 1){ echo 'value="1" checked';} ?>>
                                                 <label class="form-check-label" for="featured_product">Featured product</label>
+                                            </div>
+
+                                            <label class="form-label">Quantity</label>
+                                            <div class="mb-3 d-flex justify-content-between">
+                                        
+                                            <?php
+                                            foreach ($sizes as $size) {
+                                            ?>
+                                                <div class="col-2">
+                                                    <label for="product_quantity_<?php echo $size['size_name']; ?>"><?php echo $size['size_name']; ?></label>
+                                                    <input type="number" class="form-control" id="product_quantity_<?php echo $size['size_name']; ?>" name="product_quantity_<?php echo $size['size_name']; ?>" <?php foreach($quantity as $numb){if($size['size_id'] == $numb['size_id']){echo 'value = "'.$numb['quantity'].'"';} }?>>
+                                                </div>
+                                            
+                                            <?php
+                                            }
+                                            ?>
+
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="floatingTextarea">Description</label>
-                                                <textarea class="form-control" id="product_description" name="product_description"><?php echo $item['product_description'] ?></textarea>
+                                                <textarea class="form-control" id="product_description" name="product_description"><?php echo $item['product_description']; ?></textarea>
                                             </div>
+                                            
                                         </div>
 
                                        <!-- File img -->
@@ -126,11 +139,11 @@
                                             <div class="col-12">
                                                 <label for="product_img" class="form-label">Product image</label>
                                                 <input class="form-control" type="file" id="product_img" name="product_img[]" onchange = "loadFile(event)" multiple>
-                                                <div id = "images_preview">
+                                                <div id = "images_preview" class = "col-12 d-flex flex-wrap">
                                                     <?php
                                                         foreach($images as $img){
                                                      ?>
-                                                    <img class="col-12 my-3" id = "img_preview" src = "public/upload/<?php echo $img['image_link'] ?>">
+                                                    <img class="col-6 my-3" id = "img_preview" src = "public/upload/<?php echo $img['image_link'] ?>">
                                                         
                                                     <?php
                                                         }
@@ -160,7 +173,7 @@
         CKEDITOR.replace(product_description);
     </script>
     <script>
-            const img = (src) => '<img class="col-12 my-3" src = "'+src+'">';
+            const img = (src) => '<img class="col-6 my-3" src = "'+src+'">';
             function loadFile(event) {
             let output = document.getElementById('images_preview');
             output.innerHTML = '';

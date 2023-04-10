@@ -7,6 +7,7 @@ switch($action){
         break;
     }
     case 'create': { 
+        require_once "Model/Admin/Product/product_model.php";
         require_once "View/Admin/Product/create.php";
         break;
     }

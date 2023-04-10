@@ -29,11 +29,13 @@ function store(){
     $user_name = $_POST['user_name'];
     $password = $_POST['password'];
     $user_email = $_POST['user_email'];
+    $rePassword = $_POST['re_password'];
 
     //mac dinh khi dang ki permission la user(1)
-    
-    $new_user_sql = "INSERT INTO user (user_name,user_email,user_passw,user_permission) VALUES ('$user_name', '$user_email', '$password', 1)";
-    mysqli_query($connect,$new_user_sql);
+    if($password == $rePassword){
+        $new_user_sql = "INSERT INTO user (user_name,user_email,user_passw,user_permission) VALUES ('$user_name', '$user_email', '$password', 1)";
+        mysqli_query($connect,$new_user_sql);
+    }
 
     require_once("Config/close_connect.php");
 

@@ -21,14 +21,20 @@ function index(){
     $productImage = mysqli_query($connect,$getImageSql);
     $imgsSql = "SELECT * FROM product_image";
     $images = mysqli_query($connect,$imgsSql);
-    require_once "Config/close_connect.php";    
 
-    return array($categories,$productNewest,$productImage,$images,$productIn4);
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
+    
+    require_once "Config/close_connect.php";  
+
+    return array($cateParents,$cateChilds,$productNewest,$productImage,$images,$productIn4);
 }
 
 switch ($redirect){
     case 'detail': {
-        list($categories,$productNewest,$productImage,$images,$productIn4) = index();
+        list($cateParents,$cateChilds,$productNewest,$productImage,$images,$productIn4) = index();
         break;
     }
 }

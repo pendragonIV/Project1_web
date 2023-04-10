@@ -26,6 +26,9 @@
                         <div class="mb-3">
                             <input type="password" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder= "Mật khẩu" name = "password" style="outline: none;">
                         </div>
+                        <div class="mb-3">
+                            <input type="password" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder= "Nhập lại mật khẩu" name = "re_password" style="outline: none;">
+                        </div>
 
                         <button  type="submit" name= "register_btn" class = "text-dark py-3 mt-3 col-12 border-0 bg-transparent login__button position-relative">
                             <div class="text-white">ĐĂNG KÝ</div>
