@@ -108,7 +108,7 @@
                                             ?>
                                                 <div class="col-2">
                                                     <label for="product_quantity_<?php echo $size['size_name']; ?>"><?php echo $size['size_name']; ?></label>
-                                                    <input type="number" class="form-control" id="product_quantity_<?php echo $size['size_name']; ?>" name="product_quantity_<?php echo $size['size_name']; ?>">
+                                                    <input type="number" class="form-control" id="product_quantity_<?php echo $size['size_name']; ?>" value = "0" name="product_quantity_<?php echo $size['size_name']; ?>">
                                                 </div>
                                             
                                             <?php

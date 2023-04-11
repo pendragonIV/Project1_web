@@ -4,13 +4,16 @@
             <div id="carouselExampleIndicators" class="carousel slide p-0" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="public/images/20230302_2TDLg3fR14OpOg8U.png" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public/images/20230316_mvCRmYGZ.png" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                   <div class="carousel-item">
-                    <img src="public/images/20230302_iDwfjcWv2w8MFbw9.png" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public\images\20230316_et7O9fDj.jpeg" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                   <div class="carousel-item">
-                    <img src="public/images/20230302_M9hCqnTL55m20wtE.png" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
+                    <img src="public\images\20230406_ADD93ShC.jpeg" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="public\images\20230406_ETnffWmj.jpeg" class="d-block w-100" style= "object-fit: cover; height: 45em; object-position: 0% 0%;" alt="public/images/20230302_2TDLg3fR14OpOg8U.png">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -29,11 +32,11 @@
 
          <div class="row my-4">
             <a href="" class="col-6 p-0 position-relative category--main">
-                <img class="col-12" src="public/images/20230228_f9ll0hoepFPaC7Kp.jpeg" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
-                <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">QUẦN JEANS</div>
+                <img class="col-12" src="public/images/20230322_J5OjPFgL.png" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
+                <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">ÁO PHÔNG</div>
             </a>
             <a href ="" class="col-6 p-0 position-relative category--main">
-                <img class="col-12" src="public/images/20230228_VygJVdKGouMd3z5O.jpeg" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
+                <img class="col-12" src="public/images/20230322_MwFmoGuk.png" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
                 <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">SƠ MI</div>
             </a>
         </div>

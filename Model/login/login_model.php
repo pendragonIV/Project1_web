@@ -39,7 +39,7 @@ function store(){
 
     require_once("Config/close_connect.php");
 
-    return;
+    return ;
 }
 
 

@@ -81,7 +81,12 @@ function store(){
 
         
         foreach(mysqli_query($connect,"SELECT * FROM product_size") as $size){
-            if(isset($_POST['product_quantity_'.$size['size_name']])){
+            if(!isset($_POST['product_quantity_'.$size['size_name']]) || $_POST['product_quantity_'.$size['size_name']] == ''){
+                $sizeId = $size['size_id'];
+                $add_detail_sql = "INSERT INTO product_detail(product_id,size_id,quantity) VALUES ($product_id,$sizeId,0)";
+                mysqli_query($connect,$add_detail_sql);
+            }
+            else{
                 $quantity = $_POST['product_quantity_'.$size['size_name']];
                 $sizeId = $size['size_id'];
                 $add_detail_sql = "INSERT INTO product_detail(product_id,size_id,quantity) VALUES ($product_id,$sizeId,$quantity)";
@@ -174,7 +179,15 @@ function update(){
 
         foreach(mysqli_query($connect,"SELECT * FROM product_size") as $size){
 
-            if(isset($_POST['product_quantity_'.$size['size_name']])){
+            if(!isset($_POST['product_quantity_'.$size['size_name']]) || $_POST['product_quantity_'.$size['size_name']] == ''){
+                $sizeId = $size['size_id'];
+                $add_detail_sql = "UPDATE product_detail
+                                    SET
+                                    quantity = 0
+                                    WHERE product_id = $product_id
+                                    AND size_id = $sizeId";
+                mysqli_query($connect,$add_detail_sql);
+            }else{
                 $quantity = $_POST['product_quantity_'.$size['size_name']];
                 $sizeId = $size['size_id'];
                 $add_detail_sql = "UPDATE product_detail
