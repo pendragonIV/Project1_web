@@ -59,27 +59,27 @@
                     <?php
                         }
                     ?>
-
+                    <!-- CHOOSE SIZE -->
                     <div class="border-bottom">
                     <div class="d-flex my-3">
-                            <label class="col-1 py-1 me-2 position-relative select__size position-relative border border-1 border-dark">
+                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark"  style="height:2.2em;">
                                 <input type="radio" class="col-12 h-100 radio_custom" value="S" name = "product_size" required></input>
-                                <span class="text-white position-absolute start-0 ps-1 ">S</span>
+                                <span class="text-white position-absolute start-0 p-1">S</span>
                             </label>
 
-                            <label class="col-1 py-1 me-2 position-relative select__size position-relative border border-1 border-dark">
+                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark"  style="height:2.2em;">
                                 <input type="radio" class="col-12 h-100 radio_custom" value="M" name = "product_size"></input>
-                                <span class="text-white position-absolute start-0 ps-1 ">M</span>     
+                                <span class="text-white position-absolute start-0 p-1">M</span>     
                             </label>
 
-                            <label class="col-1 py-1 me-2 position-relative select__size position-relative border border-1 border-dark">
+                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark"  style="height:2.2em;">
                                 <input type="radio" class="col-12 h-100 radio_custom" value="L" name = "product_size"></input>
-                                <span class="text-white position-absolute start-0 ps-1 ">L</span>
+                                <span class="text-white position-absolute start-0 p-1">L</span>
                             </label>
 
-                            <label class="col-1 py-1 me-2 position-relative select__size position-relative border border-1 border-dark">
+                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark"  style="height:2.2em;">
                                 <input type="radio" class="col-12 h-100 radio_custom" value="XL" name = "product_size"></input>
-                                <span class="text-white position-absolute start-0 ps-1 ">XL</span>
+                                <span class="text-white position-absolute start-0 p-1">XL</span>
                             </label>
 
                         </div>
@@ -194,7 +194,7 @@
                 foreach($productNewest as $prdNew){
 
                     echo '<a href ="?redirect=detail&id='.$prdNew['product_id'].'" class="item__block">
-                        <img src="public/upload/'.$prdNew['image_link'].'" alt=""> 
+                        <img src="public/upload/'.$prdNew['image_link'].'" alt="" style="height:30em;"> 
                         <div class = "item__block__swatch">
                          <ul class = "swatch__type">';
 

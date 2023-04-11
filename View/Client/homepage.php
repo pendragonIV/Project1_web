@@ -32,11 +32,11 @@
 
          <div class="row my-4">
             <a href="" class="col-6 p-0 position-relative category--main">
-                <img class="col-12" src="public/images/20230322_J5OjPFgL.png" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
+                <img class="col-12" src="public/images/20230322_J5OjPFgL.png" style="object-fit: cover; height: 45em; object-position: 0% 0%;" alt="">
                 <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">ÁO PHÔNG</div>
             </a>
             <a href ="" class="col-6 p-0 position-relative category--main">
-                <img class="col-12" src="public/images/20230322_MwFmoGuk.png" style="object-fit: cover; height: 40em; object-position: 0% 0%;" alt="">
+                <img class="col-12" src="public/images/20230322_MwFmoGuk.png" style="object-fit: cover; height: 45em; object-position: 0% 0%;" alt="">
                 <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">SƠ MI</div>
             </a>
         </div>
@@ -54,7 +54,7 @@
                 foreach($productNewest as $prdNew){
 
                     echo '<a href ="?redirect=detail&id='.$prdNew['product_id'].'" class="item__block">
-                        <img src="public/upload/'.$prdNew['image_link'].'" alt=""> 
+                        <img src="public/upload/'.$prdNew['image_link'].'" alt="" style="height:30em;"> 
                         <div class = "item__block__swatch">
                          <ul class = "swatch__type">';
 

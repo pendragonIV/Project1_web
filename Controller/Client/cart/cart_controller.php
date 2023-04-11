@@ -7,6 +7,7 @@ switch($action){
     }
     case 'add':{
         require_once "Model/Client/cart/cart_model.php";
+        header("Location: ?redirect=detail&id=".$result."");
         break;
     }
     case 'update':{
@@ -15,6 +16,8 @@ switch($action){
     }
     case 'delete':{
         require_once "Model/Client/cart/cart_model.php";
+        //back to previous page
+        header('Location: '. $_SERVER['HTTP_REFERER']);
         break;
     }
 }

@@ -41,7 +41,7 @@ function addToCart(){
 
         if($check == 0){
             $product = [
-                "product_image" => $image,
+                "product_image" => $image, 
                 "product_name" => $name,
                 "product_price" => $price,
                 "product_size" => $size,
@@ -49,20 +49,28 @@ function addToCart(){
             ];
             $_SESSION['cart'][] = $product;
         }
-        
-        for($i=0; $i < sizeof($_SESSION['cart']); $i++){
-            
-        }
 
     }
 
-    require_once "Config/close_connect.php";  
+    require_once "Config/close_connect.php"; 
+    
+    return $_POST['product_id'];
+}
+
+function deleteFromCart(){
+    if(isset($_GET['itemId'])){
+        $itemId = $_GET['itemId'];
+        \array_splice($_SESSION['cart'],$itemId, 1);
+    }
 }
 
 switch ($action){
     case 'add': {
         $result = addToCart();
         break;
+    }
+    case 'delete': {
+        $result = deleteFromCart();
     }
 }
 ?>

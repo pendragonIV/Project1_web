@@ -102,20 +102,42 @@
                             </li>
                         </ul>
                     </div>
-    
+                                        <!-- brand img -->
                     <div class="col-2">
                         <a class= "col" href="?controller=">
                             <img class = "col-12" src="public/images/imglogo.png" alt="Imglogo" />
                         </a>
                     </div>
                         
+
                     <div class="col-5">
                         <ul class="d-flex flex-row-reverse list-unstyled m-0">
-                            <li class="py-3 col-1 text-end">
-                                <a href="?controller=login">
+                            <div class="dropdown py-3 col-1 text-end">
+                                <button class="bg-transparent border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-user text-white fs-5 py-1"></i>
-                                </a>
-                            </li>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <!-- CHECK FOR LOGIN OR LOGOUT -->
+                                    <?php
+                                    if(!isset($_SESSION['permission'])){
+                                    ?>
+
+                                    <li><a class="dropdown-item" href="?controller=login">Login</a></li>
+
+                                    <?php
+                                    }else{
+                                    ?>
+
+                                    <li><a class="dropdown-item" href="?controller=login&action=logout">Logout</a></li>
+                                    <li><a class="dropdown-item" href="#">Thông tin</a></li>
+
+                                    <?php
+                                    }
+                                    ?>
+                                </ul>
+                            </div>  
+
+
                             <li class="py-3 col-1 text-end">
                                 <i onclick="slideIn()" class="fa-solid fa-cart-shopping text-white fs-5 py-1"></i>
                             </li>
@@ -269,9 +291,10 @@
                                 <div><?php echo $_SESSION['cart'][$i]['product_name']; ?> - <?php echo $_SESSION['cart'][$i]['product_size']; ?></div>
                                 <div class="mt-2 d-flex">
                                     <div class = "d-inline-block col-4 d-flex me-2">
-                                        <input class = "col-4 border bg-white rounded-start" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty) && qty > 1 ) result.value--;return false;" type='button' value='-' />
+                                        <input class = "col-4 border bg-white rounded-start" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty) && qty > 1 ) result.value--;return false;" type='button' value='-'/>
                                         <input id = "ammount_<?php echo $i; ?>" class ="col-4 border text-center" value = "<?php echo (int)$_SESSION['cart'][$i]['product_quantity']; ?>">
-                                        <input class = "col-4 border bg-white rounded-end" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+' />
+                                        <input class = "col-4 border bg-white rounded-end" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+'/>
+                                        
                                     </div>
 
                                     <div class="col-4">
@@ -285,7 +308,9 @@
                             </div>
                             
                             <div class="col-1 position-relative">
-                                <i class="fa-solid fa-xmark position-absolute top-50"></i>
+                                <a class="position-absolute top-50 start-50 text-dark " href="?redirect=cart&action=delete&itemId=<?php echo $i ?>">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -305,7 +330,7 @@
 
                     <div class="d-flex my-5 justify-content-between">
                         <div class="col-6 pe-2">
-                            <button class="p-3 col-12 slide__cart__btn">MUA THÊM</button>
+                            <button onclick="slideOut()" class="p-3 col-12 slide__cart__btn">MUA THÊM</button>
                         </div>
                         <div class="col-6 pe-2">
                              <button class="col-12  p-3 slide__cart__btn">THANH TOÁN</button>
@@ -331,7 +356,7 @@
 
     </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
