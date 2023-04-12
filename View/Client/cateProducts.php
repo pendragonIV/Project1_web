@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link rel="stylesheet" href="public/CSS/products.css">
-    
-</head>
-<body>
-    <div class="container-fluid p-0">
-
+<!-- page location -->
         <div class="bg-light px-5 py-2" style="font-size: .9em;"> 
             <a href="" class="text-decoration-none text-dark">
                 Trang chủ
@@ -21,7 +7,7 @@
 
         </div>
 
-        <div class="d-flex px-3 mt-5">
+        <div class="d-flex px-3 my-5">
             <div class="col-2 me-4">
 
                 <div class="border-top">
@@ -100,38 +86,59 @@
             </div>
             <div class="col-10">
                 <div class="row">
+                    <?php
+                    $count = 0;
+                    foreach($cateProducts as $prd){
 
-                    <div class="col-4 mb-3">
-                        <a href ="" class="item__block d-inline-block text-decoration-none">
-                            <img src="../product_img/_MG_7845.jpg" alt="" class="col-12"> 
-                            <div class = "item__block__swatch">
-                             <ul class = "swatch__type">
-                                 <li>
-                                     <img class = "swatch--img" src = "../product_img/_MG_7845.jpg" />
-                                 </li>
-                                 <li>
-                                     <img class = "swatch--img" src = "../product_img/_MG_7845.jpg" />
-                                 </li>
-                             </ul>
-                            </div>
-                        </a>
-                        <a href="" class="text-decoration-none" style="font-size: .8em;">
+                    ?>
+                    <div class="col-3 mb-3">
+                    <a href ="?redirect=detail&id=<?php echo $prd['product_id'] ?>" class="item__block d-block">
+                        <img class="col-12" src="public/upload/<?php echo $prd['image_link'] ?>" alt="" style="height:25em;object-fit: cover;"> 
+                        <div class = "item__block__swatch">
+                        <ul class = "swatch__type">
+                            <?php
+                            $count = 0;
+                            foreach($productImages as $img){
+                                if ($prd['product_id'] == $img['product_id']){
+
+                            ?>
+                            <li>
+                                <img class = "swatching--img" src = "public/upload/<?php echo $img['image_link'] ?>" style="height:4em;" />
+                            </li>
+                            <?php
+                                $count++;
+                                }
+                                if($count == 3){
+                                    break;
+                                }
+
+                            }
+                            ?>
+                        </ul>
+                        </div>
+                    </a>
+                    <a href="" class="text-decoration-none" style="font-size: .8em;">
                             <div class="fw-bold text-dark my-1" >
                                     ÁO IN - CUPID - REGULAR FIT - TRẮNG
                             </div>
                             <div class="text-muted" >
                                     420,000 ₫
                             </div>
-                        </a>
+                    </a>
                     </div>
+
+                    <?php
+                    $count++;
+                    }
+                    if ($count == 0){
+                        echo '<div class="text-center fs-5">Không có sản phẩm nào</div>';
+                    }
+                    ?>
                 
         
                 </div>
             </div>
         </div>
 
-    </div>
 
-    <script src = "public/CSS/products.js"></script>
-</body>
-</html>
+    <script src = "public/JS/cateProducts.js"></script>

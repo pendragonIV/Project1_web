@@ -17,12 +17,13 @@
         .head__payment__btn:hover{
             background-color: #000;
             color: #fff;
+            transition: .5s;
         }
     </style>
 </head>
 <body>
     
-    <div class="container-fluid position-relative">
+    <div class="container-fluid p-0 position-relative">
 
         <!-- HEADER -->
         <div class="row bg-black">
@@ -50,7 +51,7 @@
                                     <p class="py-3 m-0">SẢN PHẨM</p>
                                 </a>
                                 <div class="nav__dropdown--content">
-                                    <ul class="mx-5 list-unstyled d-flex border-top border-1 border-secondary pt-5">
+                                    <ul class="mx-5 list-unstyled d-flex border-top border-1 border-secondary py-5">
                                         <ul class="col-3 text-white list-unstyled">
                                             <li>
                                                 <p class = "dropdown__link--custom fw-bold">ĐẶC BIỆT</p>
@@ -71,14 +72,18 @@
                                         ?>
                                         <ul class="col-3 text-white list-unstyled">
                                             <li>
-                                                <p class = "dropdown__link--custom fw-bold"> <?php echo mb_strtoupper($cate['category_name']) ?> </p>
+                                                <a class="text-decoration-none text-light" href="?redirect=category&category_id=<?php echo $cate['category_id'] ?>">
+                                                    <p class = "dropdown__link--custom fw-bold"> <?php echo mb_strtoupper($cate['category_name']) ?> </p>
+                                                </a>
                                             </li>
                                             <?php
                                             foreach ($cateChilds as $cateChild){
                                                 if($cateChild['parent_id'] == $cate['category_id']){
                                             ?>
                                             <li>
-                                                <p class = "dropdown__link--custom"> <?php echo ucwords($cateChild['category_name']) ?> </p>
+                                                <a class="text-decoration-none text-light"  href="?redirect=category&category_id=<?php echo $cateChild['category_id'] ?>">
+                                                    <p class = "dropdown__link--custom"> <?php echo ucwords($cateChild['category_name']) ?> </p>
+                                                </a>
                                             </li>
                                             <?php
                                                 }
@@ -176,6 +181,12 @@
                 switch($redirect){
                     case 'cart': {
                         require_once "View/Client/cart.php";
+                        break;
+                    }
+                }
+                switch($redirect){
+                    case 'category': {
+                        require_once "View/Client/cateProducts.php";
                         break;
                     }
                 }
@@ -293,7 +304,7 @@
                     
                     <!-- products -->
                     <?php
-                    if(isset(($_SESSION['cart']))){
+                    if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
                         for($i=0; $i < sizeof($_SESSION['cart']); $i++){
                     ?>
                     <div class="py-3 border-bottom border-2 border-dark">

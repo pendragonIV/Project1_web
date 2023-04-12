@@ -23,5 +23,10 @@ if($redirect == ''){
             require_once "Controller/Client/cart/cart_controller.php";
             break;
         }
+        case 'category': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
     }
 }
