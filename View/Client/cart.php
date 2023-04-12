@@ -1,23 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-
-    <style>
-        .head__payment__btn:hover{
-            background-color: #000;
-            color: #fff;
-        }
-    </style>
-
-</head>
-<body>
-    <div class="container-fluid p-0">
 
 
         <div class="row">
@@ -36,10 +16,15 @@
 
                 <div class="bg-light py-3">
                     <table class="col-11 bg-white mx-auto mb-5">
+                        
+                    <?php
+                         if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
+                            for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+                    ?>
                         <tr>
                           
                           <td class="align-middle col-2">
-                              <img src="../product_img/_MG_7845.jpg" alt="" class="col-12 p-2">
+                              <img src="public/upload/<?php echo $_SESSION['cart'][$i]['product_image'] ?>" alt="" class="col-12 p-2">
                           </td>
   
                           <td class="align-middle col-4">
@@ -73,6 +58,14 @@
                           </td>
                           
                         </tr>
+
+                    <?php
+                            }
+                        } else{
+                            echo  '<div class="fs-4 py-5 text-center"> Giỏ hàng trống </div>';
+                        }
+                    ?>
+
                     </table>
 
                     <div class="d-flex col-11 mx-auto">
@@ -150,7 +143,3 @@
                     </div>
             </div>
         </div>
-
-    </div>
-</body>
-</html>

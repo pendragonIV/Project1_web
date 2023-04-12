@@ -51,8 +51,11 @@
                         <div class="mb-3">
                             <input type="text" class="form-control border-0 p-0 fw-bold mb-3 fs-4" id="product_name" name="product_name" value="<?php echo $in4['product_name'] ?>" required>
                         </div>
+                        <div class="mb-3 d-none">
+                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6" id="product_price" name="product_price" value="<?php echo $in4['product_price']; ?>" required>
+                        </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6" id="product_price" name="product_price" value="<?php echo $in4['product_price'] ?>" required>
+                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6" value="<?php echo number_format((int)$in4['product_price'],0,'','.'); ?>₫" required>
                         </div>
                     </div>
 

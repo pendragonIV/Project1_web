@@ -2,6 +2,7 @@
 switch($action){
     case '':{
         require_once "Model/Client/cart/cart_model.php";
+        require_once "View/Client/index.php";
         //goi giao dien
         break;
     }

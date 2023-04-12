@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="public/CSS/itemDetailed_custom.css">
 
     <link rel="stylesheet" href="public/CSS/custom_home.css" <?php echo time(); ?>>
+    <style>
+        .head__payment__btn:hover{
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     
@@ -158,12 +164,18 @@
         </div>
 
         <?php
-            if($redirect == ''){
+            if($redirect == '' || $redirect == 'home'){
                 require_once "View/Client/homepage.php";
             }else{
                 switch($redirect){
                     case 'detail': {
                         require_once "View/Client/itemDetailed.php";
+                        break;
+                    }
+                }
+                switch($redirect){
+                    case 'cart': {
+                        require_once "View/Client/cart.php";
                         break;
                     }
                 }
@@ -302,7 +314,7 @@
                                     </div>
 
                                     <div class="col-4">
-                                        <span class="text-danger"><?php echo number_format(($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']),0,'','.'); ?>₫</span>
+                                        <span class="text-danger"><?php echo number_format((int)($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']),0,'','.'); ?>₫</span>
                                     </div>
                                 </div>
                             </div>
