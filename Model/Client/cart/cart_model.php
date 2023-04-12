@@ -3,16 +3,14 @@
 function index(){
     require_once "Config/open_connect.php";
 
-    if(isset($_SESSION['cart'][$productId])){
-        $_SESSION['cart'][$productId]++;
-    }
-    else{
-        $_SESSION['cart'][$productId] = 1;
-    }
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
 
     require_once "Config/close_connect.php";    
 
-    return array($categories,$product,$_SESSION['cart'][$productId]);
+    return array($cateChilds,$cateParents);
 }
 
 function addToCart(){
@@ -22,6 +20,7 @@ function addToCart(){
 
         if(!isset($_SESSION['cart'])) $_SESSION['cart']=[];
 
+        $id  = $_POST['product_id'];
         $image = $_POST['product_img'];
         $size = $_POST['product_size'];
         $name =$_POST['product_name'];
@@ -41,6 +40,7 @@ function addToCart(){
 
         if($check == 0){
             $product = [
+                "product_id" => $id,
                 "product_image" => $image, 
                 "product_name" => $name,
                 "product_price" => $price,
@@ -64,13 +64,29 @@ function deleteFromCart(){
     }
 }
 
+function updateCart(){
+    for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+        if(isset($_POST['quantity_'.$i])){
+            $quantity = $_POST['quantity_'.$i];
+            $_SESSION['cart'][$i]['product_quantity'] = $quantity;
+        }
+    }
+}
+
 switch ($action){
+    case '': {
+        list($cateChilds,$cateParents) = index();
+        break;
+    }
     case 'add': {
         $result = addToCart();
         break;
     }
     case 'delete': {
         $result = deleteFromCart();
+    }
+    case 'update': {
+        $result = updateCart();
     }
 }
 ?>

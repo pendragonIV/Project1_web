@@ -9,8 +9,7 @@ function index(){
                     ON product.product_id = image.product_id 
                     WHERE product.product_id = $productId";
     $productIn4 = mysqli_query($connect,$getProductSql);
-    $getCategorySql = "SELECT * FROM category ORDER BY category_id ASC";
-    $categories = mysqli_query($connect,$getCategorySql);
+    
     $getProductsNewSql = "SELECT * FROM product 
                         JOIN (SELECT * FROM product_image GROUP BY product_id) AS image 
                         ON product.product_id = image.product_id 

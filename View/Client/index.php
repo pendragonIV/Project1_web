@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css" />
     <link rel="stylesheet" href="public/CSS/itemDetailed_custom.css">
+    <link rel="stylesheet" href="public/CSS/payment_site.css">
 
     <link rel="stylesheet" href="public/CSS/custom_home.css" <?php echo time(); ?>>
     <style>
@@ -177,16 +178,16 @@
                         require_once "View/Client/itemDetailed.php";
                         break;
                     }
-                }
-                switch($redirect){
                     case 'cart': {
                         require_once "View/Client/cart.php";
                         break;
                     }
-                }
-                switch($redirect){
                     case 'category': {
                         require_once "View/Client/cateProducts.php";
+                        break;
+                    }
+                    case 'payment': {
+                        require_once "View/Client/paymentSite.php";
                         break;
                     }
                 }
@@ -301,8 +302,11 @@
                     <div class="py-5">
                         Giỏ hàng
                     </div>
-                    
+
+
                     <!-- products -->
+                    <div class="overflow-auto" <?php if(isset($_SESSION['cart'])){if(sizeof($_SESSION['cart']) > 1){ echo 'style = "height:25em;"';}} ?>>
+                        
                     <?php
                     if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
                         for($i=0; $i < sizeof($_SESSION['cart']); $i++){
@@ -314,10 +318,7 @@
                                 <div><?php echo $_SESSION['cart'][$i]['product_name']; ?> - <?php echo $_SESSION['cart'][$i]['product_size']; ?></div>
                                 <div class="mt-2 d-flex">
                                     <div class = "d-inline-block col-4 d-flex me-2">
-                                        <input class = "col-4 border bg-white rounded-start" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty) && qty > 1 ) result.value--;return false;" type='button' value='-'/>
-                                        <input id = "ammount_<?php echo $i; ?>" class ="col-4 border text-center" value = "<?php echo (int)$_SESSION['cart'][$i]['product_quantity']; ?>">
-                                        <input class = "col-4 border bg-white rounded-end" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+'/>
-                                        
+                                        Số lượng: <?php echo (int)$_SESSION['cart'][$i]['product_quantity']; ?>                           
                                     </div>
 
                                     <div class="col-4">
@@ -345,6 +346,7 @@
                     }
                     
                     ?>
+                    </div>
 
                     <div class="d-flex justify-content-between py-2 text-muted">
                         <span>Tổng tiền</span>
@@ -356,12 +358,14 @@
                             <button onclick="slideOut()" class="p-3 col-12 slide__cart__btn">MUA THÊM</button>
                         </div>
                         <div class="col-6 pe-2">
-                             <button class="col-12  p-3 slide__cart__btn">THANH TOÁN</button>
+                            <a href="?redirect=payment">
+                              <button class="col-12 p-3 slide__cart__btn">THANH TOÁN</button>         
+                            </a>
                         </div>
                        
                     </div>
                     
-                    <a href="" class="text-center text-muted check__cart__btn text-muted my-3">
+                    <a href="?redirect=cart" class="text-center text-muted check__cart__btn text-muted my-3">
                         Xem giỏ hàng
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>

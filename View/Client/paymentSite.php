@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link rel="stylesheet" href="payment_site.css">
-</head>
-<body>
-    
-    <div class="container-fluid">
 
-        <form action="POST">
+        <form method="POST" action="?redirect=add_order" class="my-5" >
 
           <div class="row">
             <div class="col-7 pt-5">
@@ -67,12 +53,24 @@
             <div class="col-5 border-start pt-5">
 
                 <!-- products -->
-                <div class="product-container col-9 mx-auto border-bottom py-3">
-                  <div class=" d-flex">
-                    <img class= "col-2 px-2" src="../product_img/_MG_6317.jpg" alt="">
-                    <p class="col-7 px-2 m-0">Áo Blazer - Harris - Cropped Fit - Ghi - S</p>
-                    <p class="col-3 text-end px-2">1,199,000 ₫</p>
-                  </div>
+                <div class="overflow-auto" <?php if(sizeof($_SESSION['cart']) > 1){ echo 'style = "height:20em;"';} ?>>
+
+                <?php
+                    if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
+                        for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+                ?>
+                       <div class="d-flex mt-3">
+                        <img class= "col-2 px-2" src="public/upload/<?php echo $_SESSION['cart'][$i]['product_image']; ?>" alt="">
+                        <input class= "d-none" type="text" name= "product_<?php echo $i; ?>_id" value = "<?php  echo $_SESSION['cart'][$i]['product_id']?>">
+                        <input class= "d-none" type="text" name= "product_<?php echo $i; ?>_price" value = "<?php  echo $_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity'] ?>">
+                        <input class= "d-none" type="text" name= "product_<?php echo $i; ?>_quantity" value = "<?php  echo $_SESSION['cart'][$i]['product_quantity']?>">
+                        <p class="col-7 px-2 m-0"><?php echo $_SESSION['cart'][$i]['product_name']; ?> - <?php echo $_SESSION['cart'][$i]['product_size']; ?></p>
+                        <p class="col-3 text-end px-2"><?php echo number_format((int)($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']),0,'','.'); ?>₫</p>
+                       </div>
+                <?php
+                        }
+                      }
+                ?>
                 </div>
 
                 <!-- order -->
@@ -117,7 +115,7 @@
                       </a>
                     </div>
                     <div class="col-6">
-                      <button type="submit" class="p-3 col-12 create__order__btn">Hoàn tất đơn hàng</button>
+                      <button type="submit" name = "add_ord" class="p-3 col-12 create__order__btn">Hoàn tất đơn hàng</button>
                     </div>
                   </div>
                 </div>
@@ -127,9 +125,3 @@
           </div>
 
         </form>
-
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
-</body>
-</html>

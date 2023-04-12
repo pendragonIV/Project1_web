@@ -28,5 +28,14 @@ if($redirect == ''){
             require_once "View/Client/index.php";
             break;
         }
+        case 'payment': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
+        case 'add_order': {
+            require_once "Model/Client/index_model.php";
+            break;
+        }
     }
 }

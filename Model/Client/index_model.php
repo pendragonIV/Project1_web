@@ -65,6 +65,27 @@ function getCategoryProduct(){
     return array($cateChilds,$cateParents,$productImages,$cateProducts);
 }
 
+function payment(){
+    require_once "Config/open_connect.php";
+
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
+
+    require_once "Config/close_connect.php"; 
+    return array($cateChilds,$cateParents);
+}
+
+function addOrder(){
+
+    for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+        $id = $_POST['product_'.$i.'_id'];
+        $price = $_POST['product_'.$i.'_price'];
+        $quantity = $_POST['product_'.$i.'_quantity'];
+    }
+}
+
 switch ($redirect){
     case '': {
         list($cateChilds,$productNewest,$productFeatured,$productImages,$cateParents) = index();
@@ -72,6 +93,14 @@ switch ($redirect){
     }
     case 'category': {
         list($cateChilds,$cateParents,$productImages,$cateProducts) = getCategoryProduct();
+        break;
+    }
+    case 'payment': {
+        list($cateChilds,$cateParents) = payment();
+        break;
+    }
+    case 'add_order': {
+        
         break;
     }
 }

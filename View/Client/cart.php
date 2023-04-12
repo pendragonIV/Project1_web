@@ -7,7 +7,7 @@
       <span class = "text-muted"> / Giỏ hàng</span>
    </div>
 </div>
-<form action="" method="POST" class="mb-5">
+<form action="?redirect=cart&action=update" method="POST" class="mb-5">
    <div class="row">
       <h3 class="col-9 ps-5 my-5 text-center">GIỎ HÀNG</h3>
       <div class="col-9 ps-5">
@@ -27,7 +27,7 @@
                   <td class="align-middle col-2">
                      <div class = "d-inline-block col-8 mx-auto d-flex me-2">
                       <input class = "col-4 border bg-white rounded-start" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty) && qty > 1 ) result.value--;return false;" type='button' value='-'/>
-                      <input id = "ammount_<?php echo $i; ?>" class ="col-4 border text-center" value = "<?php echo (int)$_SESSION['cart'][$i]['product_quantity']; ?>">
+                      <input id = "ammount_<?php echo $i; ?>" class ="col-4 border text-center" value = "<?php echo (int)$_SESSION['cart'][$i]['product_quantity']; ?>" name = "quantity_<?php echo $i; ?>">
                       <input class = "col-4 border bg-white rounded-end" onclick="var result = document.getElementById('ammount_<?php echo $i; ?>'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+'/>        
                     </div>
                   </td>
@@ -56,10 +56,6 @@
                   ?>
             </table>
             <div class="d-flex col-11 mx-auto">
-               <div class="col-6 pe-4">
-                  <p class="fw-bold">Ghi chú đơn hàng</p>
-                  <textarea class="form-control rounded-0" id="customer_more" rows="4"></textarea>
-               </div>
                <div class="col-6 ps-4 mt-2" style="font-size: .9em;">
                   <div>
                      Hỗ trợ khách hàng đổi sản phẩm trong vòng 
@@ -89,7 +85,7 @@
          </div>
       </div>
       <div class="col-3 pe-5">
-         <a class="d-block text-end text-decoration-none text-dark" href="" style="font-size: .9em;">Tiếp tục mua hàng
+         <a class="d-block text-end text-decoration-none text-dark" href="?controller= " style="font-size: .9em;">Tiếp tục mua hàng
          <i class="fa-solid fa-arrow-right"></i>
          </a>
          <div class="border p-3 mt-3">

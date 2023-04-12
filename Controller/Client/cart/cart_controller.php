@@ -13,6 +13,7 @@ switch($action){
     }
     case 'update':{
         require_once "Model/Client/cart/cart_model.php";
+        header("Location: ?redirect=payment");
         break;
     }
     case 'delete':{
