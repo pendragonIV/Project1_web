@@ -41,7 +41,7 @@ switch($controller) {
                     }
                 }
             }else {
-                require_once('View/Admin/dashboard.php');
+                require_once('Controller/Admin/Dashboard/dashboard_controller.php');
             }
             
             

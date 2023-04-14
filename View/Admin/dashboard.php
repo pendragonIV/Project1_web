@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThinkPro-Manage Site</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
@@ -50,7 +51,7 @@
                         <div class="btn-group-vertical col-12 " role="group" aria-label="Basic example">
                             <a href="" class="btn border-0 rounded text-start bg-primary text-light" tabindex="-1" role="button" aria-disabled="true">Dashboard</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=user" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Member management</a>
-                            <a href="admin_category.php" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Category management</a>
+                            <a href="?controller=<?php echo $controller; ?>&redirect=category" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Category management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=product" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Product management</a>
                             <a href="admin_order.php" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Order management</a>
                         
@@ -63,11 +64,11 @@
                                 <div class="card text-light bg-body mb-3">
                                     <div class="card-body d-flex">
                                         <div class="my-auto ms-5 me-3">
-                                            <i class="fa-solid fa-mobile-screen fs-1 text-success"></i>
+                                            <i class="fa-solid fa-tag fs-1 text-success"></i>
                                         </div>
                                         <div>
-                                            <h6 class="card-title text-dark text-muted">Total product</h6>
-                                            <h3 class="card-text fw-bold text-dark">100</h3>
+                                            <h6 class="card-title text-dark text-muted">Different products</h6>
+                                            <h3 class="card-text fw-bold text-dark"> <?php echo $totalDiffProduct ?> </h3>
                                             
                                         </div>
                                     </div>
@@ -77,11 +78,11 @@
                                 <div class="card text-light bg-body mb-3">
                                     <div class="card-body d-flex">
                                         <div class="my-auto ms-5 me-3">
-                                            <i class="fa-solid fa-comments fs-1 text-warning"></i>
+                                            <i class="fa-solid fa-shirt  fs-1 text-warning"></i>
                                         </div>
                                         <div>
-                                            <h6 class="card-title text-dark text-muted">Total comment</h6>
-                                            <h3 class="card-text fw-bold text-dark">100</h3>
+                                            <h6 class="card-title text-dark text-muted">Total product</h6>
+                                            <h3 class="card-text fw-bold text-dark"> <?php foreach($totalProduct as $total){ echo $total['total_prd'];} ?> </h3>
                                             
                                         </div>
                                     </div>
@@ -95,7 +96,7 @@
                                         </div>
                                         <div>
                                             <h6 class="card-title text-dark text-muted">Total user</h6>
-                                            <h3 class="card-text fw-bold text-dark">100</h3>
+                                            <h3 class="card-text fw-bold text-dark"> <?php echo $totalUser ?> </h3>
                                             
                                         </div>
                                     </div>
@@ -105,17 +106,22 @@
                                 <div class="card text-light bg-body mb-3">
                                     <div class="card-body d-flex">
                                         <div class="my-auto ms-5 me-3">
-                                            <i class="fa-solid fa-rectangle-ad fs-1 text-info"></i>
+                                            <i class= "fa-solid fa-money-bill fa-coin fs-1 text-info"></i>
                                         </div>
                                         <div>
-                                            <h6 class="card-title text-dark text-muted">Total ad</h6>
-                                            <h3 class="card-text fw-bold text-dark">100</h3>
+                                            <h6 class="card-title text-dark text-muted">Sales</h6>
+                                            <h3 class="card-text fw-bold text-dark">  <?php foreach($sales as $sale){ if($sale['sales'] == NULL){echo 0;}else{echo number_format((int)$sale['sales'],0,'','.');}}?> vnd</h3>
                                             
                                         </div>
                                     </div>
                                   </div>
                             </div>
                           </div>
+
+                          <div>
+                            <canvas id="myChart" height = "200em"></canvas>
+                          </div>
+
 
                     </div>
                 </div>
@@ -124,6 +130,32 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
 
 </body>
 </html>

@@ -35,6 +35,7 @@ if($redirect == ''){
         }
         case 'add_order': {
             require_once "Model/Client/index_model.php";
+            header("Location: ?controller=");
             break;
         }
     }

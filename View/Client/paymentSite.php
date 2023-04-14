@@ -18,32 +18,32 @@
                     <p class="fs-5 text-secondary">Thông tin giao hàng</p>
 
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="input__name" placeholder="Họ và tên" name="customer_name">
+                      <input type="text" class="form-control" id="input__name" placeholder="Họ và tên" name="customer_name" required>
                     </div>
 
                     <div class="row">
 
                       <div class="mb-3 col-8">
-                        <input type="email" class="form-control" id="input__email" placeholder="Email" name="customer_email">
+                        <input type="email" class="form-control" id="input__email" placeholder="Email" name="customer_email"  required>
                       </div>
   
                       <div class="mb-3 col-4">
-                        <input type="text" class="form-control" id="input__phone" placeholder="Số điện thoại" name="customer_phone">
+                        <input type="text" class="form-control" id="input__phone" placeholder="Số điện thoại" name="customer_phone"  required>
                       </div>
 
                     </div>
 
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="input__address" placeholder="Địa chỉ" name="customer_address">
+                      <input type="text" class="form-control" id="input__address" placeholder="Địa chỉ" name="customer_address"  required>
                     </div>
 
                     <div class="mb-3">
-                      <textarea class="form-control" id="customer_more" placeholder="Ghi chú" rows="3"></textarea>
+                      <textarea class="form-control" id="customer_more" name = "customer_note" placeholder="Ghi chú" rows="3"  required></textarea>
                     </div>
 
                     <p class="fs-5 text-muted">Phương thức thanh toán</p>
                     <div class="mb-3 form-check border rounded py-3">
-                      <input type="radio" class="form-check-input mx-1 check__radio" id="exampleCheck1">
+                      <input type="radio" class="form-check-input mx-1 check__radio" id="exampleCheck1" checked required>
                       <label class="form-check-label ms-2" for="exampleCheck1">Thanh toán tại nhà - Cash On Delivery (COD)</label>
                     </div>
                 </div>

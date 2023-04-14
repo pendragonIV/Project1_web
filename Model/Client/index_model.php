@@ -78,12 +78,57 @@ function payment(){
 }
 
 function addOrder(){
+    require_once "Config/open_connect.php";
 
-    for($i=0; $i < sizeof($_SESSION['cart']); $i++){
-        $id = $_POST['product_'.$i.'_id'];
-        $price = $_POST['product_'.$i.'_price'];
-        $quantity = $_POST['product_'.$i.'_quantity'];
+    $customerName = $_POST['customer_name'];
+    $customerEmail = $_POST['customer_email'];
+    $customerPhone = $_POST['customer_phone'];
+    $customerAddress = $_POST['customer_address'];
+    $customerNote = $_POST['customer_note'];
+
+    //insert customer to db
+    mysqli_query($connect,"INSERT INTO customer (customer_name,customer_phone,customer_address,customer_email) VALUES ('$customerName','$customerPhone','$customerAddress','$customerEmail')");
+
+    $getCustomer = mysqli_query($connect,"SELECT * FROM customer 
+                                        WHERE
+                                        customer_name = '$customerName'
+                                        AND customer_phone = '$customerPhone'
+                                        AND customer_address = '$customerAddress'
+                                        AND customer_email = '$customerEmail'
+                                        ORDER BY customer_id DESC
+                                        LIMIT 1");
+    foreach($getCustomer as $customer){
+        $customerId = $customer['customer_id'];
+        $currentDate = date('Y-m-d');
+        //insert new order
+        //status == 0 means its hasnt accept by admin
+        mysqli_query($connect,"INSERT INTO receipt (receipt_date,customer_id,order_note,receipt_status) VALUES ('$currentDate',$customerId,'$customerNote',0)");
     }
+
+    foreach(mysqli_query($connect,"SELECT * FROM receipt
+                            WHERE receipt_date = '$currentDate'
+                            AND customer_id = $customerId
+                            AND order_note = '$customerNote'
+                            AND receipt_status = 0
+                            ORDER BY receipt_id DESC
+                            LIMIT 1") as $receipt){
+                            $receiptId = $receipt['receipt_id'];
+
+                            for($i=0; $i < sizeof($_SESSION['cart']); $i++){
+                                $id = $_POST['product_'.$i.'_id'];
+                                $price = $_POST['product_'.$i.'_price'];
+                                $quantity = $_POST['product_'.$i.'_quantity'];
+                                
+                                //insert order detail
+                                mysqli_query($connect,"INSERT INTO order_detail (receipt_id,product_detail_id,product_amount,recent_price) VALUES ($receiptId,$id,$quantity,$price)");
+                                
+                            }
+                        
+                        }
+
+                        $_SESSION['cart']=[];
+
+    require_once "Config/close_connect.php"; 
 }
 
 switch ($redirect){
@@ -100,7 +145,7 @@ switch ($redirect){
         break;
     }
     case 'add_order': {
-        
+        $result = addOrder();
         break;
     }
 }
