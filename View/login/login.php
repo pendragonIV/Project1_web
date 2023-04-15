@@ -17,6 +17,15 @@
                 <div class="col-7 float-end pe-4">
                     <h2 class = "text-white">Đăng nhập</h2>
                     <form method="POST" class = "" action="index.php?controller=login&action=check_login">
+                        <?php 
+                        if(isset($_GET['record']) && $_GET['record'] == 0){
+                        ?>
+                        <div class="fs-5 my-3 text-white border-0 border-bottom pb-2 border-light">
+                            Tên đăng nhập hoặc mật khẩu không đúng!
+                        </div>
+                        <?php
+                        }
+                        ?>
 
                         <div class="mb-3">
                             <input class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder = "Tên đăng nhập" name = "user_name" style="outline: none;">

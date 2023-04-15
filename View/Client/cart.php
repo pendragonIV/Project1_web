@@ -94,11 +94,21 @@
             </div>
             <div class="d-flex justify-content-between py-3 text-muted border-bottom " style="font-size: .9em;">
                <span>Tạm tính</span>
-               <span class="text-dark fw-bold">1,380,000 ₫</span>
+               <span class="text-dark"> <?php $total = 0; if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
+                                                         for($i=0; $i < sizeof($_SESSION['cart']); $i++){ 
+                                                            $total += ($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']); 
+                                                         }
+                                                      }
+                                                      echo number_format((int)$total,0,'','.'); ?> ₫</span>
             </div>
             <div class="d-flex justify-content-between py-3 fw-bold border-bottom " style="font-size: .9em;">
-               <span>Tạm tính</span>
-               <span>1,380,000 ₫</span>
+               <span>Tổng tiền</span>
+               <span class="text-dark fw-bold"> <?php $total = 0; if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
+                                                         for($i=0; $i < sizeof($_SESSION['cart']); $i++){ 
+                                                            $total += ($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']); 
+                                                         }
+                                                      }
+                                                      echo number_format((int)$total,0,'','.'); ?> ₫</span>
             </div>
             <div class="text-muted py-3"  style="font-size: .9em;">
                Bạn có thể nhập mã giảm giá ở trang thanh toán

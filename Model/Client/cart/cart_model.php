@@ -25,7 +25,17 @@ function addToCart(){
         $size = $_POST['product_size'];
         $name =$_POST['product_name'];
         $price = $_POST['product_price'];
+        $priceNormal = $_POST['product_price_normal'];
         $quantity = $_POST['product_quantity'] ?? 1;
+
+        $detailId = '';
+
+        foreach(mysqli_query($connect,"SELECT * FROM product_size WHERE size_name = '$size'") as $sizeIn4){
+            $sizeId = $sizeIn4['size_id'];
+            foreach(mysqli_query($connect,"SELECT * FROM product_detail WHERE product_id = $id AND size_id = $sizeId") as $productDetail){
+                $detailId = $productDetail['id'];
+            }
+        }
 
          // Kiểm tra sản phẩm có trang giỏ hàng không để chống hiển thị lặp lại sản phẩm
           // kiểm tra sản phẩm có trùng hay không
@@ -41,9 +51,11 @@ function addToCart(){
         if($check == 0){
             $product = [
                 "product_id" => $id,
+                "product_detail_id" => $detailId,
                 "product_image" => $image, 
                 "product_name" => $name,
                 "product_price" => $price,
+                "normal_price" => $priceNormal,
                 "product_size" => $size,
                 "product_quantity" => $quantity
             ];

@@ -63,11 +63,23 @@
                                 ?>
 
                                 <form role="form" method="post" action = "?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=update&user_id=<?php echo $item['user_id']; ?>">
-                                    <div class="mb-3">
-                                        <div class="alert alert-danger" role="alert">
-                                            A simple danger alert—check it out!
-                                        </div>                                          
+                                    <?php 
+                                    if(isset($_GET['record']) && $_GET['record'] == 1){
+                                    ?>
+                                    <div class="alert alert-danger" role="alert">
+                                    Tên đăng nhập đã tồn tại!
                                     </div>
+                                    
+                                    <?php
+                                    }elseif(isset($_GET['record']) && $_GET['record'] == 2){
+                                    ?>
+                                    <div class="alert alert-danger" role="alert">
+                                    Mật khẩu nhập lại không trùng khớp!
+                                    </div>
+                                    
+                                    <?php
+                                    }
+                                    ?>  
 
                                     <div class="mb-3">
                                         <label for="full_name" class="form-label">Full name</label>
@@ -89,9 +101,9 @@
                                       
                                     <div class="mb-3">
                                         <label for="role_select" class="form-label">Select role</label>
-                                        <select id="role_select" class="form-select">
-                                          <option >Admin</option>
-                                          <option selected>Member</option>
+                                        <select id="role_select" class="form-select" name="user_role">
+                                          <option value = "0" <?php if($item['user_permission'] == 0){echo "selected";} ?>>Admin</option>
+                                          <option value = "1" <?php if($item['user_permission'] == 1){echo "selected";} ?>>Member</option>
                                         </select>
                                     </div>
 
@@ -101,7 +113,7 @@
 
                                     ?>
 
-                                    <button type="submit" class="btn btn-success my-2 col-2">Add</button>
+                                    <button type="submit" class="btn btn-success my-2 col-2">Edit</button>
                                   </form>
                             </div>
                         </div>

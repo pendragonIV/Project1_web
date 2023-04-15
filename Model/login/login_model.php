@@ -33,13 +33,29 @@ function store(){
 
     //mac dinh khi dang ki permission la user(1)
     if($password == $rePassword){
-        $new_user_sql = "INSERT INTO user (user_name,user_email,user_passw,user_permission) VALUES ('$user_name', '$user_email', '$password', 1)";
-        mysqli_query($connect,$new_user_sql);
+        $check = mysqli_num_rows(mysqli_query($connect,"SELECT * FROM user WHERE user_name = '$user_name'"));
+        if($check > 0){
+            
+            require_once("Config/close_connect.php");
+
+            return 1;
+        }
+        else{
+            $new_user_sql = "INSERT INTO user (user_name,user_email,user_passw,user_permission) VALUES ('$user_name', '$user_email', '$password', 1)";
+            mysqli_query($connect,$new_user_sql);
+
+            
+            require_once("Config/close_connect.php");
+
+            return 0;
+        }
+        
     }
+    else{
+        require_once("Config/close_connect.php");
 
-    require_once("Config/close_connect.php");
-
-    return ;
+        return 2;
+    }
 }
 
 

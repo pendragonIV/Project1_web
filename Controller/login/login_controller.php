@@ -19,7 +19,7 @@ switch ($action){
             header("location: index.php");
         }
         else{
-            require_once("View/login/login.php");
+            header("location: ?controller=login&action=login&record=".$check_login."");
         }
         break;
     }
@@ -29,8 +29,13 @@ switch ($action){
     }
     case 'store':{
         require_once("Model/login/login_model.php");
-        header("location: ?controller=login&action=login");
-        break;
+        if($record == 0){
+            header("location: ?controller=login&action=login");
+        }
+        else{
+            header("location: ?controller=login&action=create&record=".$record."");
+        }
+        break; 
     }
     case 'logout':{
         session_destroy();

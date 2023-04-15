@@ -118,9 +118,15 @@
                             </div>
                           </div>
 
-                          <div>
-                            <canvas id="myChart" height = "200em"></canvas>
+                          <div class="col-5 mx-auto mt-5 position-relative">
+                            <canvas style="z-index :99;" id="myChart"></canvas>
+
+                            <video muted autoplay loop class="position-absolute col-6" style = "top:10em; left:7.5em;z-index:1;">
+                                <source src="public\images\Just ricardo milos dancing 4K 60FPS.mp4" type="video/ogg">
+                            </video>
                           </div>
+
+                          
 
 
                     </div>
@@ -139,10 +145,10 @@
   new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: ['Waiting Receipt', 'Accepted Receipt', 'Shipping Receipt', 'Delivered'],
       datasets: [{
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: [<?php echo $totalReceiptWait ?>,<?php echo $totalReceiptAccept ?> , <?php echo $totalReceiptShip ?>, <?php echo $totalReceiptComplete ?>],
         borderWidth: 1
       }]
     },

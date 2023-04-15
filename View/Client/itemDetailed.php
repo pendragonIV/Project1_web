@@ -52,10 +52,14 @@
                             <input type="text" class="form-control border-0 p-0 fw-bold mb-3 fs-4" id="product_name" name="product_name" value="<?php echo $in4['product_name'] ?>" required>
                         </div>
                         <div class="mb-3 d-none">
-                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6" id="product_price" name="product_price" value="<?php echo $in4['product_price']; ?>" required>
+                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6" id="product_price" name="product_price" value="<?php echo ($in4['product_price']-($in4['product_price'] * ($in4['product_promotion']/100))); ?>" required>
                         </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6" value="<?php echo number_format((int)$in4['product_price'],0,'','.'); ?>₫" required>
+                        <div class="mb-3 d-none">
+                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6" id="product_price" name="product_price_normal" value="<?php echo $in4['product_price']; ?>" required>
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <del class="me-3"><?php echo number_format((int)$in4['product_price'],0,'','.'); ?>₫ </del>
+                            <input type="text" class="form-control border-0 p-0 fw-bold fs-6 col-6 text-danger" value="<?php echo number_format((int)($in4['product_price']-($in4['product_price'] * ($in4['product_promotion']/100))),0,'','.'); ?>₫" required>
                         </div>
                     </div>
 

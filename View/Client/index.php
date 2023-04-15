@@ -322,7 +322,7 @@
                                     </div>
 
                                     <div class="col-4">
-                                        <del><?php echo number_format((int)$_SESSION['cart'][$i]['product_price'],0,'','.'); ?>₫ </del>
+                                        <del><?php echo number_format((int)$_SESSION['cart'][$i]['normal_price'],0,'','.'); ?>₫ </del>
                                     </div>
 
                                     <div class="col-4">

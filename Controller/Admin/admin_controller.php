@@ -39,6 +39,14 @@ switch($controller) {
                         }
                         break;
                     }
+                    case 'order': {
+                        if(isset($_SESSION['permission']) && $_SESSION['permission'] == 0) {
+                            require_once('Controller/Admin/Order/order_controller.php');
+                        }else{
+                            header('location: ?controller=login&action=login');
+                        }
+                        break;
+                    }
                 }
             }else {
                 require_once('Controller/Admin/Dashboard/dashboard_controller.php');

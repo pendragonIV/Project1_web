@@ -34,17 +34,33 @@ function store(){
     
     $user_name = $_POST['user_name'];
     $user_email = $_POST['user_email'];
-    $user_passw = $_POST['user_pssw'];
-    $user_repassw = $_POST['user_re_pssw'];
-    if($user_passw == $user_repassw){
+    $password = $_POST['user_pssw'];
+    $rePassword = $_POST['user_re_pssw'];
+    $role = $_POST['user_role'];
+    if($password == $rePassword){
+        $check = mysqli_num_rows(mysqli_query($connect,"SELECT * FROM user WHERE user_name = '$user_name'"));
+        if($check > 0){
+            
+            require_once("Config/close_connect.php");
 
-    $insert_user_sql = "INSERT INTO user(user_name,user_email,user_passw) Values('$user_name', '$user_email', '$user_passw')";
-    $record = mysqli_query($connect,$insert_user_sql);
-    
+            return 1;
+        }
+        else{
+            $new_user_sql = "INSERT INTO user (user_name,user_email,user_passw,user_permission) VALUES ('$user_name', '$user_email', '$password', $role)";
+            mysqli_query($connect,$new_user_sql);
+
+            
+            require_once("Config/close_connect.php");
+
+            return 0;
+        }
+        
     }
-    require_once "Config/close_connect.php";
+    else{
+        require_once("Config/close_connect.php");
 
-    return $record;
+        return 2;
+    }
 }
 
 function destroy(){
@@ -66,26 +82,50 @@ function update(){
         $user_id = $_GET['user_id'];
         $user_name = $_POST['user_name'];
         $user_email = $_POST['user_email'];
-        $user_passw = $_POST['user_pssw'];
-        $user_repassw = $_POST['user_re_pssw'];
+        $password = $_POST['user_pssw'];
+        $rePassword = $_POST['user_re_pssw'];
+        $role = $_POST['user_role'];
 
-        if($user_passw == $user_repassw){
-
-        $edit_user_sql = "  UPDATE user
+        if($password == $rePassword){
+            $checkId = mysqli_query($connect,"SELECT * FROM user WHERE user_id = $user_id");
+            $check = 0;
+            foreach($checkId as $user){
+                if($user['user_name'] != $user_name){
+                    $check = mysqli_num_rows(mysqli_query($connect,"SELECT * FROM user WHERE user_name = '$user_name'"));
+                }
+            }
+            if($check > 0){
+                
+                require_once("Config/close_connect.php");
+    
+                return array(1,$user_id);
+            }
+            else{
+                $edit_user_sql = "  UPDATE user
                             SET 
                             user_name = '$user_name',
                             user_email ='$user_email',
-                            user_passw = '$user_passw'
+                            user_passw = '$password',
+                            user_permission = $role
                             WHERE user_id = $user_id";
 
-        $record = mysqli_query($connect,$edit_user_sql);
-
+                $record = mysqli_query($connect,$edit_user_sql);
+    
+                
+                require_once("Config/close_connect.php");
+    
+                return array(0,$user_id);
+            }
+            
         }
-    }
-   
-    require_once "Config/close_connect.php";
+        else{
+            require_once("Config/close_connect.php");
+    
+            return array(2,$user_id);
+        }
 
-    return $record;
+    }
+
 }
 
 function getUser(){
@@ -114,7 +154,7 @@ switch($action) {
         break;
     }
     case 'update' :{
-        $record = update();
+        list($record,$user_id) = update();
         break;
     }
     case 'destroy': {

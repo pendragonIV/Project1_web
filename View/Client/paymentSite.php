@@ -53,7 +53,7 @@
             <div class="col-5 border-start pt-5">
 
                 <!-- products -->
-                <div class="overflow-auto" <?php if(sizeof($_SESSION['cart']) > 1){ echo 'style = "height:20em;"';} ?>>
+                <div class="overflow-auto col-9 mx-auto border-bottom pb-3" <?php if(sizeof($_SESSION['cart']) > 1){ echo 'style = "height:20em;"';} ?>>
 
                 <?php
                     if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
@@ -61,8 +61,8 @@
                 ?>
                        <div class="d-flex mt-3">
                         <img class= "col-2 px-2" src="public/upload/<?php echo $_SESSION['cart'][$i]['product_image']; ?>" alt="">
-                        <input class= "d-none" type="text" name= "product_<?php echo $i; ?>_id" value = "<?php  echo $_SESSION['cart'][$i]['product_id']?>">
-                        <input class= "d-none" type="text" name= "product_<?php echo $i; ?>_price" value = "<?php  echo $_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity'] ?>">
+                        <input class= "d-none" type="text" name= "product_<?php echo $i; ?>_id" value = "<?php  echo $_SESSION['cart'][$i]['product_detail_id']?>">
+                        <input class= "d-none" type="text" name= "product_<?php echo $i; ?>_price" value = "<?php  echo $_SESSION['cart'][$i]['product_price'] ?>">
                         <input class= "d-none" type="text" name= "product_<?php echo $i; ?>_quantity" value = "<?php  echo $_SESSION['cart'][$i]['product_quantity']?>">
                         <p class="col-7 px-2 m-0"><?php echo $_SESSION['cart'][$i]['product_name']; ?> - <?php echo $_SESSION['cart'][$i]['product_size']; ?></p>
                         <p class="col-3 text-end px-2"><?php echo number_format((int)($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']),0,'','.'); ?>₫</p>
@@ -78,11 +78,22 @@
 
                     <div class="d-flex justify-content-between px-2 py-2 text-muted">
                       <span>Tạm tính</span>
-                      <span>1,380,000 ₫</span>
+                      <span class="text-dark fw-bold"> <?php $total = 0; if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
+                                                         for($i=0; $i < sizeof($_SESSION['cart']); $i++){ 
+                                                            $total += ($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']); 
+                                                         }
+                                                      }
+                                                      echo number_format((int)$total,0,'','.'); ?> ₫</span>
                     </div>
                     <div class="d-flex justify-content-between px-2 py-2 text-muted">
                       <span>Chiết khấu</span>
-                      <span>-181,000 ₫</span>
+                      <span class="text-dark fw-bold"> -<?php $total = 0; if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
+                                                         for($i=0; $i < sizeof($_SESSION['cart']); $i++){ 
+                                                            $total += ($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']); 
+                                                         }
+                                                      }
+                                                      $VAT = $total * (10/100);
+                                                      echo number_format((int)($VAT),0,'','.'); ?> ₫</span>
                     </div>
                     <div class="d-flex justify-content-between px-2 py-2 text-muted">
                       <span>Phí vận chuyển</span>
@@ -94,7 +105,7 @@
                   
                   <div class="d-flex justify-content-between px-2 py-2 text-muted fs-5">
                     <span>Tổng tiền</span>
-                    <span>1,199,000 ₫</span>
+                    <span> <?php echo number_format((int)($total-$VAT),0,'','.'); ?> ₫</span>
                   </div>
                 </div>
                 

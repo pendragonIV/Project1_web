@@ -14,8 +14,25 @@
     <div class="container-fluid" style = "min-height: 51em; background-color:#000;">
         <div class="row" style = "padding-top:10em;">
             <div class="col-6 mx-auto">
+                    
                     <h2 class = "text-white">Đăng ký</h2>
                     <form method="POST" class = "" action="index.php?controller=login&action=store">
+                    
+                        <?php 
+                        if(isset($_GET['record']) && $_GET['record'] == 1){
+                        ?>
+                        <div class="fs-5 my-3 text-white border-0 border-bottom pb-2 border-light">
+                            Tên đăng nhập đã tồn tại!
+                        </div>
+                        <?php
+                        }elseif(isset($_GET['record']) && $_GET['record'] == 2){
+                        ?>
+                        <div class="fs-5 my-3 text-white border-0 border-bottom pb-2 border-light">
+                            Mật khẩu nhập lại không trùng khớp!
+                        </div>
+                        <?php
+                        }
+                        ?>
 
                         <div class="mb-3">
                             <input class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder = "Tên đăng nhập" name = "user_name" style="outline: none;">
