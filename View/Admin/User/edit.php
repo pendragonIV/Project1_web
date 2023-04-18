@@ -42,14 +42,14 @@
                             <a href="?controller=<?php echo $controller; ?>&redirect=user" class="btn border-0 rounded text-start bg-primary text-light" tabindex="-1" role="button" aria-disabled="true">Member management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=category" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Category management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=product" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Product management</a>
-                            <a href="admin_order.php" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Order management</a>
+                            <a href="?controller=<?php echo $controller; ?>&redirect=order" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Order management</a>
                         </div>
                     </div>
                     <div class="col-9">
                         <!-- Title -->
                          <div class="row">
                             <div class="col">
-                                <h2 class="text-muted mb-4">Add member</h2>
+                                <h2 class="text-muted mb-4">Edit member</h2>
                             </div>
                          </div>
                          <!-- Main -->

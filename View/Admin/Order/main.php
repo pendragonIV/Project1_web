@@ -42,8 +42,8 @@
                             <a href="?controller=<?php echo $controller; ?>" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Dashboard</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=user" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Member management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=category" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Category management</a>
-                            <a href="?controller=<?php echo $controller; ?>&redirect=product" class="btn border-0 rounded text-start bg-primary text-light" tabindex="-1" role="button" aria-disabled="true">Product management</a>
-                            <a href="admin_order.php" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Order management</a>
+                            <a href="?controller=<?php echo $controller; ?>&redirect=product" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Product management</a>
+                            <a href="?controller=<?php echo $controller; ?>&redirect=order" class="btn border-0 rounded text-start bg-primary text-light" tabindex="-1" role="button" aria-disabled="true">Order management</a>
                         
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                             <table class="table my-3">
                                     <thead>
                                       <tr>
-                                        <th scope="col">ID</th>
+                                        <th scope="col">No</th>
                                         <th scope="col">Receipt Date</th>
                                         <th scope="col">Customer name</th>
                                         <th scope="col">Status</th>
@@ -76,41 +76,76 @@
                                       </tr>
                                     </thead>
                                     <tbody>
+                                      
+                                    <?php
+                
+                                    $count = 0;
+                                    foreach($record as $order){
+                                      $color = '';
+                                      $status = '';
+                                      switch($order['receipt_status']){
+                                        case 0:{
+                                          $color = 'bg-danger';
+                                          $status = 'Chưa xác nhận';
+                                          break;
+                                        }
+                                        case 1:{
+                                          $color = 'bg-success';
+                                          $status = 'Đã xác nhận';
+                                          break;
+                                        }
+                                        case 2:{
+                                          $color = 'bg-danger';
+                                          $status = 'Đang vận chuyển';
+                                          break;
+                                        }
+                                        case 3:{
+                                          $color = 'bg-primary';
+                                          $status = 'Đã giao';
+                                          break;
+                                        }
+                                      }
+                                    ?>
+
                                       <tr>
-                                        <td class = "col-1">1</td>
-                                        <td class="col-2">30/12/2022</td>
-                                        <td class="col-3">Nguyen Dinh Anh</td>
+                                        <td class = "col-1"><?php echo $count ?></td>
+                                        <td class="col-2"><?php echo $order['receipt_date'] ?></td>
+                                        <td class="col-3"><?php echo $order['customer_name'] ?></td>
                                         <td class="col-2">
-                                        <p class="bg-success rounded fs-6 py-1 text-center text-light col-9">Received</p>
+                                        <p class="<?php echo $color ?> rounded fs-6 py-1 text-center text-light col-9"> <?php echo $status ?> </p>
                                         </td>
                                         <!-- <td>
                                         <p class="bg-danger rounded fs-6 py-1 text-center text-light col-9">Not yet received</p>
                                         </td> -->
                                         <td class="col-4">
                                             
-                                            <a href="" type="button" class="btn btn-outline-success my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&rediect=order&action=access&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-success my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-check"></i>
                                             </a>
                                         
-                                            <a href="" type="button" class="btn btn-outline-warning my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&rediect=order&action=shipping&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-warning my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-truck-fast"></i>
                                             </a>
 
-                                            <a href="" type="button" class="btn btn-outline-info my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&rediect=order&action=received&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-info my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-check-to-slot"></i>
                                             </a>
 
-                                            <a href="view_order.php" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&rediect=order&action=view&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
 
-                                            <a href="" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&rediect=order&action=destroy&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
-
                                         </td>
                                       </tr>
                                       
+                                    <?php
+                                    $count++;
+                                    }
+                                    ?>
+
                                     </tbody>
                             </table>
                             </div>

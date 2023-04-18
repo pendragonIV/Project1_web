@@ -53,7 +53,7 @@
                             <a href="?controller=<?php echo $controller; ?>&redirect=user" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Member management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=category" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Category management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=product" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Product management</a>
-                            <a href="admin_order.php" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Order management</a>
+                            <a href="?controller=<?php echo $controller; ?>&redirect=order" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Order management</a>
                         
                           </div>
                     </div>
@@ -121,9 +121,9 @@
                           <div class="col-5 mx-auto mt-5 position-relative">
                             <canvas style="z-index :99;" id="myChart"></canvas>
 
-                            <video muted autoplay loop class="position-absolute col-6" style = "top:10em; left:7.5em;z-index:1;">
+                            <!-- <video muted autoplay loop class="position-absolute col-6" style = "top:10em; left:7.5em;z-index:1;">
                                 <source src="public\images\Just ricardo milos dancing 4K 60FPS.mp4" type="video/ogg">
-                            </video>
+                            </video> -->
                           </div>
 
                           

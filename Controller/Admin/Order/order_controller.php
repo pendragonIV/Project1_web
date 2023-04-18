@@ -2,32 +2,32 @@
 
 switch($action){
     case '': { 
-        // require_once "Model/Admin/Order/order_model.php";
+        require_once "Model/Admin/Order/order_model.php";
         require_once "View/Admin/Order/main.php";
         break;
     }
-    case 'create': { 
-        require_once "Model/Admin/Product/product_model.php";
-        require_once "View/Admin/Product/create.php";
+    case 'access': { 
+        require_once "Model/Admin/Order/order_model.php";
+        header('location: ?controller='.$controller.'&redirect='.$redirect.''); 
         break;
     }
-    case 'store': { 
-        require_once "Model/Admin/Product/product_model.php";
+    case 'shipping': { 
+        require_once "Model/Admin/Order/order_model.php";
         header('location: ?controller='.$controller.'&redirect='.$redirect.'');
         break;
     }
-    case 'edit': { 
-        require_once "Model/Admin/Product/product_model.php";
-        require_once "View/Admin/Product/edit.php";
+    case 'received': { 
+        require_once "Model/Admin/Order/order_model.php";
+        header('location: ?controller='.$controller.'&redirect='.$redirect.'');
         break;
     }
-    case 'update': {
-        require_once "Model/Admin/Product/product_model.php";
-        header('location: ?controller='.$controller.'&redirect='.$redirect.'');
+    case 'view': {
+        require_once "Model/Admin/Order/order_model.php";
+        require_once "View/Admin/Order/edit.php";
         break;
     }
     case 'destroy': {
-        require_once "Model/Admin/Product/product_model.php";
+        require_once "Model/Admin/Order/order_model.php";
         header('location: ?controller='.$controller.'&redirect='.$redirect.'');
         break;
     }
