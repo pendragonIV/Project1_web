@@ -3,13 +3,30 @@
 function index(){
     require_once "Config/open_connect.php";
 
-    $getOrder = mysqli_query($connect,"SELECT * FROM receipt 
-                                        JOIN customer ON receipt.receipt_id = customer.customer_id");
+    $getOrder = mysqli_query($connect,"SELECT * FROM receipt");
+                                    
+    $totalOrder = mysqli_num_rows($getOrder);
+                                    
+    $orderPerPage = 3;
+                                    
+    $totalPage = ceil($totalOrder/$orderPerPage);
+                                    
+    $currentPage = 1;
+                                    
+    if(isset($_GET['page'])){
+        $currentPage = $_GET['page'];
+    }
+                                    
+    $orderStart = ($currentPage - 1) * $orderPerPage;
                                         
-
+    $getPageOrder = "SELECT * FROM receipt 
+                    JOIN customer ON receipt.receipt_id = customer.customer_id 
+                    ORDER BY receipt.receipt_id DESC LIMIT $orderStart,$orderPerPage";
+    $record = mysqli_query($connect,$getPageOrder);
+                                    
     require_once "Config/close_connect.php";
-
-    return $getOrder;
+                                    
+    return array($record,$totalPage,$currentPage);
 }
 
 function getOrder(){
@@ -36,23 +53,68 @@ function getOrder(){
     return array($getOrder, $getDetail, $total);
 }
 
+function access(){
+    require_once "Config/open_connect.php";
+
+    if(isset($_GET['id'])){
+        $orderId = $_GET['id'];
+
+        mysqli_query($connect, "UPDATE receipt
+                                SET receipt_status = 1
+                                WHERE receipt_id = $orderId");
+
+    }
+
+    require_once "Config/close_connect.php";
+}
+
+function shipping(){
+    require_once "Config/open_connect.php";
+
+    if(isset($_GET['id'])){
+        $orderId = $_GET['id'];
+
+        mysqli_query($connect, "UPDATE receipt
+                                SET receipt_status = 2
+                                WHERE receipt_id = $orderId");
+
+    }
+
+    require_once "Config/close_connect.php";
+}
+
+function received(){
+    require_once "Config/open_connect.php";
+
+    if(isset($_GET['id'])){
+        $orderId = $_GET['id'];
+
+        mysqli_query($connect, "UPDATE receipt
+                                SET receipt_status = 3
+                                WHERE receipt_id = $orderId");
+
+    }
+
+    require_once "Config/close_connect.php";
+}
+
 switch($action){
 
 
     case '':{
-        $record = index();
+        list($record,$totalPage,$currentPage) = index();
         break;
     }
     case 'access': { 
-        
+        $record = access();
         break;
     }
     case 'shipping': { 
-        
+        $record = shipping();
         break;
     }
     case 'received': { 
-
+        $record = received();
         break;
     }
     case 'view': {

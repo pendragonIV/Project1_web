@@ -64,7 +64,7 @@
                                 <div class="card text-light bg-body mb-3">
                                     <div class="card-body d-flex">
                                         <div class="my-auto ms-5 me-3">
-                                            <i class="fa-solid fa-tag fs-1 text-success"></i>
+                                            <i class="fa-solid fa-tag fs-1 text-primary"></i>
                                         </div>
                                         <div>
                                             <h6 class="card-title text-dark text-muted">Different products</h6>
@@ -118,12 +118,27 @@
                             </div>
                           </div>
 
-                          <div class="col-5 mx-auto mt-5 position-relative">
-                            <canvas style="z-index :99;" id="myChart"></canvas>
+                          <div class="row mt-5">
+                            
+                            <div class="col-5">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-6 my-auto">
+                                <div class="card text-light bg-body mb-3">
+                                    <div class="card-body d-flex">
+                                        <div class="my-auto ms-5 me-3">
+                                            <i class= "fa-solid fa-receipt fs-1 text-success"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="card-title text-dark text-muted">Total receipt</h6>
+                                            <h3 class="card-text fw-bold text-dark"> <?php echo $totalReceipt ?> </h3>
+                                            
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
 
-                            <!-- <video muted autoplay loop class="position-absolute col-6" style = "top:10em; left:7.5em;z-index:1;">
-                                <source src="public\images\Just ricardo milos dancing 4K 60FPS.mp4" type="video/ogg">
-                            </video> -->
                           </div>
 
                           
@@ -147,7 +162,7 @@
     data: {
       labels: ['Waiting Receipt', 'Accepted Receipt', 'Shipping Receipt', 'Delivered'],
       datasets: [{
-        label: '# of Votes',
+        label: 'Số lượng',
         data: [<?php echo $totalReceiptWait ?>,<?php echo $totalReceiptAccept ?> , <?php echo $totalReceiptShip ?>, <?php echo $totalReceiptComplete ?>],
         borderWidth: 1
       }]

@@ -154,11 +154,12 @@
                                 <i onclick="slideIn()" class="fa-solid fa-cart-shopping text-white fs-5 py-1"></i>
                             </li>
                             <li  class="col-5 py-3">
-                                <form class="d-flex border col-12">
+                                <form class="d-flex border col-12" method="GET" action="?redirect=search">
+                                    <input class="d-none" name = "redirect" value="search">
+
+                                    <input class="col-10 border-0 ps-2 disable_focus_form" name = "search" placeholder="Tìm kiếm">
                                     
-                                    <input class="col-10 border-0 ps-2 disable_focus_form" placeholder="Tìm kiếm">
-                                    
-                                    <button class="p-0 m-0 col-2 bg-light border-0" type="submit">
+                                    <button class="p-0 m-0 col-2 bg-light border-0" type="submit" name = "search_btn">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </form>
@@ -169,6 +170,7 @@
                 </div>
         </div>
 
+        <!-- Switch content based page -->
         <?php
             if($redirect == '' || $redirect == 'home'){
                 require_once "View/Client/homepage.php";
@@ -180,6 +182,10 @@
                     }
                     case 'cart': {
                         require_once "View/Client/cart.php";
+                        break;
+                    }
+                    case 'search': {
+                        require_once "View/Client/searchProduct.php";
                         break;
                     }
                     case 'category': {

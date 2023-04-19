@@ -82,6 +82,10 @@
                             <td class="col-3">Customer address</td>
                             <td class="col-9"><?php echo $order['customer_address'] ?></td>
                         </tr>
+                        <tr>
+                            <td class="col-3">Customer note</td>
+                            <td class="col-9"><?php echo $order['order_note'] ?></td>
+                        </tr>
                         
                     </table>
 

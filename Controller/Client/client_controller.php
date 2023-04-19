@@ -33,6 +33,11 @@ if($redirect == ''){
             require_once "View/Client/index.php";
             break;
         }
+        case 'search': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
         case 'add_order': {
             require_once "Model/Client/index_model.php";
             header("Location: ?controller=");

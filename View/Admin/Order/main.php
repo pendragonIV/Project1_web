@@ -95,7 +95,7 @@
                                           break;
                                         }
                                         case 2:{
-                                          $color = 'bg-danger';
+                                          $color = 'bg-warning';
                                           $status = 'Đang vận chuyển';
                                           break;
                                         }
@@ -110,32 +110,30 @@
                                       <tr>
                                         <td class = "col-1"><?php echo $count ?></td>
                                         <td class="col-2"><?php echo $order['receipt_date'] ?></td>
-                                        <td class="col-3"><?php echo $order['customer_name'] ?></td>
-                                        <td class="col-2">
+                                        <td class="col-2"><?php echo $order['customer_name'] ?></td>
+                                        <td class="col-3">
                                         <p class="<?php echo $color ?> rounded fs-6 py-1 text-center text-light col-9"> <?php echo $status ?> </p>
                                         </td>
-                                        <!-- <td>
-                                        <p class="bg-danger rounded fs-6 py-1 text-center text-light col-9">Not yet received</p>
-                                        </td> -->
+
                                         <td class="col-4">
                                             
-                                            <a href="?controller=admin&rediect=order&action=access&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-success my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&redirect=order&action=access&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-success my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-check"></i>
                                             </a>
                                         
-                                            <a href="?controller=admin&rediect=order&action=shipping&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-warning my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&redirect=order&action=shipping&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-warning my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-truck-fast"></i>
                                             </a>
 
-                                            <a href="?controller=admin&rediect=order&action=received&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-info my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&redirect=order&action=received&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-info my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-check-to-slot"></i>
                                             </a>
 
-                                            <a href="?controller=admin&rediect=order&action=view&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&redirect=order&action=view&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
 
-                                            <a href="?controller=admin&rediect=order&action=destroy&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
+                                            <a href="?controller=admin&redirect=order&action=destroy&id=<?php echo $order['receipt_id'] ?>" type="button" class="btn btn-outline-danger my-1" tabindex="-1" role="button" aria-disabled="true">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                         </td>
@@ -153,23 +151,36 @@
                          
                          <div class="row">
                             <div class="col">
-                            <nav aria-label="Page navigation example">
-<ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+                            <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <?php
+                                            if($currentPage > 1){
+                                                echo '<li class="page-item">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($currentPage - 1).'" aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                      </li>';
+                                            }
+                                        ?>
+
+                                        <?php
+                                            for($i = 0; $i < $totalPage; $i++){
+                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($i + 1).'">'.($i + 1).'</a></li>';
+                                            }
+                                        ?>
+
+                                        <?php
+                                            if($currentPage < $totalPage){
+                                                echo '<li class="page-item">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($currentPage + 1).'" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                      </li>';
+                                            }
+                                        ?>
+
+                                    </ul>
+                                </nav>
                             </div>
                          </div>
                     </div>

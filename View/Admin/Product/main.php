@@ -166,16 +166,6 @@
                             </div>
 
                          </div>
-                         
-                         <div class="row">
-                            <div class="col">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        
-                                    </ul>
-                                </nav>
-                            </div>
-                         </div>
 
                     </div>
                 </div>

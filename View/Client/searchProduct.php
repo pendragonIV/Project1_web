@@ -1,5 +1,5 @@
 <!-- page location -->
-        <div class="bg-light px-5 py-2" style="font-size: .9em;"> 
+<div class="bg-light px-5 py-2" style="font-size: .9em;"> 
             <a href="" class="text-decoration-none text-dark">
                 Trang chủ
             </a>
@@ -8,6 +8,9 @@
         </div>
 
         <div class="d-flex px-3 my-5">
+
+            <!-- Option -->
+
             <div class="col-2 me-4">
 
                 <div class="border-top">
@@ -22,48 +25,45 @@
                         <i onclick="showFilter(this)" class="fa-solid fa-chevron-down mx-2 d-inline-block py-1" style="font-size: .8em;"></i>
                     </div>
                     <ul class="list-unstyled text-muted ps-3"  style="font-size: .8em;" id = "option__container">
-
-                        <!-- List cate -->
-                        <?php
-                        foreach ($cateParents as $cate){
-                            if($cate['parent_id'] == 0){
-                        ?>
                         <li class="mb-3">
                             <div class="d-flex justify-content-between mb-3">
-                                <a class="text-decoration-none text-muted" href="?redirect=category&category_id=<?php echo $cate['category_id'] ?>">
-                                    <?php echo $cate['category_name'] ?>
+                                <a>
+                                Trang Phục
                                 </a>
                                 <i onclick="showFilter(this)" class="fa-solid fa-chevron-down mx-2 d-inline-block py-1" style="font-size: .8em;"></i>
                             </div>
-                            
-                            <!-- Child option -->
 
                             <ul class="list-unstyled text-muted ps-3" id = "option__container">
-
-                            <?php
-                            foreach ($cateChilds as $cateChild){
-                                if($cateChild['parent_id'] == $cate['category_id']){
-                            ?>
-                                <li  class="mt-2">
-                                    <a class="text-decoration-none text-muted" href="?redirect=category&category_id=<?php echo $cateChild['category_id'] ?>">
-                                        <?php echo ucwords($cateChild['category_name']) ?>
-                                    </a>
-                                    
+                                <li class="mt-2">
+                                    Áo
                                 </li>
-                            <?php
-                                }
-                            }
-                            ?>
+
+                                <li  class="mt-2">
+                                    Quần
+                                </li>
 
                             </ul>
-                
                         </li>
-                        
-                        <?php
-                                } 
-                        }
-                        ?>
 
+                        <li class="mb-3">
+                            <div class="d-flex justify-content-between mb-3">
+                                <a>
+                                    Giày & Phụ Kiện
+                                </a>
+                                <i onclick="showFilter(this)" class="fa-solid fa-chevron-down mx-2 d-inline-block py-1" style="font-size: .8em;"></i>
+                            </div>
+
+                            <ul class="list-unstyled text-muted ps-3" id = "option__container">
+                                <li class="mt-2">
+                                    Balo
+                                </li>
+
+                                <li  class="mt-2">
+                                    Thắt Lưng
+                                </li>
+
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 
@@ -76,31 +76,25 @@
                     </div>
 
                     <ul class="list-unstyled text-muted ps-3" style="font-size: .8em;"  id = "option__container">
-
-                        <?php
-                        foreach($size as $prdSize) {
-                        ?>
                         <li class="mt-2">
-                            <a class="text-decoration-none text-muted" href="?redirect=category&size=<?php echo $prdSize['size_id'] ?>">
-                                <?php echo $prdSize['size_name'] ?>
-                            </a>
+                            Balo
                         </li>
 
-                        <?php
-                        }
-                        ?>
-
+                        <li  class="mt-2">
+                            Thắt Lưng
+                        </li>
                     </ul>
                 </div>
-                                        
+
             </div>
 
             <!-- Products -->
+
             <div class="col-10">
                 <div class="row">
                     <?php
                     $count = 0;
-                    foreach($cateProducts as $prd){
+                    foreach($getPrds as $prd){
 
                     ?>
                     <div class="col-3 mb-5">
@@ -158,7 +152,7 @@
                                         <?php
                                             if($currentPage > 1){
                                                 echo '<li class="page-item">
-                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&category_id='.$categoryId.'&page='.($currentPage - 1).'" aria-label="Previous">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&page='.($currentPage - 1).'" aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                       </li>';
@@ -167,14 +161,14 @@
 
                                         <?php
                                             for($i = 0; $i < $totalPage; $i++){
-                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&category_id='.$categoryId.'&page='.($i + 1).'">'.($i + 1).'</a></li>';
+                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&page='.($i + 1).'">'.($i + 1).'</a></li>';
                                             }
                                         ?>
 
                                         <?php
                                             if($currentPage < $totalPage){
                                                 echo '<li class="page-item">
-                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&category_id='.$categoryId.'&page='.($currentPage + 1).'" aria-label="Next">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&page='.($currentPage + 1).'" aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                       </li>';

@@ -25,15 +25,19 @@ function index(){
     $cateChilds = mysqli_query($connect,$getCategorySql);
     $getParentCateSql = "SELECT * FROM category";
     $cateParents = mysqli_query($connect,$getParentCateSql);
+
+    $getSizes = mysqli_query($connect,"SELECT * FROM product_detail 
+                                        JOIN product_size ON product_detail.size_id = product_size.size_id 
+                                        WHERE product_detail.product_id = $productId");
     
     require_once "Config/close_connect.php";  
 
-    return array($cateParents,$cateChilds,$productNewest,$productImage,$images,$productIn4);
+    return array($cateParents,$cateChilds,$productNewest,$productImage,$images,$productIn4,$getSizes);
 }
 
 switch ($redirect){
     case 'detail': {
-        list($cateParents,$cateChilds,$productNewest,$productImage,$images,$productIn4) = index();
+        list($cateParents,$cateChilds,$productNewest,$productImage,$images,$productIn4,$getSizes) = index();
         break;
     }
 }

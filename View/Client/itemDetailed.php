@@ -69,25 +69,31 @@
                     <!-- CHOOSE SIZE -->
                     <div class="border-bottom">
                     <div class="d-flex my-3">
-                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark"  style="height:2.2em;">
-                                <input type="radio" class="col-12 h-100 radio_custom" value="S" name = "product_size" required></input>
-                                <span class="text-white position-absolute start-0 p-1">S</span>
+
+                            <?php
+                            foreach( $getSizes as $size){
+                                if($size['quantity'] != 0){
+                            ?>
+
+                            <label class="col-1 me-2 position-relative select__size border border-1 border-dark"  style="height:2.2em;">
+                                <input type="radio" class="col-12 h-100 radio_custom" value="<?php echo $size['size_name'] ?>" name = "product_size" required></input>
+                                <span class="text-white position-absolute start-0 p-1"><?php echo $size['size_name'] ?></span>
                             </label>
 
-                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark"  style="height:2.2em;">
-                                <input type="radio" class="col-12 h-100 radio_custom" value="M" name = "product_size"></input>
-                                <span class="text-white position-absolute start-0 p-1">M</span>     
+                            <?php
+                                }
+                                else{
+                            ?>
+
+                            <label class="col-1 me-2 position-relative bg-light border border-1 border-dark"  style="height:2.2em;">
+                                <input type="radio" class="col-12 h-100 radio_custom" value="<?php echo $size['size_name'] ?>" name = "product_size" disabled></input>
+                                <span class="text-dark position-absolute start-0 p-1"><?php echo $size['size_name'] ?></span>
                             </label>
 
-                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark"  style="height:2.2em;">
-                                <input type="radio" class="col-12 h-100 radio_custom" value="L" name = "product_size"></input>
-                                <span class="text-white position-absolute start-0 p-1">L</span>
-                            </label>
-
-                            <label class="col-1 me-2 position-relative select__size position-relative border border-1 border-dark"  style="height:2.2em;">
-                                <input type="radio" class="col-12 h-100 radio_custom" value="XL" name = "product_size"></input>
-                                <span class="text-white position-absolute start-0 p-1">XL</span>
-                            </label>
+                            <?php
+                                }
+                            }
+                            ?>
 
                         </div>
                     
