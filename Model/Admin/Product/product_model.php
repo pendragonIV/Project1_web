@@ -18,6 +18,7 @@ function index(){
     $productStart = ($currentPage - 1) * $productPerPage;
 
     $products = mysqli_query($connect, "SELECT * FROM product 
+                                        JOIN category ON category.category_id = product.category_id
                                         JOIN (SELECT * FROM product_image GROUP BY product_id) AS image 
                                         ON product.product_id = image.product_id
                                         ORDER BY product.product_id DESC 
@@ -241,6 +242,45 @@ function getCreate(){
     return array($cates,$sizes);
 }
 
+function search(){
+    if(isset($_GET['search_btn'])){
+        require_once "Config/open_connect.php";
+
+        $productPerPage = 3;
+
+        $currentPage = 1;
+      
+        if(isset($_GET['page'])){
+            $currentPage = $_GET['page'];
+        }
+
+        $searchIn4 = "";
+        if(isset($_GET['search'])){
+            $searchIn4 = $_GET['search'];
+        }
+        
+        $productStart = ($currentPage - 1) * $productPerPage;
+        
+        $products =  mysqli_query($connect,"SELECT * FROM product 
+                                            JOIN category ON category.category_id = product.category_id
+                                            JOIN (SELECT * FROM product_image GROUP BY product_id) AS image 
+                                            ON product.product_id = image.product_id
+                                            WHERE product.product_name LIKE '%$searchIn4%'
+                                            ORDER BY product.product_id DESC 
+                                            LIMIT $productStart,$productPerPage");
+    
+        $totalProduct = mysqli_num_rows(mysqli_query($connect,"SELECT * FROM product WHERE product.product_name LIKE '%$searchIn4%'"));
+
+        $totalPage = ceil($totalProduct/$productPerPage);
+
+        
+    require_once "Config/close_connect.php";
+
+    return array($products,$totalPage,$currentPage,$searchIn4);
+
+    }
+}
+
 switch($action){
 
 
@@ -268,6 +308,9 @@ switch($action){
         $record = destroy();
         break;
     }
-
+    case 'search': {
+        list($products,$totalPage,$currentPage,$searchIn4) = search();
+        break;
+    }
 
 }

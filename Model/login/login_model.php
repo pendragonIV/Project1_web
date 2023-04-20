@@ -16,6 +16,7 @@ function checkLogin(){
     else{
         session_start();
         $_SESSION['permission'] = $user['user_permission'];
+        $_SESSION['user_session'] = $user['id'];
         return 1;
     }
     
@@ -28,6 +29,7 @@ function store(){
 
     $user_name = $_POST['user_name'];
     $password = $_POST['password'];
+    $full_name = $_POST['full_name'];
     $user_email = $_POST['user_email'];
     $rePassword = $_POST['re_password'];
 
@@ -41,7 +43,7 @@ function store(){
             return 1;
         }
         else{
-            $new_user_sql = "INSERT INTO user (user_name,user_email,user_passw,user_permission) VALUES ('$user_name', '$user_email', '$password', 1)";
+            $new_user_sql = "INSERT INTO user (user_name,user_email,user_passw,user_permission,full_name) VALUES ('$user_name', '$user_email', '$password', 1, '$full_name')";
             mysqli_query($connect,$new_user_sql);
 
             

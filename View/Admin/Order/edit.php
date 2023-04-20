@@ -26,8 +26,8 @@
                     <button class="btn dropdown-toggle bg-transparent border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Profile</a></li>
-                      <li><a class="dropdown-item" href="#">Logout</a></li>
+                      <li><a class="dropdown-item" href="?controller=admin&redirect=profile">Profile</a></li>
+                      <li><a class="dropdown-item d-block" href="?controller=login&action=logout">Logout</a></li>
                     </ul>
                   </div>
             </div>
@@ -86,7 +86,46 @@
                             <td class="col-3">Customer note</td>
                             <td class="col-9"><?php echo $order['order_note'] ?></td>
                         </tr>
-                        
+                        <?php
+                        $color = '';
+                        $status = '';
+                        switch($order['receipt_status']){
+                          case 0:{
+                            $color = 'bg-danger';
+                            $status = 'Chưa xác nhận';
+                            break;
+                          }
+                          case 1:{
+                            $color = 'bg-success';
+                            $status = 'Đã xác nhận';
+                            break;
+                          }
+                          case 2:{
+                            $color = 'bg-warning';
+                            $status = 'Đang vận chuyển';
+                            break;
+                          }
+                          case 3:{
+                            $color = 'bg-primary';
+                            $status = 'Đã giao';
+                            break;
+                          }
+                        }
+                        ?>
+                        <tr>
+                            <td class="col-3">Order status</td>
+                            <td class="col-9"><p class="<?php echo $color ?> rounded fs-6 py-1 text-center text-light col-9"> <?php echo $status ?> </p></td>
+                        </tr>
+                        <?php
+                        if($acceptBy != ''){
+                        ?>
+                        <tr>
+                            <td class="col-3">Accepted by</td>
+                            <td class="col-9"><?php echo $acceptBy ?></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
                     </table>
 
                     <?php
@@ -120,7 +159,7 @@
                         ?>
 
                         <!-- Nav -->
-
+<!-- 
                         <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item">
@@ -137,7 +176,7 @@
       </a>
     </li>
   </ul>
-</nav>
+</nav> -->
                     </div>
                     <!-- Total -->
                     <div class="col-4">
@@ -164,8 +203,30 @@
                                 </div>
                             </div>
                             <div class="row">
-                            <a href="payment.php" class="col-6"><input class="my-3 col-12 border-0 bg-success p-2 text-light fw-bold" type="button" value = "Accept" style="border-radius: .5em;"></input></a>
-                            <a href="payment.php" class="col-6"><input class="my-3 col-12 border-0 bg-danger p-2 text-light fw-bold" type="button" value = "Deny" style="border-radius: .5em;"></input></a>
+
+                                <?php
+                                foreach($getOrder as $status){
+                                    if($status['receipt_status'] == 0){
+                                ?>
+                                <a href="?controller=admin&redirect=order&action=access&id=<?php echo $status['receipt_id'] ?>" class="col-6"><input class="my-3 col-12 border-0 bg-success p-2 text-light fw-bold" type="button" value = "Accept" style="border-radius: .5em;"></input></a>
+                                <a href="?controller=admin&redirect=order&action=destroy&id=<?php echo $order['receipt_id'] ?>" class="col-6"><input class="my-3 col-12 border-0 bg-danger p-2 text-light fw-bold" type="button" value = "Deny" style="border-radius: .5em;"></input></a>
+
+                                <?php
+                                    }elseif($status['receipt_status'] == 1){
+                                ?>
+                                <a href="?controller=admin&redirect=order&action=shipping&id=<?php echo $status['receipt_id'] ?>" class="col-6"><input class="my-3 col-12 border-0 bg-warning p-2 text-light fw-bold" type="button" value = "Ship" style="border-radius: .5em;"></input></a>
+                                <a href="?controller=admin&redirect=order&action=destroy&id=<?php echo $order['receipt_id'] ?>" class="col-6"><input class="my-3 col-12 border-0 bg-danger p-2 text-light fw-bold" type="button" value = "Delete" style="border-radius: .5em;"></input></a>
+
+                                <?php
+                                    }elseif($status['receipt_status'] == 2){
+
+                                ?>
+                                <a href="?controller=admin&redirect=order&action=received&id=<?php echo $status['receipt_id'] ?>" class="col-6 mx-auto"><input class="my-3 col-12 border-0 bg-info p-2 text-light fw-bold" type="button" value = "Received" style="border-radius: .5em;"></input></a>
+
+                                <?php
+                                    }
+                                }
+                                ?>
                             </div>
                         </div>
     

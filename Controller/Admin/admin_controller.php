@@ -47,6 +47,14 @@ switch($controller) {
                         }
                         break;
                     }
+                    case 'profile': {
+                        if(isset($_SESSION['permission']) && $_SESSION['permission'] == 0) {
+                            require_once('Controller\Admin\Profile\profile_controller.php');
+                        }else{
+                            header('location: ?controller=login&action=login');
+                        }
+                        break;
+                    }
                 }
             }else {
                 require_once('Controller/Admin/Dashboard/dashboard_controller.php');

@@ -1,11 +1,5 @@
 <!-- page location -->
-<div class="bg-light px-5 py-2" style="font-size: .9em;"> 
-            <a href="" class="text-decoration-none text-dark">
-                Trang chủ
-            </a>
-            <span class = "text-muted"> / Giỏ hàng</span>
 
-        </div>
 
         <div class="d-flex px-3 my-5">
 
@@ -152,7 +146,7 @@
                                         <?php
                                             if($currentPage > 1){
                                                 echo '<li class="page-item">
-                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&page='.($currentPage - 1).'" aria-label="Previous">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&search_btn=&page='.($currentPage - 1).'" aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                       </li>';
@@ -161,14 +155,14 @@
 
                                         <?php
                                             for($i = 0; $i < $totalPage; $i++){
-                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&page='.($i + 1).'">'.($i + 1).'</a></li>';
+                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&search_btn=&page='.($i + 1).'">'.($i + 1).'</a></li>';
                                             }
                                         ?>
 
                                         <?php
                                             if($currentPage < $totalPage){
                                                 echo '<li class="page-item">
-                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&page='.($currentPage + 1).'" aria-label="Next">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&search='.$searchIn4.'&search_btn=&page='.($currentPage + 1).'" aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                       </li>';

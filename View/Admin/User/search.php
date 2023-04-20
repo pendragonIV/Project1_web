@@ -42,7 +42,7 @@
                     <div class="col-3 shadow p-3 bg-body rounded mb-3 min-vh-100">
                         <div class="btn-group-vertical col-12 " role="group" aria-label="Basic example">
                             <a href="?controller=<?php echo $controller; ?>" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Dashboard</a>
-                            <a href="" class="btn border-0 rounded text-start bg-primary text-light" tabindex="-1" role="button" aria-disabled="true">Member management</a>
+                            <a href="?controller=<?php echo $controller; ?>&redirect=user" class="btn border-0 rounded text-start bg-primary text-light" tabindex="-1" role="button" aria-disabled="true">Member management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=category" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Category management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=product" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Product management</a>
                             <a href="?controller=<?php echo $controller; ?>&redirect=order" class="btn border-0 rounded text-start" tabindex="-1" role="button" aria-disabled="true">Order management</a>
@@ -58,11 +58,11 @@
                          <!-- Main -->
                          <div class="row">
                             <div class="container-fluid">
-                              <form class="d-flex my-1" method="GET" action="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=search">
+                            <form class="d-flex my-1" method="GET" action="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=search">
                                 <input class="d-none" name = "controller" value="<?php echo $controller; ?>">
                                 <input class="d-none" name = "redirect" value="<?php echo $redirect; ?>">
                                 <input class="d-none" name = "action" value="search">
-                                <input class="form-control me-2" type="search" name="search" placeholder="Search">
+                                <input class="form-control me-2" type="search" name="search" value = "<?php echo $searchIn4 ?>" placeholder="Search">
                                 <button class="btn btn-outline-info" type="submit" name = "search_btn">Search</button>
                               </form>
                             </div>
@@ -92,7 +92,7 @@
 
                                     $index = 0;
     
-                                    foreach($record as $item){
+                                    foreach($getUsers as $item){
 
                                     ?>
 
@@ -127,7 +127,7 @@
                                         <?php
                                             if($currentPage > 1){
                                                 echo '<li class="page-item">
-                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($currentPage - 1).'" aria-label="Previous">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&action='.$action.'&search='.$searchIn4.'&search_btn=&page='.($currentPage - 1).'" aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                       </li>';
@@ -136,14 +136,14 @@
 
                                         <?php
                                             for($i = 0; $i < $totalPage; $i++){
-                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($i + 1).'">'.($i + 1).'</a></li>';
+                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&action='.$action.'&search='.$searchIn4.'&search_btn=&page='.($i + 1).'">'.($i + 1).'</a></li>';
                                             }
                                         ?>
 
                                         <?php
                                             if($currentPage < $totalPage){
                                                 echo '<li class="page-item">
-                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($currentPage + 1).'" aria-label="Next">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&action='.$action.'&search='.$searchIn4.'&search_btn=&page='.($currentPage + 1).'" aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                       </li>';

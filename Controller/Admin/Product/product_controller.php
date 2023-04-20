@@ -31,4 +31,9 @@ switch($action){
         header('location: ?controller='.$controller.'&redirect='.$redirect.'');
         break;
     }
+    case 'search': { 
+        require_once "Model/Admin/Product/product_model.php";
+        require_once "View/Admin/Product/search.php";
+        break;
+    }
 }

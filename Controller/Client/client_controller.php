@@ -43,5 +43,40 @@ if($redirect == ''){
             header("Location: ?controller=");
             break;
         }
+        case 'story': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
+        case 'new': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
+        case 'lastchance': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
+        case 'profile': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
+        case 'vieworder': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
+        case 'search_order': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
+        case 'get_order': {
+            require_once "Model/Client/index_model.php";
+            require_once "View/Client/index.php";
+            break;
+        }
     }
 }

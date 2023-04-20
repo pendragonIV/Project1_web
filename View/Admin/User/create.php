@@ -26,7 +26,7 @@
                     <button class="dropdown-toggle bg-transparent border-0" style="outline:none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><a class="dropdown-item" href="?controller=admin&redirect=profile">Profile</a></li>
                       <li><a class="dropdown-item d-block" href="?controller=login&action=logout">Logout</a></li>
                     </ul>
                 </div>
@@ -74,21 +74,24 @@
                                     }
                                     ?>                                        
                                     <div class="mb-3">
-                                        <label for="full_name" class="form-label">User name</label>
-                                        <input type="text" class="form-control" id="full_name" name="user_name" require>
-                                      </div>
+                                        <label for="user_name" class="form-label">User name</label>
+                                        <input type="text" class="form-control" id="user_name" name="user_name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="fn" class="form-label">Full name</label>
+                                      <input type="text" class="form-control" id="fn" name="full_name" required>
+                                    </div>
                                     <div class="mb-3">
                                       <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email"  require>
-                                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email"  required>
                                     </div>
                                     <div class="mb-3">
                                       <label for="exampleInputPassword1" class="form-label">Password</label>
-                                      <input type="password" class="form-control" id="exampleInputPassword1" name="user_pssw"  require>
+                                      <input type="password" class="form-control" id="exampleInputPassword1" name="user_pssw"  required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword2" class="form-label">Re-enter password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword2   " name="user_re_pssw"  require>
+                                        <input type="password" class="form-control" id="exampleInputPassword2   " name="user_re_pssw"  required>
                                       </div>
                                       
                                     <div class="mb-3">

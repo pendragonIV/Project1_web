@@ -34,6 +34,7 @@ function getCategoryProduct(){
     $cateParents = mysqli_query($connect,$getParentCateSql);
 
     $size = mysqli_query($connect,"SELECT * FROM product_size");
+    $categoryId = '';
 
     if(isset($_GET['category_id'])){
 
@@ -84,6 +85,7 @@ function getCategoryProduct(){
                                 ORDER BY product.product_id DESC";
             }
         }
+        
     }
     elseif(isset($_GET['size'])){
         $productPerPage = 12;
@@ -162,7 +164,14 @@ function addOrder(){
         $currentDate = date('Y-m-d');
         //insert new order
         //status == 0 means its hasnt accept by admin
-        mysqli_query($connect,"INSERT INTO receipt (receipt_date,customer_id,order_note,receipt_status) VALUES ('$currentDate',$customerId,'$customerNote',0)");
+        //belong to 0 means user havent login 
+        //accepted by == 0 means there is no admin accept
+        if(isset($_SESSION['user_session']) && $_SESSION['user_session'] != ''){
+            $userId = $_SESSION['user_session'];
+            mysqli_query($connect,"INSERT INTO receipt (receipt_date,customer_id,order_note,receipt_status,accept_by,belong_to) VALUES ('$currentDate',$customerId,'$customerNote',0,0,$userId)");
+        }else{
+            mysqli_query($connect,"INSERT INTO receipt (receipt_date,customer_id,order_note,receipt_status,accept_by,belong_to) VALUES ('$currentDate',$customerId,'$customerNote',0,0,0)");
+        }
     }
 
     foreach(mysqli_query($connect,"SELECT * FROM receipt
@@ -237,6 +246,217 @@ function search(){
     return array($cateChilds,$cateParents,$productImages,$totalPage,$currentPage,$getPrds,$searchIn4);
 }
 
+function story(){
+    require_once "Config/open_connect.php";
+
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
+
+    require_once "Config/close_connect.php"; 
+    return array($cateChilds,$cateParents);
+}
+
+function newProduct(){
+    require_once "Config/open_connect.php";
+
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
+
+    $size = mysqli_query($connect,"SELECT * FROM product_size");
+
+    $productPerPage = 12;
+
+        $currentPage = 1;
+
+        
+      
+        if(isset($_GET['page'])){
+            $currentPage = $_GET['page'];
+        }
+    
+        $productStart = ($currentPage - 1) * $productPerPage;
+
+        //
+        $totalProduct = mysqli_num_rows(mysqli_query($connect,"SELECT * FROM  product"));
+        $totalPage = ceil($totalProduct/$productPerPage);
+        $productStart = ($currentPage - 1) * $productPerPage;
+
+        $getCatePrds = "SELECT * FROM  product 
+                                                    JOIN (SELECT * FROM product_image GROUP BY product_id) AS image 
+                                                    ON product.product_id = image.product_id 
+                                                    ORDER BY product.product_id DESC 
+                                                    LIMIT $productStart,$productPerPage";
+
+    $cateProducts = mysqli_query($connect,$getCatePrds);
+    $getImageSql = "SELECT * FROM product_image";
+    $productImages = mysqli_query($connect,$getImageSql);
+
+
+    require_once "Config/close_connect.php"; 
+    
+    return array($cateChilds,$cateParents,$productImages,$cateProducts,$totalPage,$currentPage,$size);
+}
+
+
+function lastChance(){
+    require_once "Config/open_connect.php";
+
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
+
+    $size = mysqli_query($connect,"SELECT * FROM product_size");
+
+    $productPerPage = 12;
+
+        $currentPage = 1;
+
+        
+      
+        if(isset($_GET['page'])){
+            $currentPage = $_GET['page'];
+        }
+    
+        $productStart = ($currentPage - 1) * $productPerPage;
+
+        //
+        $totalProduct = mysqli_num_rows(mysqli_query($connect,"SELECT * FROM  product WHERE product_promotion >= 30"));
+        $totalPage = ceil($totalProduct/$productPerPage);
+        $productStart = ($currentPage - 1) * $productPerPage;
+
+        $getCatePrds = "SELECT * FROM  product 
+                                                    JOIN (SELECT * FROM product_image GROUP BY product_id) AS image 
+                                                    ON product.product_id = image.product_id 
+                                                    WHERE product_promotion >= 30
+                                                    ORDER BY product.product_promotion DESC 
+                                                    LIMIT $productStart,$productPerPage";
+
+    $cateProducts = mysqli_query($connect,$getCatePrds);
+    $getImageSql = "SELECT * FROM product_image";
+    $productImages = mysqli_query($connect,$getImageSql);
+
+
+    require_once "Config/close_connect.php"; 
+    
+    return array($cateChilds,$cateParents,$productImages,$cateProducts,$totalPage,$currentPage,$size);
+}
+
+function profile(){
+    require_once "Config/open_connect.php";
+
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
+
+    $userId = $_SESSION['user_session'];
+    $userIn4 = mysqli_query($connect,"SELECT * FROM user WHERE id = $userId");
+    
+    $order = mysqli_query($connect,"SELECT * FROM receipt 
+                                    JOIN customer ON receipt.receipt_id = customer.customer_id 
+                                    WHERE receipt.belong_to = $userId
+                                    ORDER BY receipt.receipt_id DESC ");
+
+    $totalSql = "";
+    $count = 0;
+    foreach($order as $ord){
+        $receiptId = $ord['receipt_id'];
+        if($count == 0){
+            $totalSql = $totalSql."SELECT SUM(recent_price) as total,receipt_id  FROM order_detail WHERE receipt_id = $receiptId";
+        }else{
+            $totalSql = $totalSql." UNION SELECT SUM(recent_price) as total,receipt_id  FROM order_detail WHERE receipt_id = $receiptId";
+        }
+        $count++;
+    }
+    
+    $total = mysqli_query($connect,$totalSql);
+                            
+    require_once "Config/close_connect.php";
+    
+    return array($cateChilds,$cateParents,$userIn4,$order,$total);
+}
+
+function viewOrder(){
+    require_once "Config/open_connect.php";
+
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
+
+    if(isset($_GET['id'])){
+        $orderId = $_GET['id'];
+        
+        $getOrder = mysqli_query($connect,"SELECT * FROM receipt 
+                                            JOIN customer ON receipt.receipt_id = customer.customer_id
+                                            WHERE receipt.receipt_id = $orderId");
+
+        $acceptBy = '';
+        foreach($getOrder as $user){
+            if($user['accept_by'] != 0 ){
+                $userId = $user['accept_by'];
+                foreach(mysqli_query($connect,"SELECT * FROM user WHERE id = $userId") as $userIn4){
+                    $acceptBy = $userIn4['full_name'];
+                }
+            }
+        }
+    
+        $getDetail = mysqli_query($connect,"SELECT * FROM order_detail 
+                                            JOIN product_detail ON order_detail.product_detail_id = product_detail.id
+                                            JOIN product_size ON product_detail.size_id = product_size.size_id
+                                            JOIN product ON product_detail.product_id = product.product_id 
+                                            JOIN product_image ON product.product_id = product_image.product_id
+                                            WHERE receipt_id =  $orderId
+                                            GROUP BY product_detail.id");
+        $total = mysqli_query($connect,"SELECT SUM(recent_price*product_amount) as total_price FROM order_detail WHERE receipt_id = $orderId");
+    }
+                     
+    require_once "Config/close_connect.php";
+    
+    return array($cateChilds,$cateParents,$getOrder, $getDetail, $total,$acceptBy);
+}
+
+function getOrder(){
+    require_once "Config/open_connect.php";
+
+    $getCategorySql = "SELECT * FROM category";
+    $cateChilds = mysqli_query($connect,$getCategorySql);
+    $getParentCateSql = "SELECT * FROM category";
+    $cateParents = mysqli_query($connect,$getParentCateSql);
+
+    $searchIn4 = "";
+    if(isset($_GET['search'])){
+        $searchIn4 = $_GET['search'];
+    }
+
+        
+    $getOrders =  mysqli_query($connect,"SELECT * FROM receipt 
+                                        JOIN customer ON receipt.receipt_id = customer.customer_id 
+                                        WHERE customer.customer_phone LIKE '%$searchIn4%'
+                                        ORDER BY receipt.receipt_id DESC ") ;
+    $totalSql = "";
+    $count = 0;
+    foreach($getOrders as $ord){
+        $receiptId = $ord['receipt_id'];
+        if($count == 0){
+            $totalSql = $totalSql."SELECT SUM(recent_price) as total,receipt_id  FROM order_detail WHERE receipt_id = $receiptId";
+        }else{
+            $totalSql = $totalSql." UNION SELECT SUM(recent_price) as total,receipt_id  FROM order_detail WHERE receipt_id = $receiptId";
+        }
+        $count++;
+    }
+    
+    $total = @mysqli_query($connect,$totalSql);
+
+    require_once "Config/close_connect.php"; 
+    return array($cateChilds,$cateParents,$getOrders,$total,$searchIn4);
+}
+
 switch ($redirect){
     case '': {
         list($cateChilds,$productNewest,$productFeatured,$productImages,$cateParents) = index();
@@ -258,4 +478,33 @@ switch ($redirect){
         $result = addOrder();
         break;
     }
+    case 'story': {
+        list($cateChilds,$cateParents) = story();
+        break;
+    }
+    case 'new': {
+        list($cateChilds,$cateParents,$productImages,$cateProducts,$totalPage,$currentPage,$size) = newProduct();
+        break;
+    }
+    case 'lastchance': {
+        list($cateChilds,$cateParents,$productImages,$cateProducts,$totalPage,$currentPage,$size) = lastChance();
+        break;
+    }
+    case 'profile': {
+        list($cateChilds,$cateParents,$userIn4,$order,$total) = profile();
+        break;
+    }
+    case 'vieworder': {
+        list($cateChilds,$cateParents,$getOrder, $getDetail, $total,$acceptBy) = viewOrder();
+        break;
+    }
+    case 'search_order': {
+        list($cateChilds,$cateParents) = story();
+        break;
+    }
+    case 'get_order': {
+        list($cateChilds,$cateParents,$getOrders,$total,$searchIn4) = getOrder();
+        break;
+    }
+    
 }

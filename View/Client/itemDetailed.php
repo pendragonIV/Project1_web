@@ -3,13 +3,7 @@
     <div class="container-fluid px-0">
         <div class="row">
              <!-- Page location -->
-             <div class="bg-light px-5 py-2" style="font-size: .9em;"> 
-                <a href="" class="text-decoration-none text-dark">
-                    Trang chủ
-                </a>
-                <span class = "text-muted"> / Giỏ hàng</span>
-
-            </div>
+            
         </div>
 
         <!-- Product  -->

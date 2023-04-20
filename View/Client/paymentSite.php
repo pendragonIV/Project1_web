@@ -53,7 +53,7 @@
             <div class="col-5 border-start pt-5">
 
                 <!-- products -->
-                <div class="overflow-auto col-9 mx-auto border-bottom pb-3" <?php if(sizeof($_SESSION['cart']) > 1){ echo 'style = "height:20em;"';} ?>>
+                <div class="overflow-auto col-9 mx-auto border-bottom pb-3" <?php if(isset(($_SESSION['cart'])) && sizeof($_SESSION['cart']) > 1){ echo 'style = "height:20em;"';} ?>>
 
                 <?php
                     if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
@@ -70,6 +70,9 @@
                 <?php
                         }
                       }
+                      else {
+                        echo '<div class="text-center"> Giỏ hàng trống </div>';
+                      }
                 ?>
                 </div>
 
@@ -85,16 +88,7 @@
                                                       }
                                                       echo number_format((int)$total,0,'','.'); ?> ₫</span>
                     </div>
-                    <div class="d-flex justify-content-between px-2 py-2 text-muted">
-                      <span>Chiết khấu</span>
-                      <span class="text-dark fw-bold"> -<?php $total = 0; if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
-                                                         for($i=0; $i < sizeof($_SESSION['cart']); $i++){ 
-                                                            $total += ($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']); 
-                                                         }
-                                                      }
-                                                      $VAT = $total * (10/100);
-                                                      echo number_format((int)($VAT),0,'','.'); ?> ₫</span>
-                    </div>
+                    
                     <div class="d-flex justify-content-between px-2 py-2 text-muted">
                       <span>Phí vận chuyển</span>
                       <span>Shop sẽ liên hệ sau</span>
@@ -105,7 +99,7 @@
                   
                   <div class="d-flex justify-content-between px-2 py-2 text-muted fs-5">
                     <span>Tổng tiền</span>
-                    <span> <?php echo number_format((int)($total-$VAT),0,'','.'); ?> ₫</span>
+                    <span> <?php echo number_format((int)($total),0,'','.'); ?> ₫</span>
                   </div>
                 </div>
                 

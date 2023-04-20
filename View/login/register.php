@@ -35,16 +35,19 @@
                         ?>
 
                         <div class="mb-3">
-                            <input class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder = "Tên đăng nhập" name = "user_name" style="outline: none;">
+                            <input class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder = "Tên đăng nhập" name = "user_name" style="outline: none;" required>
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder = "Email" name = "user_email" style="outline: none;">
+                            <input type="text" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder = "Họ và tên" name = "full_name" style="outline: none;" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder= "Mật khẩu" name = "password" style="outline: none;">
+                            <input type="email" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder = "Email" name = "user_email" style="outline: none;" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder= "Nhập lại mật khẩu" name = "re_password" style="outline: none;">
+                            <input type="password" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder= "Mật khẩu" name = "password" style="outline: none;" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="border-0 border-bottom col-12 py-3 bg-transparent text-white" placeholder= "Nhập lại mật khẩu" name = "re_password" style="outline: none;" required>
                         </div>
 
                         <button  type="submit" name= "register_btn" class = "text-dark py-3 mt-3 col-12 border-0 bg-transparent login__button position-relative">

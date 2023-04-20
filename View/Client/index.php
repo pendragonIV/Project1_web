@@ -24,7 +24,7 @@
 </head>
 <body>
     
-    <div class="container-fluid p-0 position-relative">
+    <div class="container-fluid position-relative">
 
         <!-- HEADER -->
         <div class="row bg-black">
@@ -42,13 +42,13 @@
                     <div class="col-5">
                         <ul class="d-flex flex-row list-unstyled m-0 h-100">
                             <li class="col-3">
-                                <a class ="nav__link--red" href="">
+                                <a class ="nav__link--red" href="?redirect=lastchance">
                                     <p class="py-3 m-0">LAST CHANCE</p>
                                 </a>
                             </li>
     
                             <li class="nav__dropdown col-3">
-                                <a class ="nav__link--custom" href="">
+                                <a class ="nav__link--custom" href="?redirect=new">
                                     <p class="py-3 m-0">SẢN PHẨM</p>
                                 </a>
                                 <div class="nav__dropdown--content">
@@ -58,10 +58,9 @@
                                                 <p class = "dropdown__link--custom fw-bold">ĐẶC BIỆT</p>
                                             </li>
                                             <li>
-                                                <p class = "dropdown__link--custom">Hàng Mới</p>
-                                            </li>
-                                            <li>
-                                                <p class = "dropdown__link--custom">Bán Chạy</p>
+                                                <a class="text-decoration-none text-light" href="?redirect=new">
+                                                    <p class = "dropdown__link--custom">Hàng Mới</p>                                                
+                                                </a>
                                             </li>
                                             
                                         </ul>
@@ -100,7 +99,9 @@
                                         <ul class="col-3 text-white list-unstyled">
                                             <img class = "col-12" src="public/images/20230303_ItbXhV8iqmuLYa3c.png" />
                                             <li class=" my-3">
-                                                <p class = "dropdown__link--custom fw-bold">MUA NGAY</p>
+                                                <a class ="text-light" href="?redirect=new">
+                                                    <p class = "dropdown__link--custom fw-bold">MUA NGAY</p>
+                                                </a>
                                             </li>
                                         </ul>
                                     </ul>
@@ -108,7 +109,7 @@
                             </li>
     
                             <li class="col-3">
-                                <a class ="nav__link--custom" href="">
+                                <a class ="nav__link--custom" href="?redirect=story">
                                     <p class="py-3 m-0">CÂU CHUYỆN</p>
                                 </a>
                             </li>
@@ -135,13 +136,15 @@
                                     ?>
 
                                     <li><a class="dropdown-item" href="?controller=login">Login</a></li>
+                                    <li><a class="dropdown-item" href="?redirect=search_order">Tìm kiếm đơn hàng</a></li>
 
                                     <?php
                                     }else{
                                     ?>
 
                                     <li><a class="dropdown-item" href="?controller=login&action=logout">Logout</a></li>
-                                    <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                                    <li><a class="dropdown-item" href="?redirect=profile">Thông tin</a></li>
+                                    <li><a class="dropdown-item" href="?redirect=search_order">Tìm kiếm đơn hàng</a></li>
 
                                     <?php
                                     }
@@ -196,6 +199,34 @@
                         require_once "View/Client/paymentSite.php";
                         break;
                     }
+                    case 'story': {
+                        require_once "View/Client/story.php";
+                        break;
+                    }
+                    case 'new': {
+                        require_once "View/Client/cateProducts.php";
+                        break;
+                    }
+                    case 'lastchance': {
+                        require_once "View/Client/cateProducts.php";
+                        break;
+                    }
+                    case 'profile': {
+                        require_once "View/Client/profile.php";
+                        break;
+                    }
+                    case 'vieworder': {
+                        require_once "View/Client/viewOrder.php";
+                        break;
+                    }
+                    case 'search_order': {
+                        require_once "View/Client/searchOrder.php";
+                        break;
+                    }
+                    case 'get_order': {
+                        require_once "View/Client/searchOrder.php";
+                        break;
+                    }
                 }
             }
             
@@ -208,7 +239,7 @@
             
             <!-- img -->
             <div class="footer__img col-12">
-                <a class = "col d-block" href="">
+                <a class = "col d-block" href="index.php">
                     <img src="public/images/imglogo.png" class = "col-2 d-block mx-auto mb-5" alt="">
                 </a>
             </div>
@@ -356,7 +387,12 @@
 
                     <div class="d-flex justify-content-between py-2 text-muted">
                         <span>Tổng tiền</span>
-                        <span>1,199,000 ₫</span>
+                        <span> <?php $total = 0; if(isset(($_SESSION['cart'])) && $_SESSION['cart'] != []){
+                                                         for($i=0; $i < sizeof($_SESSION['cart']); $i++){ 
+                                                            $total += ($_SESSION['cart'][$i]['product_price'] * $_SESSION['cart'][$i]['product_quantity']); 
+                                                         }
+                                                      }
+                                                      echo number_format((int)$total,0,'','.'); ?> ₫</span>
                     </div>
 
                     <div class="d-flex my-5 justify-content-between">

@@ -102,7 +102,7 @@
                                     <?php
                 
                                     $count = 0;
-                                    foreach($record as $order){
+                                    foreach($orders as $order){
                                       $color = '';
                                       $status = '';
                                       switch($order['receipt_status']){
@@ -268,7 +268,7 @@
                                         <?php
                                             if($currentPage > 1){
                                                 echo '<li class="page-item">
-                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($currentPage - 1).'" aria-label="Previous">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&action='.$action.'&search='.$searchIn4.'&search_btn=&page='.($currentPage - 1).'" aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                       </li>';
@@ -277,14 +277,14 @@
 
                                         <?php
                                             for($i = 0; $i < $totalPage; $i++){
-                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($i + 1).'">'.($i + 1).'</a></li>';
+                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&action='.$action.'&search='.$searchIn4.'&search_btn=&page='.($i + 1).'">'.($i + 1).'</a></li>';
                                             }
                                         ?>
 
                                         <?php
                                             if($currentPage < $totalPage){
                                                 echo '<li class="page-item">
-                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($currentPage + 1).'" aria-label="Next">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&action='.$action.'&search='.$searchIn4.'&search_btn=&page='.($currentPage + 1).'" aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                       </li>';

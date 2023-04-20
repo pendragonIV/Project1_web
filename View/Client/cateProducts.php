@@ -1,11 +1,5 @@
 <!-- page location -->
-        <div class="bg-light px-5 py-2" style="font-size: .9em;"> 
-            <a href="" class="text-decoration-none text-dark">
-                Trang chủ
-            </a>
-            <span class = "text-muted"> / Giỏ hàng</span>
-
-        </div>
+    
 
         <div class="d-flex px-3 my-5">
             <div class="col-2 me-4">
@@ -156,6 +150,10 @@
                 <nav aria-label="Page navigation">
                                     <ul class="pagination">
                                         <?php
+                                        if(isset($categoryId)){
+
+                                        ?>
+                                        <?php
                                             if($currentPage > 1){
                                                 echo '<li class="page-item">
                                                         <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&category_id='.$categoryId.'&page='.($currentPage - 1).'" aria-label="Previous">
@@ -179,6 +177,37 @@
                                                         </a>
                                                       </li>';
                                             }
+                                        ?>
+
+                                        <?php
+                                        }else{
+                                        ?>
+
+                                        <?php
+                                            if($currentPage > 1){
+                                                echo '<li class="page-item">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($currentPage - 1).'" aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                      </li>';
+                                            }
+                                        ?>
+
+                                        <?php
+                                            for($i = 0; $i < $totalPage; $i++){
+                                                echo '<li class="page-item"><a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($i + 1).'">'.($i + 1).'</a></li>';
+                                            }
+                                        ?>
+
+                                        <?php
+                                            if($currentPage < $totalPage){
+                                                echo '<li class="page-item">
+                                                        <a class="page-link" href="?controller='.$controller.'&redirect='.$redirect.'&page='.($currentPage + 1).'" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                      </li>';
+                                            }
+                                        }
                                         ?>
 
                                     </ul>

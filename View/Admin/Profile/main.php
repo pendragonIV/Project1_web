@@ -49,7 +49,7 @@
                         <!-- Title -->
                          <div class="row">
                             <div class="col">
-                                <h2 class="text-muted mb-4">Edit member</h2>
+                                <h2 class="text-muted mb-4">User profile</h2>
                             </div>
                          </div>
                          <!-- Main -->
@@ -62,7 +62,7 @@
 
                                 ?>
 
-                                <form role="form" method="post" action = "?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=update">
+                                <form role="form">
                                     <?php 
                                     if(isset($_GET['record']) && $_GET['record'] == 1){
                                     ?>
@@ -81,35 +81,24 @@
                                     }
                                     ?>  
                                     <div class="mb-3 d-none">
-                                        <input type="text" class="form-control" id="user_id" name="user_id" value = "<?php echo $item['id']; ?>" required>
+                                        <input type="text" class="form-control" id="user_id" name="user_id" value = "<?php echo $item['id']; ?>" disabled>
                                     </div>
                                     <div class="mb-3">
                                         <label for="user_name" class="form-label">User name</label>
-                                        <input type="text" class="form-control" id="user_name" name="user_name" value = "<?php echo $item['user_name']; ?>" required>
+                                        <input type="text" class="form-control" id="user_name" name="user_name" value = "<?php echo $item['user_name']; ?>" disabled>
                                     </div>
                                     <div class="mb-3">
                                       <label for="fn" class="form-label">Full name</label>
-                                      <input type="text" class="form-control" id="fn" name="full_name" value = "<?php echo $item['full_name']; ?>" required>
+                                      <input type="text" class="form-control" id="fn" name="full_name" value = "<?php echo $item['full_name']; ?>" disabled>
                                     </div>
                                     <div class="mb-3">
                                       <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email" value = "<?php echo $item['user_email']; ?>" required>
+                                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email" value = "<?php echo $item['user_email']; ?>" disabled>
                                     </div>
+
                                     <div class="mb-3">
-                                      <label for="exampleInputPassword1" class="form-label">Password</label>
-                                      <input type="password" class="form-control" id="exampleInputPassword1" name="user_pssw" value = "<?php echo $item['user_passw']; ?>" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword2" class="form-label">Re-enter password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword2   " name="user_re_pssw"  value = "<?php echo $item['user_passw']; ?>" required>
-                                    </div>
-                                      
-                                    <div class="mb-3">
-                                        <label for="role_select" class="form-label">Select role</label>
-                                        <select id="role_select" class="form-select" name="user_role">
-                                          <option value = "0" <?php if($item['user_permission'] == 0){echo "selected";} ?>>Admin</option>
-                                          <option value = "1" <?php if($item['user_permission'] == 1){echo "selected";} ?>>Member</option>
-                                        </select>
+                                        <label class="form-label">Role</label>
+                                        <input class="form-control" value = "<?php if($item['user_permission'] == 0){echo "Admin";}else{echo "User";} ?>" disabled>
                                     </div>
 
                                     <?php
@@ -118,7 +107,7 @@
 
                                     ?>
 
-                                    <button type="submit" class="btn btn-success my-2 col-2">Edit</button>
+                                    <a href="?controller=admin&redirect=user&action=edit&user_id=<?php echo $_SESSION['user_session']; ?>" class="btn btn-success my-2 col-2">Edit</a>
                                   </form>
                             </div>
                         </div>

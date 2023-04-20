@@ -28,7 +28,7 @@
                     <button class="dropdown-toggle bg-transparent border-0" style="outline:none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
                     <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><a class="dropdown-item" href="?controller=admin&redirect=profile">Profile</a></li>
                       <li><a class="dropdown-item d-block" href="?controller=login&action=logout">Logout</a></li>
                     </ul>
                 </div>
@@ -61,9 +61,12 @@
                          <div class="row">
 
                             <div class="container-fluid">
-                              <form class="d-flex my-1">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-info" type="submit">Search</button>
+                             <form class="d-flex my-1" method="GET" action="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=search">
+                                <input class="d-none" name = "controller" value="<?php echo $controller; ?>">
+                                <input class="d-none" name = "redirect" value="<?php echo $redirect; ?>">
+                                <input class="d-none" name = "action" value="search">
+                                <input class="form-control me-2" type="search" name="search" placeholder="Search">
+                                <button class="btn btn-outline-info" type="submit" name = "search_btn">Search</button>
                               </form>
                             </div>
 
@@ -103,12 +106,12 @@
                                             <tr>
                                             <th scope="row" class = "col-1"> <?php echo $index; ?>  </th>
                                             <td class="col-3"> <?php echo $item['product_name']; ?>  </td>
-                                            <td class="col-3"> <?php echo $item['product_price']; ?> vnd</td>
+                                            <td class="col-2"> <?php echo $item['product_price']; ?> vnd</td>
                                             <td class="col-2">
                                                 <img class="col-12" src="public/upload/<?php echo $item['image_link']; ?>">
                                             </td>
-                                            <td class="col-1">
-                                                a
+                                            <td class="col-2">
+                                            <?php echo $item['category_name']; ?>
                                             </td>
                                             <td class="col-2">
                                                 <a href="?controller=<?php echo $controller; ?>&redirect=<?php echo $redirect; ?>&action=edit&product_id=<?php echo $item['product_id']; ?>" type="button" class="btn btn-outline-primary my-1" tabindex="-1" role="button" aria-disabled="true">
