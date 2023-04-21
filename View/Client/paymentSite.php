@@ -114,7 +114,7 @@
                   
                   <div class="d-flex">
                     <div class="col-6 position-relative">
-                      <a href = "" class=" position-absolute top-50 start-0 translate-middle-y text-decoration-none text-dark back__cart__btn">
+                      <a href = "?redirect=cart" class=" position-absolute top-50 start-0 translate-middle-y text-decoration-none text-dark back__cart__btn">
                         <i class="fa-solid fa-chevron-left fs-6 position-relative"></i>
                         <span class="mx-2">Giỏ hàng</span>
                       </a>

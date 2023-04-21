@@ -5,7 +5,7 @@ function index(){
 
     $totalProduct = mysqli_num_rows(mysqli_query($connect,"SELECT * FROM product"));
 
-    $productPerPage = 3;
+    $productPerPage = 4;
 
     $totalPage = ceil($totalProduct/$productPerPage);
 
@@ -214,13 +214,13 @@ function destroy(){
 
     if(isset($_GET['product_id'])){
         $product_id = $_GET['product_id'];
-        //del product
-        $del_product_sql = "DELETE FROM product WHERE product_id = $product_id";
-        mysqli_query($connect,$del_product_sql);
         //del imgs
         mysqli_query($connect,"DELETE FROM product_image WHERE product_id = $product_id");
         //del detail
         mysqli_query($connect,"DELETE FROM product_detail WHERE product_id = $product_id");
+        //del product
+        $del_product_sql = "DELETE FROM product WHERE product_id = $product_id";
+        mysqli_query($connect,$del_product_sql);
     }
     else {
         return;
@@ -246,7 +246,7 @@ function search(){
     if(isset($_GET['search_btn'])){
         require_once "Config/open_connect.php";
 
-        $productPerPage = 3;
+        $productPerPage = 4;
 
         $currentPage = 1;
       

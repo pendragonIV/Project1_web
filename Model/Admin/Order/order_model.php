@@ -128,13 +128,18 @@ function destroy(){
 
     if(isset($_GET['id'])){
         $receiptId = $_GET['id'];
+
         $getOrder = mysqli_query($connect,"SELECT * FROM receipt WHERE receipt_id = $receiptId");
+
+        mysqli_query($connect,"DELETE FROM order_detail WHERE receipt_id = $receiptId");
+
+        mysqli_query($connect,"DELETE FROM receipt WHERE receipt_id = $receiptId");
+
         foreach($getOrder as $row){
             $customerId = $row['customer_id'];
             mysqli_query($connect,"DELETE FROM customer WHERE customer_id = $customerId");
         }
-        mysqli_query($connect,"DELETE FROM receipt WHERE receipt_id = $receiptId");
-        mysqli_query($connect,"DELETE FROM order_detail WHERE receipt_id = $receiptId");
+        
     }
 
     require_once "Config/close_connect.php";

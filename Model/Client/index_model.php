@@ -82,7 +82,8 @@ function getCategoryProduct(){
                                 JOIN (SELECT * FROM product_image GROUP BY product_id) AS image 
                                 ON product.product_id = image.product_id  
                                 WHERE category_id = $categoryId
-                                ORDER BY product.product_id DESC";
+                                ORDER BY product.product_id DESC
+                                LIMIT $productStart,$productPerPage";
             }
         }
         

@@ -66,16 +66,18 @@ function destroy(){
     require_once "Config/open_connect.php";
     if(isset($_GET['category_id'])){
         $cateId = $_GET['category_id'];
-        $del_sql = "DELETE FROM category WHERE category_id = $cateId";
-        mysqli_query($connect,$del_sql);
 
         foreach(mysqli_query($connect,"SELECT * FROM product WHERE category_id = $cateId") as $prd){
             $prdId = $prd['product_id'];
-            mysqli_query($connect,"DELETE FROM product WHERE product_id = $prdId");
+            
             mysqli_query($connect,"DELETE FROM product_detail WHERE product_id = $prdId");
             mysqli_query($connect,"DELETE FROM product_image WHERE product_id = $prdId");
+            mysqli_query($connect,"DELETE FROM product WHERE product_id = $prdId");
+            
         }
 
+        $del_sql = "DELETE FROM category WHERE category_id = $cateId";
+        mysqli_query($connect,$del_sql);
         
     }
     require_once "Config/close_connect.php";
