@@ -20,15 +20,14 @@ Cart</br>
 Payment site</br>
 ![image](https://github.com/pendragonIV/Project1_web/assets/88123140/4d403c90-a68d-4c08-bb26-7ba91b2c9e9b)</br>
 
-
+Log in-register</br>
 ![image](https://github.com/pendragonIV/Project1_web/assets/88123140/a619e9a6-932a-4a09-afa5-810348a636d8)</br>
 
-Log in-register</br>
 ![image](https://github.com/pendragonIV/Project1_web/assets/88123140/9dcb40b4-3bae-4d7c-9e26-8585512ebb9f)</br>
 
+Management page(Admin)</br>
 ![image](https://github.com/pendragonIV/Project1_web/assets/88123140/3bd98c6e-db76-4ece-aa93-a285776d635a)</br>
 
-Management page(Admin)</br>
 ![image](https://github.com/pendragonIV/Project1_web/assets/88123140/a375a270-c8de-42b8-8a4a-67bfbcd26fe0)</br>
 
 ![image](https://github.com/pendragonIV/Project1_web/assets/88123140/7fce9e56-a8a2-4945-ae3b-22600392f4e4)</br>
