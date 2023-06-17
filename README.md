@@ -1,7 +1,7 @@
 # Project1_web
 Online shop for clothing store 
 
-There're some images of my product
+There're some images of my product </br>
 Home page
 ![image](https://github.com/pendragonIV/Project1_web/assets/88123140/39d536b4-2c05-4c80-b0bc-d51dc795646d)
 
